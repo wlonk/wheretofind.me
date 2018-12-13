@@ -1,0 +1,1 @@
+[{{ site.name }}] Complete your registration

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block "main" %}
+<h1 class="display-4">Where to find {{ object.username }}</h1>
+{% if identities %}
+<ul>
+  {% for identity in identities %}
+  <li>
+    <a href="{{ identity.url }}">{{ identity.name }}</a>
+    {% if identity.user == user %}
+    (<a href="{% url "identity-update" pk=identity.pk %}">edit</a>,
+    <a href="{% url "identity-delete" pk=identity.pk %}">delete</a>)
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="text-center">
+  <em><small>they are stealthy, and have left no trace</small></em>
+</div>
+{% endif %}
+{% endblock "main" %}
