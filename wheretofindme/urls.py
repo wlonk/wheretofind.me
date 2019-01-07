@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic.base import TemplateView
 from django_registration.backends.activation.views import RegistrationView
+from rest_framework import routers
 
 from . import views
 from .forms import CustomUserForm
+
+router = routers.DefaultRouter()
+router.register(r"identities", views.IdentityViewset)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,14 +34,9 @@ urlpatterns = [
     ),
     path("accounts/", include("django_registration.backends.activation.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("api/", include(router.urls)),
     path("u/<str:slug>/", views.UserProfileView.as_view(), name="user-profile"),
-    path("s/me/", views.MeRedirectView.as_view()),
-    path("s/new/", views.IdentityCreateView.as_view(), name="identity-create"),
-    path(
-        "s/<int:pk>/edit/", views.IdentityUpdateView.as_view(), name="identity-update"
-    ),
-    path(
-        "s/<int:pk>/delete/", views.IdentityDeleteView.as_view(), name="identity-delete"
-    ),
+    path("s/me/", views.MeRedirectView.as_view(), name="me"),
+    path("s/edit/", views.EditView.as_view(), name="identity-edit"),
     path("", TemplateView.as_view(template_name="base.html"), name="root"),
 ]

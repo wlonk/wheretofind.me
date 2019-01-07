@@ -1,8 +1,10 @@
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.base import TemplateView
+from rest_framework import viewsets
 
 from .models import InternetIdentity, User
+from .serializers import IdentitySerializer
 
 
 class MeRedirectView(RedirectView):
@@ -24,23 +26,37 @@ class UserProfileView(DetailView):
         return context
 
 
-class IdentityCreateView(CreateView):
-    success_url = "/s/me/"
-    model = InternetIdentity
-    fields = ("name", "url")
+class EditView(TemplateView):
+    template_name = "edit_identities.html"
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-
-class IdentityUpdateView(UpdateView):
-    success_url = "/s/me/"
-    model = InternetIdentity
-    fields = ("name", "url")
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["identities"] = self.request.user.internetidentity_set.all()
+        return context
 
 
-class IdentityDeleteView(DeleteView):
-    success_url = "/s/me/"
-    model = InternetIdentity
-    fields = ("name", "url")
+class IdentityViewset(viewsets.ModelViewSet):
+    serializer_class = IdentitySerializer
+    queryset = InternetIdentity.objects.all()
+
+
+# class IdentityCreateView(CreateView):
+#     success_url = "/s/me/"
+#     model = InternetIdentity
+#     fields = ("name", "url")
+
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
+
+
+# class IdentityUpdateView(UpdateView):
+#     success_url = "/s/me/"
+#     model = InternetIdentity
+#     fields = ("name", "url")
+
+
+# class IdentityDeleteView(DeleteView):
+#     success_url = "/s/me/"
+#     model = InternetIdentity
+#     fields = ("name", "url")

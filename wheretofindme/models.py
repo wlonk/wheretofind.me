@@ -18,7 +18,11 @@ class User(AbstractUser):
 class InternetIdentity(models.Model):
     class Meta:
         verbose_name_plural = "Internet Identities"
+        ordering = (
+            "created_at",
+        )
 
+    created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
     url = models.URLField()

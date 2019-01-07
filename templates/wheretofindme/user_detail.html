@@ -2,17 +2,15 @@
 {% block "main" %}
 <h1 class="display-4">Where to find {{ object.username }}</h1>
 {% if identities %}
-<ul>
+<div class="card-deck">
   {% for identity in identities %}
-  <li>
-    <a href="{{ identity.url }}">{{ identity.name }}</a>
-    {% if identity.user == user %}
-    (<a href="{% url "identity-update" pk=identity.pk %}">edit</a>,
-    <a href="{% url "identity-delete" pk=identity.pk %}">delete</a>)
-    {% endif %}
-  </li>
+  <div class="card">
+    <div class="card-body">
+      <a href="{{ identity.url }}">{{ identity.name }}</a>
+    </div>
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% else %}
 <div class="text-center">
   <em><small>they are stealthy, and have left no trace</small></em>

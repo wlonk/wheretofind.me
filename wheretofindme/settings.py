@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_registration",
+    "rest_framework",
     "crispy_forms",
     "wheretofindme",
 ]
@@ -194,3 +195,11 @@ if DEBUG:
 else:
     EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
     SENDGRID_API_KEY = env("SENDGRID_API_KEY")
+
+# REST Framework
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES":
+    (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+}
