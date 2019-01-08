@@ -33,7 +33,9 @@ jQuery(document).ready(function($) {
           <input type="text" class="form-control url" name="url" readonly placeholder="https://example.com/">
         </div>
       </div>
-      <button class="btn delete btn-outline-danger float-right">&minus;</button>
+      <button class="btn delete btn-outline-danger float-right">
+        <span class="fas fa-minus-circle"></span>
+      </button>
     </div>
   </div>
     `);

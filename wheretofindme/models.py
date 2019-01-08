@@ -1,9 +1,24 @@
+from collections import defaultdict
+from urllib.parse import urlparse
+
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+
+ICONS = defaultdict(lambda: "fas fa-link", {
+    "keybase.io": "fab fa-keybase",
+    "mastodon.social": "fab fa-mastodon",
+    "twitter.com": "fab fa-twitter",
+    "facebook.com": "fab fa-facebook",
+    "plus.google.com": "fab fa-google-plus-g",
+    "twitch.tv": "fab fa-twitch",
+    "instagram.com": "fab fa-instagram",
+    "youtube.com": "fab fa-youtube",
+    "github.com": "fab fa-github",
+})
 
 
 class UserQuerySet(models.QuerySet):
@@ -40,3 +55,9 @@ class InternetIdentity(models.Model):
         except ValidationError:
             valid = False
         return self.url.startswith("mailto:") or valid
+
+    def icon(self):
+        if self.url.startswith("mailto:"):
+            return "fas fa-envelope"
+        netloc = urlparse(self.url).netloc
+        return ICONS[netloc]

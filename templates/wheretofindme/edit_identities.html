@@ -18,10 +18,14 @@
           <input type="text" class="form-control" id="url-{{ identity.id }}" name="url" value="{{ identity.url }}">
         </div>
       </div>
-      <button class="btn delete btn-outline-danger float-right">&minus;</button>
+      <button class="btn delete btn-outline-danger float-right">
+        <span class="fas fa-minus-circle"></span>
+      </button>
     </div>
   </div>
   {% endfor %}
-  <button class="btn add-identity btn-outline-primary float-right">+</button>
+  <button class="btn add-identity btn-outline-primary float-right">
+    <span class="fas fa-plus-circle"></span>
+  </button>
 </form>
 {% endblock "main" %}
