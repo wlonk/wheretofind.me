@@ -190,6 +190,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Email
+DEFAULT_FROM_EMAIL = "no-reply@wheretofind.me"
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
