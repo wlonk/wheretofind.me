@@ -35,7 +35,7 @@ urlpatterns = [
     path("accounts/", include("django_registration.backends.activation.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("api/", include(router.urls)),
-    path("@<str:slug>/", views.UserProfileView.as_view(), name="user-profile"),
+    path("@<str:slug>", views.UserProfileView.as_view(), name="user-profile"),
     path("s/me/", views.MeRedirectView.as_view(), name="me"),
     path("s/edit/", views.EditView.as_view(), name="identity-edit"),
     path("", TemplateView.as_view(template_name="base.html"), name="root"),
