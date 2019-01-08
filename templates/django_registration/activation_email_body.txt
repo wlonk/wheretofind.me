@@ -1,1 +1,11 @@
-[{{ site.name }}] Complete your registration
+Hi!
+
+You signed up at {{ site.name }}, but to complete your registration, we have to verify your email.
+
+Please go to {{ scheme }}://{{ site.domain }}{% url "django_registration_activate" activation_key=activation_key %} within {{ expiration_days }} days to verify your email.
+
+If you received this in error, we're sorry!
+
+Thanks,
+
+{{ site.name }}
