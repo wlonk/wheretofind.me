@@ -24,13 +24,13 @@ jQuery(document).ready(function($) {
       <div class="form-group row">
         <label class="col-sm-2 col-form-label name">Name</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control name" name="name" readonly placeholder="...">
+          <input type="text" class="form-control name" name="name" readonly placeholder="Example">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-2 col-form-label url">URL</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control url" name="url" readonly placeholder="...">
+          <input type="text" class="form-control url" name="url" readonly placeholder="https://example.com/">
         </div>
       </div>
       <button class="btn delete btn-outline-danger float-right">&minus;</button>
@@ -41,8 +41,8 @@ jQuery(document).ready(function($) {
     // Hit API
     var url = "/api/identities/";
     var data = {
-      "name": "example",
-      "url": "https://example.com/"
+      "name": "",
+      "url": ""
     };
     var csrftoken = getCookie('csrftoken');
     fetch(url, {
@@ -58,7 +58,6 @@ jQuery(document).ready(function($) {
       data => {
         placeholder.data("id", data.id);
         placeholder.find("input").removeAttr("readonly");
-        placeholder.find("input").removeAttr("placeholder");
         placeholder.find("input.name").val(data.name);
         placeholder.find("label.name").attr("for", `name-${data.id}`);
         placeholder.find("input.name").attr("id", `name-${data.id}`);

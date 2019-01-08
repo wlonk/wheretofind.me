@@ -24,8 +24,8 @@ class InternetIdentity(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    name = models.CharField(max_length=100)
-    url = models.URLField()
+    name = models.CharField(max_length=100, blank=True)
+    url = models.URLField(blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s {self.name} at {self.url}"

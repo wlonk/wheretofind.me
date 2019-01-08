@@ -5,11 +5,13 @@
 {% if identities %}
 <div class="card-deck">
   {% for identity in identities %}
+  {% if identity.name %}
   <div class="card">
     <div class="card-body">
       <a rel="me" href="{{ identity.url }}">{{ identity.name }}</a>
     </div>
   </div>
+  {% endif %}
   {% endfor %}
 </div>
 {% else %}
