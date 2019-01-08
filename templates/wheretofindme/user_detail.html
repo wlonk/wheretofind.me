@@ -8,7 +8,11 @@
   {% if identity.name %}
   <div class="card">
     <div class="card-body">
+      {% if identity.looks_like_link %}
       <a rel="me" href="{{ identity.url }}">{{ identity.name }}</a>
+      {% else %}
+      {{ identity.name }}: {{ identity.url }}
+      {% endif %}
     </div>
   </div>
   {% endif %}
