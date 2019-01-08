@@ -109,4 +109,7 @@ jQuery(document).ready(function($) {
     ).catch();
     return false;
   });
+
+  // Suppress form submission:
+  $("form.identities").submit(() => false);
 });

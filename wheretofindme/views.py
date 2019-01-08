@@ -19,6 +19,8 @@ class MeRedirectView(RedirectView):
 class UserProfileView(DetailView):
     model = User
     slug_field = "username"
+    # We have to set this so it doesn't clobber the `user` context variable:
+    context_object_name = "user_in_question"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -27,7 +29,7 @@ class UserProfileView(DetailView):
 
 
 class EditView(TemplateView):
-    template_name = "edit_identities.html"
+    template_name = "wheretofindme/edit_identities.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -38,25 +40,3 @@ class EditView(TemplateView):
 class IdentityViewset(viewsets.ModelViewSet):
     serializer_class = IdentitySerializer
     queryset = InternetIdentity.objects.all()
-
-
-# class IdentityCreateView(CreateView):
-#     success_url = "/s/me/"
-#     model = InternetIdentity
-#     fields = ("name", "url")
-
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-
-
-# class IdentityUpdateView(UpdateView):
-#     success_url = "/s/me/"
-#     model = InternetIdentity
-#     fields = ("name", "url")
-
-
-# class IdentityDeleteView(DeleteView):
-#     success_url = "/s/me/"
-#     model = InternetIdentity
-#     fields = ("name", "url")

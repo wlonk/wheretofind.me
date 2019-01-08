@@ -3,7 +3,6 @@
 {% block "main" %}
 <h1 class="display-4">Where are you?</h1>
 <form method="post" action="." class="identities">
-  {% csrf_token %}
   {% for identity in identities %}
   <div class="identity card" data-id="{{ identity.id }}">
     <div class="card-body">
