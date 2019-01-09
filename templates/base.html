@@ -48,9 +48,9 @@
       </p>
       <p class="lead">
         Maybe a layer of indirection can save the day. Point people at your
-        page on wheretofind.me and they can find you no matter what sites
-        you're using these days. It's like a business card for your social
-        media presence.
+        page on <code>wheretofind.me</code> and they can find you no matter
+        what sites you're using these days. It's like a business card for your
+        social media presence.
       </p>
       {% endblock "main" %}
     </div>
@@ -60,6 +60,11 @@
         <div class="row">
           <div class="col-12 col-md text-center">
             <small class="d-block mb-3 text-muted">&copy; 2018-2019 Kit La Touche</small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md text-center">
+            <small class="d-block mb-3 text-muted">Please <a href="{% url "user-profile" slug="kit" %}">get in touch</a> if you have any problems or feedback.</small>
           </div>
         </div>
       </footer>
