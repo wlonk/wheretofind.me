@@ -54,12 +54,14 @@ jQuery(document).ready(function($) {
   // Change:
   $("form.identities").change(evt => {
     var identity = $(evt.target).parents(".identity");
+    var saving = identity.find('.msg-saving');
     var url = `/api/identities/${identity.data("id")}/`;
     var data = {
       "name": identity.find("input[name=name]").val(),
       "url": identity.find("input[name=url]").val(),
     };
     var csrftoken = getCookie('csrftoken');
+    saving.removeClass('d-none');
     fetch(url, {
       method: "PUT",
       body: JSON.stringify(data),
@@ -69,14 +71,19 @@ jQuery(document).ready(function($) {
         "X-CSRFToken": csrftoken
       }
     }).then()
-    .catch();
+    .catch()
+    .finally(() => saving.addClass('d-none'));
   });
 
   // Delete:
   $("form.identities").on("click", ".delete", evt => {
     var identity = $(evt.target).parents(".identity");
+    var deleting = identity.find('.msg-deleting');
+    var inputs = identity.find('input');
     var url = `/api/identities/${identity.data("id")}/`;
     var csrftoken = getCookie('csrftoken');
+    inputs.prop('readonly', true);
+    deleting.removeClass('d-none');
     fetch(url, {
       method: "DELETE",
       credentials: "same-origin",
@@ -87,7 +94,10 @@ jQuery(document).ready(function($) {
       () => {
         identity.remove();
       }
-    ).catch();
+    ).catch(() => {
+      inputs.prop('readonly', false);
+      deleting.addClass('d-none');
+    });
     return false;
   });
 
