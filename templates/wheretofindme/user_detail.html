@@ -5,20 +5,24 @@
 {% if identities %}
 <div class="card-deck">
   {% for identity in identities %}
-  {% if identity.name %}
-  <div class="card bg-light shadow-sm mb-3">
-    <div class="card-body">
-      {% if identity.looks_like_link %}
-      <a rel="me nofollow" href="{{ identity.url }}">
-        <span class="{{ identity.icon }}"></span>
-        {{ identity.name }}
-      </a>
-      {% else %}
-      {{ identity.name }}: {{ identity.url }}
-      {% endif %}
-    </div>
-  </div>
-  {% endif %}
+    {% if identity.name %}
+      <div class="card bg-light shadow-sm mb-3">
+        {% if identity.looks_like_link %}
+          <a rel="me nofollow" href="{{ identity.url }}">
+        {% endif %}
+        <div class="card-body">
+          <span class="{{ identity.icon }}"></span>
+          {% if identity.looks_like_link %}
+            {{ identity.name }}
+          {% else %}
+            {{ identity.name }}: {{ identity.url }}
+          {% endif %}
+        </div>
+        {% if identity.looks_like_link %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
   {% endfor %}
 </div>
 {% else %}

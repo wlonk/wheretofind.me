@@ -9,15 +9,29 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
 ICONS = defaultdict(lambda: "fas fa-link", {
-    "keybase.io": "fab fa-keybase",
-    "mastodon.social": "fab fa-mastodon",
-    "twitter.com": "fab fa-twitter",
     "facebook.com": "fab fa-facebook",
-    "plus.google.com": "fab fa-google-plus-g",
-    "twitch.tv": "fab fa-twitch",
-    "instagram.com": "fab fa-instagram",
-    "youtube.com": "fab fa-youtube",
+    "www.facebook.com": "fab fa-facebook",
+
     "github.com": "fab fa-github",
+    "www.github.com": "fab fa-github",
+
+    "instagram.com": "fab fa-instagram",
+    "www.instagram.com": "fab fa-instagram",
+
+    "keybase.io": "fab fa-keybase",
+
+    "mastodon.social": "fab fa-mastodon",
+
+    "plus.google.com": "fab fa-google-plus-g",
+
+    "twitch.tv": "fab fa-twitch",
+    "www.twitch.tv": "fab fa-twitch",
+
+    "twitter.com": "fab fa-twitter",
+    "www.twitter.com": "fab fa-twitter",
+
+    "youtube.com": "fab fa-youtube",
+    "www.youtube.com": "fab fa-youtube",
 })
 
 
