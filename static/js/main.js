@@ -14,9 +14,9 @@ function getCookie(name) {
   return cookieValue;
 }
 
-jQuery(document).ready(function($) {
+$(() => {
   // Add:
-  $(".add-identity").click(function() {
+  $(".add-identity").click(() => {
     // Add placeholder
     var placeholder = $("template#identity").contents('div').clone();
     $("form.identities .add-identity").before(placeholder);
@@ -88,11 +88,9 @@ jQuery(document).ready(function($) {
       headers:{
         "X-CSRFToken": csrftoken
       }
-    }).then(
-      () => {
-        identity.remove();
-      }
-    ).catch(() => {
+    }).then(() => {
+      identity.remove();
+    }).catch(() => {
       inputs.prop('readonly', false);
       deleting.addClass('d-none');
     });
