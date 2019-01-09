@@ -10,13 +10,19 @@
         {% if identity.looks_like_link %}
           <a rel="me nofollow" href="{{ identity.url }}">
         {% endif %}
-        <div class="card-body">
+        <div class="card-header">
           <span class="{{ identity.icon }}"></span>
+          {{ identity.type_name }}
+        </div>
+        <div class="card-body">
           {% if identity.looks_like_link %}
             {{ identity.name }}
           {% else %}
             {{ identity.name }}: {{ identity.url }}
           {% endif %}
+        </div>
+        <div class="card-footer">
+          <em><small>Last active 3 days ago.</small></em>
         </div>
         {% if identity.looks_like_link %}
           </a>

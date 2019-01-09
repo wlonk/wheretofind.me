@@ -34,6 +34,32 @@ ICONS = defaultdict(lambda: "fas fa-link", {
     "www.youtube.com": "fab fa-youtube",
 })
 
+TYPES = defaultdict(lambda: "link", {
+    "facebook.com": "Facebook",
+    "www.facebook.com": "Facebook",
+
+    "github.com": "GitHub",
+    "www.github.com": "GitHub",
+
+    "instagram.com": "Instagram",
+    "www.instagram.com": "Instagram",
+
+    "keybase.io": "Keybase",
+
+    "mastodon.social": "Mastodon",
+
+    "plus.google.com": "G+",
+
+    "twitch.tv": "Twitch",
+    "www.twitch.tv": "Twitch",
+
+    "twitter.com": "Twitter",
+    "www.twitter.com": "Twitter",
+
+    "youtube.com": "YouTube",
+    "www.youtube.com": "YouTube",
+})
+
 
 class UserQuerySet(models.QuerySet):
     pass
@@ -75,3 +101,9 @@ class InternetIdentity(models.Model):
             return "fas fa-envelope"
         netloc = urlparse(self.url).netloc
         return ICONS[netloc]
+
+    def type_name(self):
+        if self.url.startswith("mailto:"):
+            return "Email"
+        netloc = urlparse(self.url).netloc
+        return TYPES[netloc]
