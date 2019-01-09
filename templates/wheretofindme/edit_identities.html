@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block "main" %}
-<h1 class="display-4">Where are you?</h1>
 <form method="post" action="." class="identities">
+  <h1 class="display-4">Where are you?</h1>
   {% for identity in identities %}
   <div class="identity card bg-light shadow-sm w-100 mb-3" data-id="{{ identity.id }}">
     <div class="card-body">

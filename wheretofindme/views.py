@@ -1,7 +1,9 @@
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
-from rest_framework import viewsets
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .models import InternetIdentity, User
 from .serializers import IdentitySerializer
@@ -43,3 +45,12 @@ class IdentityViewset(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return InternetIdentity.objects.filter(user=self.request.user)
+
+    @action(detail=False, methods=['POST'], name='Reorder Identities')
+    def reorder(self, request):
+        self.get_queryset().all().update(seq=None)
+        for seq, id in enumerate(request.data):
+            identity = self.get_queryset().get(id=id)
+            identity.seq = seq
+            identity.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
