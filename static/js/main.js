@@ -70,9 +70,7 @@ jQuery(document).ready(function($) {
         "Content-Type": "application/json",
         "X-CSRFToken": csrftoken
       }
-    }).then()
-    .catch()
-    .finally(() => saving.addClass('d-none'));
+    }).finally(() => saving.addClass('d-none'));
   });
 
   // Delete:
