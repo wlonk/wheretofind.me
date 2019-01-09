@@ -18,27 +18,7 @@ jQuery(document).ready(function($) {
   // Add:
   $(".add-identity").click(function() {
     // Add placeholder
-    var placeholder = $(`
-  <div class="identity card">
-    <div class="card-body">
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label name">Name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control name" name="name" readonly placeholder="Example">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-2 col-form-label url">URL</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control url" name="url" readonly placeholder="https://example.com/">
-        </div>
-      </div>
-      <button class="btn delete btn-outline-danger float-right">
-        <span class="fas fa-minus-circle"></span>
-      </button>
-    </div>
-  </div>
-    `);
+    var placeholder = $("template#identity").contents('div').clone();
     $("form.identities .add-identity").before(placeholder);
     // Hit API
     var url = "/api/identities/";
