@@ -6,6 +6,6 @@
 <form method="post" action="{% url "django_registration_register" %}">
   {% csrf_token %}
   {{ form|crispy }}
-  <input type="submit" class="btn" value="Sign up">
+  <input type="submit" class="btn btn-primary" value="Sign up">
 </form>
 {% endblock "main" %}
