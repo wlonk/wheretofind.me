@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block "main" %}
+<h1 class="display-4 text-center">Whoops.</h1>
+<p class="lead text-center">
+  Sorry, something went wrong. We're working on it. If you need to get in
+  touch, <a href="{% url "user-profile" slug="kit" %}">please do</a>.
+</p>
+{% endblock "main" %}
