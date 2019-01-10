@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.base import TemplateView
@@ -47,10 +48,13 @@ class IdentityViewset(viewsets.ModelViewSet):
         return InternetIdentity.objects.filter(user=self.request.user)
 
     @action(detail=False, methods=['POST'], name='Reorder Identities')
+    @transaction.atomic
     def reorder(self, request):
-        self.get_queryset().all().update(seq=None)
-        for seq, id in enumerate(request.data):
-            identity = self.get_queryset().get(id=id)
-            identity.seq = seq
+        ids = {id: seq for (seq, id) in enumerate(request.data)}
+
+        self.get_queryset().update(seq=None)
+        for identity in self.get_queryset():
+            identity.seq = ids.get(identity.id)
             identity.save()
+
         return Response(None, status=status.HTTP_204_NO_CONTENT)
