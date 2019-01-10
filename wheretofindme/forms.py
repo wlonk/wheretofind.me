@@ -1,9 +1,9 @@
-from django_registration.forms import RegistrationForm
+from django_registration.forms import RegistrationFormTermsOfService
 
 from .models import User
 
 
-class CustomUserForm(RegistrationForm):
-    class Meta(RegistrationForm.Meta):
+class CustomUserForm(RegistrationFormTermsOfService):
+    class Meta(RegistrationFormTermsOfService.Meta):
         model = User
         fields = ("username", "email", "password1", "password2")
