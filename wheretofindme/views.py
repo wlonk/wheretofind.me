@@ -39,4 +39,7 @@ class EditView(TemplateView):
 
 class IdentityViewset(viewsets.ModelViewSet):
     serializer_class = IdentitySerializer
-    queryset = InternetIdentity.objects.all()
+    model = InternetIdentity
+
+    def get_queryset(self):
+        return InternetIdentity.objects.filter(user=self.request.user)

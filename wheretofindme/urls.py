@@ -23,7 +23,7 @@ from . import views
 from .forms import CustomUserForm
 
 router = routers.DefaultRouter()
-router.register(r"identities", views.IdentityViewset)
+router.register(r"identities", views.IdentityViewset, basename="identity")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
