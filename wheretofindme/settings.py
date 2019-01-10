@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from pathlib import Path
 
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
@@ -64,7 +65,7 @@ def boolish(val):
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).absolute().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -124,7 +125,7 @@ AUTH_USER_MODEL = "wheretofindme.User"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [str(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -183,8 +184,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [str(BASE_DIR / "static")]
+STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
