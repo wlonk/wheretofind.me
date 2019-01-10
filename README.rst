@@ -6,7 +6,7 @@ You will need:
 
 * Python 3.7 or later (``brew install python@3.7``)
 * Pipenv (``brew install pipenv``)
-* PostgreSQL (Postgres.app_)
+* PostgreSQL (``brew install postgres`` or Postgres.app_)
 
 .. _Postgres.app: https://postgresapp.com/
 
@@ -14,7 +14,8 @@ Ensure the development database exists::
 
    createdb wheretofindme
 
-Set the following environment variables::
+Set the following environment variables in a ``.env`` file in the repo
+root::
 
    export DJANGO_SECRET_KEY=$(uuidgen)
    export DJANGO_DEBUG=True
@@ -23,4 +24,5 @@ Set the following environment variables::
 Use ``pipenv``::
 
    $ pipenv sync
-   $ pipenv run python manage.py (migrate, runserver, etc)
+   $ pipenv run python manage.py migrate
+   $ pipenv run python manage.py runserver
