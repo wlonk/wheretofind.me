@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
@@ -48,6 +49,9 @@ class User(AbstractUser):
 
     def follows(self):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
+
+    def get_absolute_url(self):
+        return reverse("user-profile", kwargs={"slug": self.username})
 
 
 class InternetIdentity(models.Model):
