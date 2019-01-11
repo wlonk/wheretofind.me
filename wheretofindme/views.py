@@ -45,6 +45,11 @@ class EditView(LoginRequiredMixin, TemplateView):
 class FollowsView(LoginRequiredMixin, ListView):
     model = Follow
 
+    def get_queryset(self):
+        return Follow.objects.filter(
+            from_user=self.request.user,
+        )
+
 
 class FollowViewset(viewsets.ModelViewSet):
     model = Follow
