@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block "main" %}
+<h1 class="display-4">Who follows me?</h1>
+<div>
+  {% for follow in object_list %}
+    <div class="card bg-light shadow-sm mb-3">
+      <a href="{% url "user-profile" slug=follow.from_user.username %}">
+        <div class="card-body">
+          {{ follow.from_user.username }}
+        </div>
+      </a>
+    </div>
+  {% empty %}
+    No one's following you yet.
+  {% endfor %}
+</div>
+{% endblock "main" %}
