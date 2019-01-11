@@ -90,5 +90,10 @@ class InternetIdentity(models.Model):
 
 
 class Follow(models.Model):
+    class Meta:
+        ordering = (
+            "to_user__username",
+        )
+
     from_user = models.ForeignKey(User, on_delete=models.PROTECT)
     to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
