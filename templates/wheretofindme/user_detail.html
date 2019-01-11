@@ -3,7 +3,7 @@
 {% block "main" %}
 <h1 class="display-4">
   Where to find {{ object.username }}
-  {% if object != user %}
+  {% if user.is_authenticated and object != user %}
   <span class="float-right">
     <button
       class="follow-button btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
