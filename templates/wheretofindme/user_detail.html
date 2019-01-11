@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 
 {% block "main" %}
-<h1 class="display-4">
-  Where to find {{ object.username }}
-  {% if user.is_authenticated and object != user %}
-  <span class="float-right">
-    <button
-      class="follow-button btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
-      {% if object in user.follows %}aria-pressed="true"{% endif %}
-      data-username="{{ object.username }}"
-      >
-      <span class="fas fa-star"></span>
-    </button>
-  </span>
-  {% endif %}
+{% if user.is_authenticated and object != user %}
+<span class="float-right">
+  <button
+    class="follow-button btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
+    {% if object in user.follows %}aria-pressed="true"{% endif %}
+    data-username="{{ object.username }}"
+    >
+    <span class="fas fa-star"></span>
+  </button>
+</span>
+{% endif %}
+
+<h1 class="text-center display-4">
+  <small class="text-muted font-italic">Where to find</small>
+  <br>
+  {{ object.username }}
 </h1>
+
 {% if identities %}
-<div class="identities-display">
+<div class="container identities-display">
   {% for identity in identities %}
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
     {% if identity.name %}
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
@@ -36,6 +42,8 @@
         {% endif %}
       </div>
     {% endif %}
+    </div>
+  </div>
   {% endfor %}
 </div>
 {% else %}
