@@ -1,13 +1,14 @@
 from django.db import transaction
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from django.views.generic.base import TemplateView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import InternetIdentity, User
-from .serializers import IdentitySerializer
+from .models import InternetIdentity, User, Follow
+from .serializers import IdentitySerializer, FollowSerializer
 
 
 class MeRedirectView(RedirectView):
@@ -38,6 +39,19 @@ class EditView(TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context["identities"] = self.request.user.internetidentity_set.all()
         return context
+
+
+class FollowsView(ListView):
+    model = Follow
+
+
+class FollowViewset(viewsets.ModelViewSet):
+    model = Follow
+    serializer_class = FollowSerializer
+    lookup_field = "to_user__username"
+
+    def get_queryset(self):
+        return Follow.objects.filter(from_user=self.request.user)
 
 
 class IdentityViewset(viewsets.ModelViewSet):

@@ -24,6 +24,7 @@ from .forms import CustomUserForm
 
 router = routers.DefaultRouter()
 router.register(r"identities", views.IdentityViewset, basename="identity")
+router.register(r"follows", views.FollowViewset, basename="follow")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -38,6 +39,7 @@ urlpatterns = [
     path("@<str:slug>", views.UserProfileView.as_view(), name="user-profile"),
     path("s/me/", views.MeRedirectView.as_view(), name="me"),
     path("s/edit/", views.EditView.as_view(), name="identity-edit"),
+    path("s/follows/", views.FollowsView.as_view(), name="follows"),
     path("tos/", TemplateView.as_view(template_name="tos.html"), name="tos"),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     path("", TemplateView.as_view(template_name="base.html"), name="root"),
