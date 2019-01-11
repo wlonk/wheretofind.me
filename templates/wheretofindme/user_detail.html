@@ -3,7 +3,7 @@
 {% block "main" %}
 <h1 class="display-4">Where to find {{ object.username }}</h1>
 {% if identities %}
-<div class="card-deck">
+<div class="identities-display">
   {% for identity in identities %}
     {% if identity.name %}
       <div class="card bg-light shadow-sm mb-3">

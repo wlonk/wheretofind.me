@@ -27,3 +27,7 @@ html {
 .identity {
   background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
 }
+
+.identities-display {
+  columns: 320px 2;
+}
