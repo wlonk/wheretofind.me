@@ -134,4 +134,42 @@ $(() => {
 
   // Suppress form submission:
   $("form.identities").submit(() => false);
+
+  // Allow follow and unfollow:
+  $(".follow-button").click(evt => {
+    var csrftoken = getCookie('csrftoken');
+    var username = $(evt.target).data("username");
+    if ($(evt.target).hasClass("active")) {
+      // Delete
+      var url = `/api/follows/${username}/`;
+      fetch(url, {
+        method: "DELETE",
+        credentials: "same-origin",
+        headers: {
+          "X-CSRFToken": csrftoken
+        }
+      }).then(() => {
+        $(evt.target).removeClass("active");
+        $(evt.target).attr("aria-pressed", false);
+      });
+    } else {
+      // Add
+      var url = "/api/follows/";
+      var data = {
+        to_user: username
+      };
+      fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken
+        }
+      }).then(() => {
+        $(evt.target).addClass("active");
+        $(evt.target).attr("aria-pressed", true);
+      });
+    }
+  });
 });

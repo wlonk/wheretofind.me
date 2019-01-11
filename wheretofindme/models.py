@@ -46,6 +46,9 @@ class UserManager(BaseUserManager.from_queryset(UserQuerySet)):
 class User(AbstractUser):
     objects = UserManager()
 
+    def follows(self):
+        return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
+
 
 class InternetIdentity(models.Model):
     class Meta:
@@ -80,3 +83,8 @@ class InternetIdentity(models.Model):
             return "fas fa-envelope"
         netloc = urlparse(self.url).netloc
         return ICONS[netloc]
+
+
+class Follow(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.PROTECT)
+    to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")

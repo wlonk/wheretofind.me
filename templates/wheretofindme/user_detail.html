@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block "main" %}
-<h1 class="display-4">Where to find {{ object.username }}</h1>
+<h1 class="display-4">
+  Where to find {{ object.username }}
+  {% if user.is_authenticated and object != user %}
+  <span class="float-right">
+    <button
+      class="follow-button btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
+      {% if object in user.follows %}aria-pressed="true"{% endif %}
+      data-username="{{ object.username }}"
+      >
+      <span class="fas fa-star"></span>
+    </button>
+  </span>
+  {% endif %}
+</h1>
 {% if identities %}
 <div class="identities-display">
   {% for identity in identities %}
