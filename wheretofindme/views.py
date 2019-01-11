@@ -46,9 +46,7 @@ class FollowsView(LoginRequiredMixin, ListView):
     model = Follow
 
     def get_queryset(self):
-        return Follow.objects.filter(
-            from_user=self.request.user,
-        )
+        return Follow.objects.filter(from_user=self.request.user)
 
 
 class FollowViewset(viewsets.ModelViewSet):
