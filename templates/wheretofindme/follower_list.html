@@ -4,15 +4,20 @@
 <h1 class="display-4">Who follows me?</h1>
 <div>
   {% for follow in object_list %}
-    <div class="card bg-light shadow-sm mb-3">
-      <a href="{% url "user-profile" slug=follow.from_user.username %}">
-        <div class="card-body">
+    <div class="card border-secondary shadow-sm mb-3">
+      <div class="card-header">
+        <a href="{% url "user-profile" slug=follow.from_user.username %}">
           {{ follow.from_user.username }}
-        </div>
-      </a>
+        </a>
+      </div>
+      <div class="card-body">
+        {% for identity in follow.from_user.first_three %}
+        {% include "wheretofindme/_identity.html" with identity=identity  %}
+        {% endfor %}
+      </div>
     </div>
   {% empty %}
-    No one's following you yet.
+    No one's following you.
   {% endfor %}
 </div>
 {% endblock "main" %}
