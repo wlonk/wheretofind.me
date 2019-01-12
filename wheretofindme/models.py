@@ -50,6 +50,9 @@ class User(AbstractUser):
     def follows(self):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
+    def first_three(self):
+        return self.internetidentity_set.all()[:3]
+
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
 
@@ -93,6 +96,9 @@ class Follow(models.Model):
     class Meta:
         ordering = (
             "to_user__username",
+        )
+        unique_together = (
+            ("from_user", "to_user"),
         )
 
     from_user = models.ForeignKey(User, on_delete=models.PROTECT)

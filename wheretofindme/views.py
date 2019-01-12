@@ -49,6 +49,14 @@ class FollowsView(LoginRequiredMixin, ListView):
         return Follow.objects.filter(from_user=self.request.user)
 
 
+class FollowersView(LoginRequiredMixin, ListView):
+    model = Follow
+    template_name = "wheretofindme/follower_list.html"
+
+    def get_queryset(self):
+        return Follow.objects.filter(to_user=self.request.user)
+
+
 class FollowViewset(viewsets.ModelViewSet):
     model = Follow
     serializer_class = FollowSerializer
