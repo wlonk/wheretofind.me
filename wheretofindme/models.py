@@ -1,3 +1,5 @@
+import codecs
+
 from collections import defaultdict
 from urllib.parse import urlparse
 
@@ -87,6 +89,12 @@ class InternetIdentity(models.Model):
             return "fas fa-envelope"
         netloc = urlparse(self.url).netloc
         return ICONS[netloc]
+
+    def should_blind(self):
+        return self.url.startswith("mailto:")
+
+    def blind_url(self):
+        return codecs.encode(self.url, "rot_13")
 
 
 class Follow(models.Model):

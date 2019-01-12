@@ -27,7 +27,13 @@
     {% if identity.name %}
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
-          <a rel="me nofollow" href="{{ identity.url }}">
+          <a
+            rel="me nofollow"
+            {% if identity.should_blind %}
+            data-erot13="{{ identity.blind_url }}"
+            {% else %}
+            href="{{ identity.url }}"
+            {% endif %}>
         {% endif %}
         <div class="card-body">
           <span class="{{ identity.icon }}"></span>
