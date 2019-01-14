@@ -138,8 +138,8 @@ $(() => {
   // Allow follow and unfollow:
   $(".follow-button").click(evt => {
     var csrftoken = getCookie('csrftoken');
-    var username = $(evt.target).data("username");
-    if ($(evt.target).hasClass("active")) {
+    var username = $(evt.delegateTarget).data("username");
+    if ($(evt.delegateTarget).hasClass("active")) {
       // Delete
       var url = `/api/follows/${username}/`;
       fetch(url, {
@@ -149,8 +149,8 @@ $(() => {
           "X-CSRFToken": csrftoken
         }
       }).then(() => {
-        $(evt.target).removeClass("active");
-        $(evt.target).attr("aria-pressed", false);
+        $(evt.delegateTarget).removeClass("active");
+        $(evt.delegateTarget).attr("aria-pressed", false);
       });
     } else {
       // Add
@@ -167,8 +167,8 @@ $(() => {
           "X-CSRFToken": csrftoken
         }
       }).then(() => {
-        $(evt.target).addClass("active");
-        $(evt.target).attr("aria-pressed", true);
+        $(evt.delegateTarget).addClass("active");
+        $(evt.delegateTarget).attr("aria-pressed", true);
       });
     }
   });
