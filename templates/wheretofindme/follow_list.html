@@ -11,7 +11,7 @@
         </a>
       </div>
       <div class="card-body">
-        {% for identity in follow.from_user.first_three %}
+        {% for identity in follow.to_user.first_three %}
         {% include "wheretofindme/_identity.html" with identity=identity  %}
         {% endfor %}
       </div>
