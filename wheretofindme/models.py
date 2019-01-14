@@ -133,7 +133,7 @@ class User(AbstractUser):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
     def first_three(self):
-        return self.internetidentity_set.all()[:3]
+        return self.internetidentity_set.exclude(name="")[:3]
 
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
