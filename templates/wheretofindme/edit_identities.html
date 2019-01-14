@@ -3,6 +3,11 @@
 {% block "main" %}
 <form method="post" action="." class="identities">
   <h1 class="display-4">Where are you?</h1>
+  <p class="text-muted">
+    Hit the plus to add a new location, hit the minus to remove it, and drag
+    and drop them to arrange them into your preferred order. They save as soon
+    as you stop editing them.
+  </p>
   {% for identity in identities %}
   <div class="identity card bg-light shadow-sm w-100 mb-3" data-id="{{ identity.id }}">
     <div class="card-body">
