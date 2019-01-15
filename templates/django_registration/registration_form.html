@@ -1,73 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block "main" %}
 <h1 class="display-4">Sign up</h1>
 
-<form method="post" action="{% url "django_registration_register" %}">
-  {% csrf_token %}
-
-  <div id="div_{{ form.username.id_for_label }}" class="form-group{% if form.username.field.required %} required{% endif %}">
-    <label for="{{ form.username.id_for_label }}" class="col-form-label{% if form.username.field.required %} requiredField{% endif %}">
-      Username{% if form.username.field.required %}<span class="asteriskField">*</span>{% endif %}
-    </label>
-    <div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">https://wheretofind.me/@</span>
-        </div>
-        <input type="text" name="{{ form.username.name }}" maxlength="150" autofocus class="textinput textInput form-control"{% if form.username.field.required %} required{% endif %} id="{{ form.username.id_for_label }}">
-      </div>
-      <small id="hint_{{ form.username.id_for_label }}" class="form-text text-muted">
-        {{ form.username.field.help_text }}
-      </small>
-      <small id="warn_{{ form.username.id_for_label }}" class="form-text text-muted">
-        You cannot change this without intervention from an admin, so consider carefully.
-      </small>
-    </div>
-  </div>
-
-  <div id="div_{{ form.email.id_for_label }}" class="form-group{% if form.email.field.required %} required{% endif %}">
-    <label for="{{ form.email.id_for_label }}" class="col-form-label {% if form.email.field.required %} requiredField{% endif %}">
-      Email address{% if form.email.field.required %}<span class="asteriskField">*</span>{% endif %}
-    </label>
-    <div>
-      <input type="email" name="{{ form.email.name }}" maxlength="254" class="emailinput form-control"{% if form.email.field.required %} required{% endif %} id="{{ form.email.id_for_label }}">
-    </div>
-  </div>
-
-  <div id="div_{{ form.password1.id_for_label }}" class="form-group{% if form.password1.field.required %} required{% endif %}">
-    <label for="{{ form.password1.id_for_label }}" class="col-form-label {% if form.password1.field.required %} requiredField{% endif %}">
-      Password{% if form.password1.field.required %}<span class="asteriskField">*</span>{% endif %}
-    </label>
-    <div class="">
-      <input type="password" name="password1" class="textinput textInput form-control"{% if form.password1.field.required %} required{% endif %} id="{{ form.password1.id_for_label }}">
-      <small id="hint_{{ form.password1.id_for_label }}" class="form-text text-muted">
-        {{ form.password1.field.help_text }}
-      </small>
-    </div>
-  </div>
-
-  <div id="div_{{ form.password2.id_for_label }}" class="form-group{% if form.password2.field.required %} required{% endif %}">
-    <label for="{{ form.password2.id_for_label }}" class="col-form-label {% if form.password2.field.required %} requiredField{% endif %}">
-      Password confirmation{% if form.password2.field.required %}<span class="asteriskField">*</span>{% endif %}
-    </label>
-    <div class="">
-      <input type="password" name="password2" class="textinput textInput form-control"{% if form.password2.field.required %} required{% endif %} id="{{ form.password2.id_for_label }}">
-      <small id="hint_{{ form.password2.id_for_label }}" class="form-text text-muted">
-        {{ form.password2.field.help_text }}
-      </small>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div id="div_{{ form.tos.id_for_label }}" class="form-check{% if form.tos.field.required %} required{% endif %}">
-      <label for="{{ form.tos.id_for_label }}" class="form-check-label{% if form.tos.field.required %} requiredField{% endif %}">
-        <input type="checkbox" name="tos" class="checkboxinput form-check-input"{% if form.tos.field.required %} required{% endif %} id="{{ form.tos.id_for_label }}">
-        I have read and agree to the <a target="_blank" href="{% url "tos" %}">Terms of Service</a>{% if form.tos.field.required %}<span class="asteriskField">*</span>{% endif %}
-      </label>
-    </div>
-  </div>
-
-  <input type="submit" class="btn btn-primary" value="Sign up">
-</form>
+{% crispy form %}
 {% endblock "main" %}

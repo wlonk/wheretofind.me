@@ -1,1 +1,1 @@
-[{{ site.name }}] Complete your registration
+[Where to Find Me] Complete your registration
