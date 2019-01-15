@@ -2,6 +2,10 @@
 Wheretofind.me
 ==============
 
+.. image:: https://badge.waffle.io/wlonk/wheretofind.me.svg?columns=all
+ :target: https://waffle.io/wlonk/wheretofind.me
+ :alt: 'Waffle.io - Columns and their card count'
+
 You will need:
 
 * Python 3.7 or later (``brew install python@3.7``)
