@@ -125,7 +125,7 @@ AUTH_USER_MODEL = "wheretofindme.User"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(BASE_DIR / "templates")],
+        "DIRS": [str(BASE_DIR / "public"), str(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -152,7 +152,9 @@ DATABASES = {"default": dj_database_url.config(default="postgres:///wheretofindm
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": (
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        )
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
@@ -184,7 +186,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(BASE_DIR / "static")]
+STATICFILES_DIRS = [str(BASE_DIR / "static"), str(BASE_DIR / "dist")]
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -200,8 +202,5 @@ else:
 
 # REST Framework
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES":
-    (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",)
 }

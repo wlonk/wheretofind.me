@@ -6,11 +6,15 @@ Wheretofind.me
  :target: https://waffle.io/wlonk/wheretofind.me
  :alt: 'Waffle.io - Columns and their card count'
 
+Server development
+------------------
+
 You will need:
 
 * Python 3.7 or later (``brew install python@3.7``)
 * Pipenv (``brew install pipenv``)
 * PostgreSQL (``brew install postgres`` or Postgres.app_)
+* yarn (``brew install yarn``)
 
 .. _Postgres.app: https://postgresapp.com/
 
@@ -25,8 +29,23 @@ root::
    export DJANGO_DEBUG=True
    export SENDGRID_API_KEY=INVALID
 
-Use ``pipenv``::
+Use ``pipenv`` to get the database into a good state::
 
    $ pipenv sync
    $ pipenv run python manage.py migrate
-   $ pipenv run python manage.py runserver
+
+Then get the frontend building::
+
+   $ yarn install
+   $ yarn serve
+
+Dependencies
+------------
+
+To add Python dependencies::
+
+   $ pipenv install (--dev) <dep name>
+
+To add JavaScript dependencies::
+
+   $ yarn add (--dev) <dep name>

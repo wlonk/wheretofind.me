@@ -1,116 +1,84 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
 *$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
+*.cover
 *.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.egg-info/
+*.log
 *.manifest
+*.mo
+*.njsproj
+*.ntvs*
+*.pot
+*.py[cod]
+*.sage.py
+*.sln
+*.so
 *.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
+*.suo
+*.sw*
+.DS_Store
+.Python
+.cache
 .coverage
 .coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-staticfiles/
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+.dmypy.json
+.eggs/
 .env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
+.env.*.local
+.env.local
+.hypothesis/
+.idea
+.installed.cfg
+.ipynb_checkpoints
+.mypy_cache/
+.nox/
+.pyre/
+.pytest_cache/
+.python-version
+.ropeproject
+.scrapy
 .spyderproject
 .spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
+.tox/
+.venv
+.vscode
+.webassets-cache
+/dist
 /site
-
-# mypy
-.mypy_cache/
-.dmypy.json
+ENV/
+MANIFEST
+__pycache__/
+build/
+celerybeat-schedule
+coverage.xml
+db.sqlite3
+develop-eggs/
+dist/
 dmypy.json
-
-# Pyre type checker
-.pyre/
+docs/_build/
+downloads/
+eggs/
+env.bak/
+env/
+htmlcov/
+instance/
+ipython_config.py
+lib/
+lib64/
+local_settings.py
+node_modules
+nosetests.xml
+npm-debug.log*
+parts/
+pip-delete-this-directory.txt
+pip-log.txt
+profile_default/
+sdist/
+share/python-wheels/
+staticfiles/
+target/
+var/
+venv.bak/
+venv/
+wheels/
+yarn-debug.log*
+yarn-error.log*
