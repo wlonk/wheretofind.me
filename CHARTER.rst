@@ -23,7 +23,10 @@ site to take, and what directions we *don't* want to take.
 The guiding philosophy, as I have conceived of it, is that Where to Find
 Me is the map, not the destination. We won't have statuses, we won't
 have posts, we won't have *content as such* here. We won't pull that in
-from other connected sites, either.
+from other connected sites, either. We won't sell your data and we won't
+run ads. If we have to raise money to keep this running, our first
+choice will be memberships: selling a service for money is a lot more
+honest and sustainable than partaking in surveillance capitalism.
 
 We are interested in pursuing matters like verified ownership of linked
 identities, whether by OAuth logins or IndieWeb microformats. We are
