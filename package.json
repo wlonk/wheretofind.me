@@ -11,7 +11,8 @@
     "serve": "run-p js:serve py:serve"
   },
   "dependencies": {
-    "vue": "^2.5.21"
+    "vue": "^2.5.21",
+    "vue-cookie": "^1.1.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",

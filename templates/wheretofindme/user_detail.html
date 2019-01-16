@@ -4,9 +4,11 @@
 {% if user.is_authenticated and object != user %}
 <span class="float-right">
   <button
-    class="follow-button btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
+    class="favstar btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
     {% if object in user.follows %}aria-pressed="true"{% endif %}
     data-username="{{ object.username }}"
+    data-active="{% if object in user.follows %}true{% else %}false{% endif %}"
+    disabled
     >
     <span class="fas fa-star"></span>
   </button>
