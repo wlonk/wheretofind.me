@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "vue": "^2.5.21",
-    "vue-cookie": "^1.1.4"
+    "vue-cookie": "^1.1.4",
+    "vuedraggable": "^2.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",

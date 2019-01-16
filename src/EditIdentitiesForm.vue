@@ -1,13 +1,19 @@
 <template>
   <form @submit.prevent>
-    <Identity
-      v-for="identity in identities"
-      :key="identity.id"
-      :identity="identity"
-      :disabled="identity.disabled"
-      @updateIdentity="handleUpdateIdentity"
-      @deleteIdentity="handleDeleteIdentity"
-    />
+    <draggable
+      v-model="identities"
+      :options="draggableOptions"
+      @end="handleReorderIdentities"
+    >
+      <Identity
+        v-for="identity in identities"
+        :key="identity.id"
+        :identity="identity"
+        :disabled="identity.disabled"
+        @updateIdentity="handleUpdateIdentity"
+        @deleteIdentity="handleDeleteIdentity"
+      />
+    </draggable>
     <AddIdentityButton @createIdentity="handleCreateIdentity" />
   </form>
 </template>
@@ -17,18 +23,30 @@
 // https://github.com/SortableJS/Vue.Draggable
 import Identity from "./components/Identity.vue";
 import AddIdentityButton from "./components/AddIdentityButton.vue";
+import draggable from "vuedraggable";
 
 export default {
   name: "EditIdentitiesForm",
   components: {
     Identity,
-    AddIdentityButton
+    AddIdentityButton,
+    draggable
+  },
+  props: {
+    draggableOptions: {
+      type: Object,
+      default() {
+        return {
+          items: ".identity",
+          axis: "y",
+          containment: "parent"
+        };
+      }
+    }
   },
   data() {
     return {
-      identities: [
-        // TODO: Prepopulate this from the DOM.
-      ]
+      identities: []
     };
   },
   created() {
@@ -45,6 +63,18 @@ export default {
       });
   },
   methods: {
+    handleReorderIdentities() {
+      const url = "/api/identities/reorder/";
+      const data = this.identities.map(i => i.id);
+      const options = this.getFetchOptions({
+        method: "POST",
+        body: JSON.stringify(data)
+      });
+
+      fetch(url, options).catch(() => {
+        // TODO: revert to pre-sorted order.
+      });
+    },
     handleCreateIdentity() {
       const newIdentity = {
         id: this.identities.length + 1,
@@ -60,16 +90,14 @@ export default {
           newIdentity.disabled = false;
           newIdentity.id = id;
         })
-        .catch
         // TODO: display error state.
-        ();
+        .catch();
     },
     handleUpdateIdentity(identity) {
       this.updateIdentity(identity)
         .then()
-        .catch
         // TODO: display error state.
-        ();
+        .catch();
     },
     handleDeleteIdentity(identity) {
       this.deleteIdentity(identity)
@@ -77,9 +105,8 @@ export default {
           const index = this.identities.map(i => i.id).indexOf(identity.id);
           this.identities.splice(index, 1);
         })
-        .catch
         // TODO: display error state.
-        ();
+        .catch();
     },
     // TODO: This is WET, copied from the FavStar component. We should move all
     // this into an API component and call it there.
