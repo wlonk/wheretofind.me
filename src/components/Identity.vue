@@ -60,8 +60,9 @@ export default {
   },
   methods: {
     updateIdentity() {
-      // TODO flash "saving" div.
-      this.$emit('updateIdentity', this.identity);
+      const url = window.Urls['api:identity-detail'](this.identity.id);
+      const data = this.identity;
+      return this.$http.put(url, data);
     },
     deleteIdentity() {
       // TODO flash "deleting" div.
@@ -71,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .drag-indicator {
   cursor: grab;
 }

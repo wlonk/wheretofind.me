@@ -1,20 +1,15 @@
 <template>
   <form @submit.prevent>
-    <draggable
-      v-model="identities"
-      :options="draggableOptions"
-      @end="handleReorderIdentities"
-    >
+    <draggable v-model="identities" :options="draggableOptions" @end="reorder">
       <Identity
         v-for="identity in identities"
         :key="identity.id"
         :identity="identity"
         :disabled="identity.disabled"
-        @updateIdentity="handleUpdateIdentity"
-        @deleteIdentity="handleDeleteIdentity"
+        @deleteIdentity="destroy"
       />
     </draggable>
-    <AddIdentityButton @createIdentity="handleCreateIdentity" />
+    <AddIdentityButton @createIdentity="create" />
   </form>
 </template>
 
@@ -55,12 +50,12 @@ export default {
     });
   },
   methods: {
-    handleReorderIdentities() {
+    reorder() {
       this.reorderIdentities()
         // TODO: revert to pre-sorted order on error.
         .catch();
     },
-    handleCreateIdentity() {
+    create() {
       const newIdentity = {
         id: this.identities.length + 1,
         name: '',
@@ -77,12 +72,7 @@ export default {
         // TODO: display error state.
         .catch();
     },
-    handleUpdateIdentity(identity) {
-      this.updateIdentity(identity)
-        // TODO: display error state.
-        .catch();
-    },
-    handleDeleteIdentity(identity) {
+    destroy(identity) {
       this.deleteIdentity(identity)
         .then(() => {
           const index = this.identities.map(i => i.id).indexOf(identity.id);
@@ -110,11 +100,6 @@ export default {
       const url = window.Urls['api:identity-list']();
       return this.$http.get(url);
     },
-    updateIdentity(identity) {
-      const url = window.Urls['api:identity-detail'](identity.id);
-      const data = identity;
-      return this.$http.put(url, data);
-    },
     deleteIdentity(identity) {
       const url = window.Urls['api:identity-detail'](identity.id);
       return this.$http.delete(url);
@@ -123,7 +108,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .sortable-chosen {
   opacity: 0;
 }
