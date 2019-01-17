@@ -5,7 +5,7 @@
   "scripts": {
     "inspect": "vue-cli-service inspect",
     "js:serve": "vue-cli-service serve",
-    "js:build": "vue-cli-service build",
+    "build": "vue-cli-service build",
     "js:lint": "vue-cli-service lint",
     "py:serve": "pipenv run python manage.py runserver",
     "serve": "run-p js:serve py:serve"
