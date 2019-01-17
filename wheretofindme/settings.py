@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_registration",
+    "django_js_reverse",
     "rest_framework",
     "crispy_forms",
     "wheretofindme",
@@ -204,3 +205,7 @@ else:
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",)
 }
+
+# JS Reverse
+JS_REVERSE_JS_GLOBAL_OBJECT_NAME = "window"
+JS_REVERSE_INCLUDE_ONLY_NAMESPACES = ["api"]

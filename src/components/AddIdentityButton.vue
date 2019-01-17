@@ -1,5 +1,6 @@
 <template>
   <button
+    type="button"
     class="btn add-identity btn-outline-primary float-right"
     @click.prevent="createIdentity"
   >
@@ -9,12 +10,12 @@
 
 <script>
 export default {
-  name: "AddIdentityButton",
+  name: 'AddIdentityButton',
   methods: {
     createIdentity() {
-      this.$emit("createIdentity");
-    }
-  }
+      this.$emit('createIdentity');
+    },
+  },
 };
 </script>
 

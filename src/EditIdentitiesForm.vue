@@ -19,74 +19,58 @@
 </template>
 
 <script>
-// TODO: Support drag and drop, perhaps using
-// https://github.com/SortableJS/Vue.Draggable
-import Identity from "./components/Identity.vue";
-import AddIdentityButton from "./components/AddIdentityButton.vue";
-import draggable from "vuedraggable";
+import Identity from './components/Identity.vue';
+import AddIdentityButton from './components/AddIdentityButton.vue';
+import draggable from 'vuedraggable';
 
 export default {
-  name: "EditIdentitiesForm",
+  name: 'EditIdentitiesForm',
   components: {
     Identity,
     AddIdentityButton,
-    draggable
+    draggable,
   },
   props: {
     draggableOptions: {
       type: Object,
       default() {
         return {
-          items: ".identity",
-          axis: "y",
-          containment: "parent"
+          items: '.identity',
+          axis: 'y',
+          containment: 'parent',
         };
-      }
-    }
+      },
+    },
   },
   data() {
     return {
-      identities: []
+      identities: [],
     };
   },
   created() {
-    const url = "/api/identities/";
-    const options = this.getFetchOptions({
-      method: "GET"
-    });
     // TODO: this approach has a flash as the original DOM elements are
     // replaced by the Vue ones.
-    fetch(url, options)
-      .then(r => r.json())
-      .then(resp => {
-        this.identities = resp;
-      });
+    this.retrieveIdentities().then(resp => {
+      this.identities = resp.data;
+    });
   },
   methods: {
     handleReorderIdentities() {
-      const url = "/api/identities/reorder/";
-      const data = this.identities.map(i => i.id);
-      const options = this.getFetchOptions({
-        method: "POST",
-        body: JSON.stringify(data)
-      });
-
-      fetch(url, options).catch(() => {
-        // TODO: revert to pre-sorted order.
-      });
+      this.reorderIdentities()
+        // TODO: revert to pre-sorted order on error.
+        .catch();
     },
     handleCreateIdentity() {
       const newIdentity = {
         id: this.identities.length + 1,
-        name: "",
-        url: "",
-        disabled: true
+        name: '',
+        url: '',
+        disabled: true,
       };
       this.identities.push(newIdentity);
       this.createNewIdentity()
-        .then(r => r.json())
         .then(resp => {
-          const { id } = resp;
+          const { id } = resp.data;
           newIdentity.disabled = false;
           newIdentity.id = id;
         })
@@ -95,7 +79,6 @@ export default {
     },
     handleUpdateIdentity(identity) {
       this.updateIdentity(identity)
-        .then()
         // TODO: display error state.
         .catch();
     },
@@ -108,56 +91,43 @@ export default {
         // TODO: display error state.
         .catch();
     },
-    // TODO: This is WET, copied from the FavStar component. We should move all
-    // this into an API component and call it there.
+    // API calls:
+    reorderIdentities() {
+      const url = window.Urls['api:identity-reorder']();
+      const data = this.identities.map(i => i.id);
+
+      return this.$http.post(url, data);
+    },
     createNewIdentity() {
-      const url = "/api/identities/";
+      const url = window.Urls['api:identity-list']();
       const data = {
-        name: "",
-        url: ""
+        name: '',
+        url: '',
       };
-      const options = this.getFetchOptions({
-        method: "POST",
-        body: JSON.stringify(data)
-      });
-      return fetch(url, options);
+      return this.$http.post(url, data);
+    },
+    retrieveIdentities() {
+      const url = window.Urls['api:identity-list']();
+      return this.$http.get(url);
     },
     updateIdentity(identity) {
-      const url = `/api/identities/${identity.id}/`;
+      const url = window.Urls['api:identity-detail'](identity.id);
       const data = identity;
-      const options = this.getFetchOptions({
-        method: "PUT",
-        body: JSON.stringify(data)
-      });
-      return fetch(url, options);
+      return this.$http.put(url, data);
     },
     deleteIdentity(identity) {
-      const url = `/api/identities/${identity.id}/`;
-      const options = this.getFetchOptions({
-        method: "DELETE"
-      });
-      return fetch(url, options);
+      const url = window.Urls['api:identity-detail'](identity.id);
+      return this.$http.delete(url);
     },
-    getFetchOptions(merge) {
-      return this.extend(
-        {
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": this.$cookie.get("csrftoken")
-          }
-        },
-        merge
-      );
-    },
-    extend(obj, src) {
-      Object.keys(src).forEach(key => {
-        obj[key] = src[key];
-      });
-      return obj;
-    }
-  }
+  },
 };
 </script>
 
-<style></style>
+<style>
+.sortable-chosen {
+  opacity: 0;
+}
+.sortable-drag {
+  opacity: 1;
+}
+</style>

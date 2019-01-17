@@ -10,20 +10,20 @@
 
 <script>
 export default {
-  name: "FavStar",
+  name: 'FavStar',
   props: {
     active: {
       type: Boolean,
-      default: false
+      default: false,
     },
     username: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
-      isActive: this.active
+      isActive: this.active,
     };
   },
   methods: {
@@ -40,45 +40,18 @@ export default {
         });
       }
     },
-    // TODO: the API calls could live in a dedicated API component.
-    // Extra so the URLs.
     unfollow() {
-      const url = `/api/follows/${this.username}/`;
-      const options = this.getFetchOptions({
-        method: "DELETE"
-      });
-      return fetch(url, options);
+      const url = window.Urls['api:follow-detail'](this.username);
+      return this.$http.delete(url);
     },
     follow() {
-      const url = "/api/follows/";
+      const url = window.Urls['api:follow-list']();
       const data = {
-        to_user: this.username
+        to_user: this.username,
       };
-      const options = this.getFetchOptions({
-        method: "POST",
-        body: JSON.stringify(data)
-      });
-      return fetch(url, options);
+      return this.$http.post(url, data);
     },
-    getFetchOptions(merge) {
-      return this.extend(
-        {
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": this.$cookie.get("csrftoken")
-          }
-        },
-        merge
-      );
-    },
-    extend(obj, src) {
-      Object.keys(src).forEach(key => {
-        obj[key] = src[key];
-      });
-      return obj;
-    }
-  }
+  },
 };
 </script>
 

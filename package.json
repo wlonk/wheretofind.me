@@ -11,7 +11,9 @@
     "serve": "run-p js:serve py:serve"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "vue": "^2.5.21",
+    "vue-axios": "^2.1.4",
     "vue-cookie": "^1.1.4",
     "vuedraggable": "^2.17.0"
   },

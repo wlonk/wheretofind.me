@@ -15,15 +15,3 @@ html {
 .main {
   max-width: 700px;
 }
-
-.card-deck .card {
-  min-width: 220px;
-}
-
-.identities {
-  position: relative;
-}
-
-.identity {
-  background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
-}
