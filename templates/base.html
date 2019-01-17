@@ -19,13 +19,6 @@
   </head>
 
   <body>
-    <noscript>
-      <strong>
-        We're sorry but Where to Find Me doesn't work properly without
-        JavaScript enabled. Please enable it to continue.
-      </strong>
-    </noscript>
-
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <h5 class="my-0 mr-md-auto font-weight-normal">
         <a class="navbar-brand" href="/">Where to find me</a>
@@ -59,7 +52,16 @@
     </div>
 
     <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-      <div id="app"></div>
+
+      {% if user.is_authenticated %}
+        <noscript>
+          <div class="alert alert-danger" role="alert">
+            We're sorry but Where to Find Me doesn't work properly without
+            JavaScript enabled. Please enable it to continue.
+          </div>
+        </noscript>
+      {% endif %}
+
       {% block "main" %}
       <h1 class="display-4 text-center">Where are you?</h1>
       <p class="lead">
