@@ -2,13 +2,17 @@
   "name": "wheretofind.me",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "yarn": "1.x"
+  },
   "scripts": {
     "inspect": "vue-cli-service inspect",
     "js:serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "js:lint": "vue-cli-service lint",
     "py:serve": "pipenv run python manage.py runserver",
-    "serve": "run-p js:serve py:serve"
+    "serve": "run-p js:serve py:serve",
+    "postinstall": "yarn build"
   },
   "dependencies": {
     "axios": "^0.18.0",
