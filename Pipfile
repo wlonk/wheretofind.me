@@ -20,6 +20,7 @@ Django = "~=2.1"
 "django-registration" = "~=3.0"
 "django-sendgrid-v5" = "~=0.7"
 djangorestframework = "~=3.9"
+django-js-reverse = "*"
 
 [requires]
 python_version = "3.7"
