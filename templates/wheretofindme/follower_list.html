@@ -9,6 +9,18 @@
         <a href="{% url "user-profile" slug=follow.from_user.username %}">
           {{ follow.from_user.username }}
         </a>
+
+        <span class="float-right">
+          <button
+            class="favstar btn btn-sm btn-outline-warning{% if follow.from_user in user.follows %} active{% endif %}"
+            {% if follow.from_user in user.follows %}aria-pressed="true"{% endif %}
+            data-username="{{ follow.from_user.username }}"
+            data-active="{% if follow.from_user in user.follows %}true{% else %}false{% endif %}"
+            disabled
+            >
+            <span class="fas fa-star"></span>
+          </button>
+        </span>
       </div>
       <div class="card-body">
         {% for identity in follow.from_user.first_three %}

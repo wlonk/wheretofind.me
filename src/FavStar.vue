@@ -1,7 +1,8 @@
 <template>
   <button
+    type="button"
     class="favstar btn btn-outline-warning"
-    :class="{ active: isActive }"
+    :class="{ 'btn-sm': this.size, active: isActive }"
     @click="toggleFavstar"
   >
     <span class="fas fa-star"></span>
@@ -19,6 +20,10 @@ export default {
     username: {
       type: String,
       default: null,
+    },
+    size: {
+      type: String,
+      default: '',
     },
   },
   data() {
