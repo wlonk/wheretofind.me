@@ -17,7 +17,7 @@ Vue.config.productionTip = false;
 Vue.use(VueCookie);
 Vue.use(VueAxios, instance);
 
-Array.from(document.getElementsByClassName('favstar')).forEach(el => {
+Array.from(document.querySelectorAll('.favstar')).forEach(el => {
   const data = {
     active: el.dataset.active !== 'false',
     username: el.dataset.username,
@@ -28,6 +28,9 @@ Array.from(document.getElementsByClassName('favstar')).forEach(el => {
   });
 });
 
-new Vue({
-  render: createElement => createElement(EditIdentitiesForm),
-}).$mount('#edit-identities-form');
+Array.from(document.querySelectorAll('#edit-identities-form')).forEach(el => {
+  new Vue({
+    el,
+    render: createElement => createElement(EditIdentitiesForm),
+  });
+});
