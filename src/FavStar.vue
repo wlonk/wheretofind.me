@@ -2,7 +2,7 @@
   <button
     type="button"
     class="favstar btn btn-outline-warning"
-    :class="{ 'btn-sm': this.size, active: isActive }"
+    :class="{ 'btn-sm': small, active: isActive }"
     @click="toggleFavstar"
   >
     <span class="fas fa-star"></span>
@@ -21,9 +21,9 @@ export default {
       type: String,
       default: null,
     },
-    size: {
-      type: String,
-      default: '',
+    small: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
