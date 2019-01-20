@@ -16,18 +16,15 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+      - restore_cache:
+          keys:
+          - v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - v2-dependencies-py-
 
       - restore_cache:
           keys:
-          - v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - v1-dependencies-py-
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v1-dependencies-js-
+          - v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v2-dependencies-js-
 
       - run:
           name: Install Python dependencies
@@ -43,13 +40,13 @@ jobs:
       - save_cache:
           paths:
             - ".venv"
-          key: v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
@@ -63,8 +60,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - v1-dependencies-py-
+          - v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - v2-dependencies-py-
 
       - run:
           name: run python tests
@@ -82,8 +79,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v1-dependencies-js-
+          - v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v2-dependencies-js-
 
       - run:
           name: run javascript tests
