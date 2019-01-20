@@ -21,15 +21,15 @@ jobs:
           - v1-dependencies-js-
 
       - run:
-          name: install python dependencies
+          name: Install Python dependencies
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install pipenv
+            # Pipenv already present per CircleCI virtualenvs
             pipenv install --dev
 
       - run:
-          name: install javascript dependencies
+          name: Install Javascript dependencies
           command: |
             yarn
 
