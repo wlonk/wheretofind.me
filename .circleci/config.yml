@@ -40,8 +40,6 @@ jobs:
       - save_cache:
           paths:
             - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.7/site-packages"
           key: v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
         
       - save_cache:
