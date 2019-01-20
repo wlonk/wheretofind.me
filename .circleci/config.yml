@@ -69,7 +69,7 @@ jobs:
       - run:
           name: run python tests
           command: |
-            pipenv run test
+            pipenv run pytest
 
   test-client:
     docker:
