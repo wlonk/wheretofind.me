@@ -80,9 +80,8 @@ jobs:
           - v1-dependencies-js-
 
       - run:
-          name: run python tests
+          name: run javascript tests
           command: |
-            . venv/bin/activate
             yarn js:test:unit
 
 workflows:
