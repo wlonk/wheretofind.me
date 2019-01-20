@@ -3,7 +3,13 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7.2-node
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
       - image: circleci/postgres:11.1
+        environment:
+          POSTGRES_USER: wheretofindme
+          POSTGRES_DB: wheretofindme
 
     working_directory: ~/repo
 
@@ -12,20 +18,18 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           - v1-dependencies-py-
 
       - restore_cache:
           keys:
-          - v1-dependencies-js-{{ checksum "yarn.lock" }}
+          - v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
           - v1-dependencies-js-
 
       - run:
           name: Install Python dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install 'pipenv>=2018.11.26'
+            sudo pip install pipenv
             pipenv install --dev
 
       - run:
@@ -35,14 +39,16 @@ jobs:
 
       - save_cache:
           paths:
-            - "./venv"
-          key: v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.7/site-packages"
+          key: v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v1-dependencies-js-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
@@ -56,13 +62,12 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           - v1-dependencies-py-
 
       - run:
           name: run python tests
           command: |
-            . venv/bin/activate
             pipenv run test
 
   test-client:
@@ -76,7 +81,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-js-{{ checksum "yarn.lock" }}
+          - v1-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
           - v1-dependencies-js-
 
       - run:
