@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.7.2
-      - image: circleci/node:11.7
+      - image: circleci/python:3.7.2-node
       - image: circleci/postgres:11.1
 
     working_directory: ~/repo
@@ -68,7 +67,7 @@ jobs:
 
   test-client:
     docker:
-      - image: circleci/node:11.7
+      - image: circleci/python:3.7.2-node
 
     working_directory: ~/repo
 
