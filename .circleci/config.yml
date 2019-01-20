@@ -58,6 +58,9 @@ jobs:
           DJANGO_DEBUG: True
           SECURE_SSL_REDIRECT: false
       - image: circleci/postgres:11.1
+        environment:
+          POSTGRES_USER: wheretofindme
+          POSTGRES_DB: wheretofindme
 
     working_directory: ~/repo
 
