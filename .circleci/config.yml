@@ -84,3 +84,15 @@ jobs:
           command: |
             . venv/bin/activate
             yarn js:test:unit
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test-server:
+          requires:
+            - build
+      - test-client:
+          requires:
+            - build
