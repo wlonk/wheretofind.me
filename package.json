@@ -2,17 +2,19 @@
   "name": "wheretofind.me",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "yarn": "1.x"
-  },
   "scripts": {
-    "inspect": "vue-cli-service inspect",
-    "js:serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "inspect": "vue-cli-service inspect",
     "js:lint": "vue-cli-service lint",
+    "js:serve": "vue-cli-service serve",
+    "js:test:unit": "vue-cli-service test:unit --coverage",
+    "postinstall": "yarn build",
     "py:serve": "pipenv run python manage.py runserver",
+    "py:migrate": "pipenv run python manage.py migrate",
+    "py:makemigrations": "pipenv run python manage.py makemigrations wheretofindme",
+    "py:test:unit": "pipenv run pytest",
     "serve": "run-p js:serve py:serve",
-    "postinstall": "yarn build"
+    "test": "run-s js:test:unit py:test:unit"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -24,9 +26,13 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-plugin-unit-jest": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "lint-staged": "^8.1.0",
@@ -57,6 +63,9 @@
     "last 2 versions",
     "not ie <= 8"
   ],
+  "engines": {
+    "yarn": "1.x"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
