@@ -49,3 +49,16 @@ To add Python dependencies::
 To add JavaScript dependencies::
 
    $ yarn add (--dev) <dep name>
+
+Tests
+-----
+
+The Python tests are written using ``pytest``, ``pytest-django``,
+``pytest-cov``, and ``pytest-factoryboy``. You can run them easily with
+``yarn py:test:unit``.
+
+The JavaScript tests are written using Jest and Vue's unit-test helpers.
+You can run them easily with ``yarn js:test:unit``.
+
+We require 100% test coverage on both parts. We will gladly help you
+with any test-writing issues you may have.

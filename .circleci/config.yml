@@ -1,0 +1,87 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.2
+      - image: circleci/node:11.7
+      - image: circleci/postgres:11.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-py-
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-js-{{ checksum "yarn.lock" }}
+          - v1-dependencies-js-
+
+      - run:
+          name: install python dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install pipenv
+            pipenv install --dev
+
+      - run:
+          name: install javascript dependencies
+          command: |
+            yarn
+
+      - save_cache:
+          paths:
+            - "./venv"
+          key: v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+        
+      - save_cache:
+          paths:
+            - "~/.cache/yarn"
+            - "./node_modules/"
+          key: v1-dependencies-js-{{ checksum "yarn.lock" }}
+        
+  test-server:
+    docker:
+      - image: circleci/python:3.7.2
+      - image: circleci/postgres:11.1
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-py-{{ checksum "Pipfile.lock" }}
+          - v1-dependencies-py-
+
+      - run:
+          name: run python tests
+          command: |
+            . venv/bin/activate
+            pipenv run test
+
+  test-client:
+    docker:
+      - image: circleci/node:11.7
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-js-{{ checksum "yarn.lock" }}
+          - v1-dependencies-js-
+
+      - run:
+          name: run python tests
+          command: |
+            . venv/bin/activate
+            yarn js:test:unit

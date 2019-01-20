@@ -10,6 +10,8 @@
     "js:test:unit": "vue-cli-service test:unit --coverage",
     "postinstall": "yarn build",
     "py:serve": "pipenv run python manage.py runserver",
+    "py:migrate": "pipenv run python manage.py migrate",
+    "py:makemigrations": "pipenv run python manage.py makemigrations wheretofindme",
     "py:test:unit": "pipenv run pytest",
     "serve": "run-p js:serve py:serve",
     "test": "run-s js:test:unit py:test:unit"
