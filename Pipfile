@@ -8,6 +8,10 @@ isort = "*"
 black = "==18.9b0"
 flake8 = "*"
 ipython = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-factoryboy = "*"
+pytest-cov = "*"
 
 [packages]
 "dj-database-url" = "~=0.5"

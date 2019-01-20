@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Identity from './components/Identity.vue';
-import AddIdentityButton from './components/AddIdentityButton.vue';
+import Identity from '@/components/Identity.vue';
+import AddIdentityButton from '@/components/AddIdentityButton.vue';
 import draggable from 'vuedraggable';
 
 export default {
@@ -51,9 +51,11 @@ export default {
   },
   methods: {
     reorder() {
-      this.reorderIdentities()
-        // TODO: revert to pre-sorted order on error.
-        .catch();
+      return (
+        this.reorderIdentities()
+          // TODO: revert to pre-sorted order on error.
+          .catch()
+      );
     },
     create() {
       const newIdentity = {
@@ -63,23 +65,27 @@ export default {
         disabled: true,
       };
       this.identities.push(newIdentity);
-      this.createNewIdentity()
-        .then(resp => {
-          const { id } = resp.data;
-          newIdentity.disabled = false;
-          newIdentity.id = id;
-        })
-        // TODO: display error state.
-        .catch();
+      return (
+        this.createNewIdentity()
+          .then(resp => {
+            const { id } = resp.data;
+            newIdentity.disabled = false;
+            newIdentity.id = id;
+          })
+          // TODO: display error state.
+          .catch()
+      );
     },
     destroy(identity) {
-      this.deleteIdentity(identity)
-        .then(() => {
-          const index = this.identities.map(i => i.id).indexOf(identity.id);
-          this.identities.splice(index, 1);
-        })
-        // TODO: display error state.
-        .catch();
+      return (
+        this.deleteIdentity(identity)
+          .then(() => {
+            const index = this.identities.map(i => i.id).indexOf(identity.id);
+            this.identities.splice(index, 1);
+          })
+          // TODO: display error state.
+          .catch()
+      );
     },
     // API calls:
     reorderIdentities() {

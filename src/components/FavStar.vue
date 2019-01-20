@@ -35,15 +35,15 @@ export default {
     toggleFavstar() {
       const originalActive = this.isActive;
       this.isActive = !originalActive;
+      let callback;
       if (originalActive) {
-        this.unfollow().catch(() => {
-          this.isActive = originalActive;
-        });
+        callback = this.unfollow;
       } else {
-        this.follow().catch(() => {
-          this.isActive = originalActive;
-        });
+        callback = this.follow;
       }
+      callback().catch(() => {
+        this.isActive = originalActive;
+      });
     },
     unfollow() {
       const url = window.Urls['api:follow-detail'](this.username);

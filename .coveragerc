@@ -1,0 +1,7 @@
+[run]
+omit = 
+    wheretofindme/settings/*
+    wheretofindme/migrations/*
+
+[report]
+fail_under = 100

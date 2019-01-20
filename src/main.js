@@ -3,8 +3,8 @@ import VueCookie from 'vue-cookie';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import FavStar from './FavStar.vue';
-import EditIdentitiesForm from './EditIdentitiesForm.vue';
+import FavStar from './components/FavStar.vue';
+import EditIdentitiesForm from './components/EditIdentitiesForm.vue';
 
 const instance = axios.create({
   xsrfCookieName: 'csrftoken',
