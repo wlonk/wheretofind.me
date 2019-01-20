@@ -54,6 +54,9 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
+          DJANGO_SECRET_KEY: "some secret this is"
+          DJANGO_DEBUG: True
+          SECURE_SSL_REDIRECT: false
       - image: circleci/postgres:11.1
 
     working_directory: ~/repo
