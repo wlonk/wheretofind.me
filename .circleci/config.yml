@@ -51,6 +51,9 @@ jobs:
   test-server:
     docker:
       - image: circleci/python:3.7.2
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
       - image: circleci/postgres:11.1
 
     working_directory: ~/repo
