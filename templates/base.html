@@ -6,47 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/png" href="">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}"/>
 
     <title>Where to find me</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- Custom styles for this template -->
-    <link href="{% static "css/main.css" %}" rel="stylesheet">
     <link href="{% static "css/app.css" %}" rel="stylesheet">
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
-      <a class="navbar-brand flex-grow-1" href="/">Where to find me</a>
+      <a class="navbar-brand flex-grow-1" href="/">
+        <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="Where to Find Me logo">
+        Where to find me
+      </a>
 
-      {% if user.is_authenticated %}
-      <form class="form-inline flex-shrink-1" method="post" action="{% url "logout" %}">{% csrf_token %}
-        <div class="btn-group">
-          <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              @{{ user.username }}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="{% url "me" %}">My profile</a>
-              <a class="dropdown-item" href="{% url "identity-edit" %}">Edit my profile</a>
-              <a class="dropdown-item" href="{% url "follows" %}">Who I follow</a>
-              <a class="dropdown-item" href="{% url "followers" %}">Who follows me</a>
-              <a class="dropdown-item" href="{% url "password_change" %}">Change my password</a>
-            </div>
-          </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar" aria-controls="nav-bar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <input class="btn btn-outline-primary" type="submit" value="Sign out">
+      <div class="flex-shrink-1">
+        <div id="nav-bar" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "me" %}">@{{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "identity-edit" %}">Edit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "follows" %}">Follows</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "followers" %}">Followers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "password_change" %}">Password</a>
+            </li>
+
+            <form class="form-inline" method="post" action="{% url "logout" %}">{% csrf_token %}
+              <input class="btn btn-link" type="submit" value="Sign out">
+            </form>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "django_registration_register" %}">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "login" %}">Sign in</a>
+            </li>
+            {% endif %}
+          </ul>
         </div>
-      </form>
-      {% else %}
-      <div class="btn-group" role="group" aria-label="Authentication">
-        <a class="btn btn-outline-primary" href="{% url "django_registration_register" %}">Sign up</a>
-        <a class="btn btn-outline-primary" href="{% url "login" %}">Sign in</a>
       </div>
-      {% endif %}
     </nav>
 
     <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto">
@@ -62,12 +75,12 @@
 
       {% block "main" %}
       <h1 class="display-4 text-center">Where are you?</h1>
-      <p class="lead">
+      <p class="lead text-justify">
         As closed social media sites never have our best interests at heart,
         sometimes we have to move homes on the internet, and we can fall out of
         touch with people as we go elsewhere.
       </p>
-      <p class="lead">
+      <p class="lead text-justify">
         Maybe a layer of indirection can save the day. Point people at your
         page on <code>wheretofind.me</code> and they can find you no matter
         what sites you're using these days. It's like a business card for your
@@ -106,12 +119,6 @@
       </footer>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
       {% js_reverse_inline %}
     </script>

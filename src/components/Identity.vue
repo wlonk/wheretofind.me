@@ -77,6 +77,6 @@ export default {
   cursor: grab;
 }
 .identity {
-  background: url('/static/images/draghandle.png') no-repeat bottom 2px left 3px;
+  background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
 }
 </style>
