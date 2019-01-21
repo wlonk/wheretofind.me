@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/png" href="">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo.png' %}"/>
 
     <title>Where to find me</title>
 
@@ -17,33 +17,49 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
-      <a class="navbar-brand flex-grow-1" href="/">Where to find me</a>
+      <a class="navbar-brand flex-grow-1" href="/">
+        <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="Where to Find Me logo">
+        Where to find me
+      </a>
 
-      {% if user.is_authenticated %}
-      <form class="form-inline flex-shrink-1" method="post" action="{% url "logout" %}">{% csrf_token %}
-        <div class="btn-group">
-          <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              @{{ user.username }}
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-              <a class="dropdown-item" href="{% url "me" %}">My profile</a>
-              <a class="dropdown-item" href="{% url "identity-edit" %}">Edit my profile</a>
-              <a class="dropdown-item" href="{% url "follows" %}">Who I follow</a>
-              <a class="dropdown-item" href="{% url "followers" %}">Who follows me</a>
-              <a class="dropdown-item" href="{% url "password_change" %}">Change my password</a>
-            </div>
-          </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar" aria-controls="nav-bar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <input class="btn btn-outline-primary" type="submit" value="Sign out">
+      <div class="flex-shrink-1">
+        <div id="nav-bar" class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "me" %}">@{{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "identity-edit" %}">Edit</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "follows" %}">Follows</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "followers" %}">Followers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "password_change" %}">Password</a>
+            </li>
+
+            <form class="form-inline" method="post" action="{% url "logout" %}">{% csrf_token %}
+              <input class="btn btn-link" type="submit" value="Sign out">
+            </form>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "django_registration_register" %}">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url "login" %}">Sign in</a>
+            </li>
+            {% endif %}
+          </ul>
         </div>
-      </form>
-      {% else %}
-      <div class="btn-group" role="group" aria-label="Authentication">
-        <a class="btn btn-outline-primary" href="{% url "django_registration_register" %}">Sign up</a>
-        <a class="btn btn-outline-primary" href="{% url "login" %}">Sign in</a>
       </div>
-      {% endif %}
     </nav>
 
     <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto">
@@ -59,12 +75,12 @@
 
       {% block "main" %}
       <h1 class="display-4 text-center">Where are you?</h1>
-      <p class="lead">
+      <p class="lead text-justify">
         As closed social media sites never have our best interests at heart,
         sometimes we have to move homes on the internet, and we can fall out of
         touch with people as we go elsewhere.
       </p>
-      <p class="lead">
+      <p class="lead text-justify">
         Maybe a layer of indirection can save the day. Point people at your
         page on <code>wheretofind.me</code> and they can find you no matter
         what sites you're using these days. It's like a business card for your

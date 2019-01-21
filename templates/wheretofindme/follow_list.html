@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block "main" %}
-<h1 class="display-4">Where is everyone else?</h1>
+<h1>Where is everyone else?</h1>
 <div>
   {% for follow in object_list %}
-    <div class="card border-secondary shadow-sm mb-3">
+    <div class="card border-info shadow-sm mb-3">
       <div class="card-header">
         <a href="{% url "user-profile" slug=follow.to_user.username %}">
           {{ follow.to_user.username }}

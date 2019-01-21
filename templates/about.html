@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block "main" %}
-<h1 class="display-4 text-center">About</h1>
-<p>
+<h1 class="text-center">About</h1>
+<p class="text-justify">
   I decided to make this to help folks find each other as sites come and go. I
   like making webapps, and I figured this was something I could do to help.
 </p>
-<p>
+<p class="text-justify">
   I believe that "community" is a bunch of people who have each others' best
   interests at heart and that it's important to be able to stay in touch, no
   matter what changes the internet goes through. I think that a community
@@ -14,7 +14,7 @@
   life outside of that. I don't pretend that this site somehow solves that, but
   I hope it'll help people keep in touch a bit better.
 </p>
-<p>
+<p class="text-justify">
   This is very much a work in progress! We're trying to work on it in the open,
   so you can see our current list of oustanding bugs and feature ideas
   <a href="https://github.com/wlonk/wheretofind.me/issues">on GitHub</a>, and
@@ -22,7 +22,7 @@
   you don't, you can always <a href="{% url "user-profile" slug="kit" %}">get
   in touch</a> with me and I'll turn our conversation into a ticket.
 </p>
-<p>
-  Icons from FontAwesome.
+<p class="text-justify">
+  Icons from FontAwesome. Color scheme from Bootswatch's "Minty" theme.
 </p>
 {% endblock "main" %}

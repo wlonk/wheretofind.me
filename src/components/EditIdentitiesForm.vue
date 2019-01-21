@@ -1,12 +1,12 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="clearfix">
     <draggable v-model="identities" :options="draggableOptions" @end="reorder">
       <Identity
         v-for="identity in identities"
         :key="identity.id"
         :identity="identity"
         :disabled="identity.disabled"
-        @deleteIdentity="destroy"
+        @deleteIdentity="destroyIdentity"
       />
     </draggable>
     <AddIdentityButton @createIdentity="create" />
@@ -76,7 +76,7 @@ export default {
           .catch()
       );
     },
-    destroy(identity) {
+    destroyIdentity(identity) {
       return (
         this.deleteIdentity(identity)
           .then(() => {
