@@ -5,10 +5,16 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
 from .models import Alias, Follow, InternetIdentity, User
-from .serializers import AliasSerializer, FollowSerializer, IdentitySerializer
+from .serializers import (
+    AliasSerializer,
+    FollowSerializer,
+    IdentitySerializer,
+    ProfileSerializer,
+)
 
 
 class MeRedirectView(LoginRequiredMixin, RedirectView):
@@ -32,12 +38,21 @@ class UserProfileView(DetailView):
         return context
 
 
-class EditView(LoginRequiredMixin, TemplateView):
+class EditIdentityView(LoginRequiredMixin, TemplateView):
     template_name = "wheretofindme/edit_identities.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["identities"] = self.request.user.internetidentity_set.all()
+        return context
+
+
+class EditAliasView(LoginRequiredMixin, TemplateView):
+    template_name = "wheretofindme/edit_aliases.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["aliases"] = self.request.user.alias_set.all()
         return context
 
 
@@ -56,6 +71,18 @@ class FollowersView(LoginRequiredMixin, ListView):
         return Follow.objects.filter(to_user=self.request.user)
 
 
+class SearchView(ListView):
+    model = User
+    template_name = "wheretofindme/search.html"
+
+    def get_queryset(self):
+        return (
+            User.objects.filter(search_enabled=True)
+            .prefetch_related("alias_set")
+            .filter(alias__name__search=self.request.GET["q"])
+        )
+
+
 # API Views
 
 
@@ -71,6 +98,14 @@ class ReorderMixin:
             obj.save()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
+class ProfileView(RetrieveUpdateAPIView):
+    model = User
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        return self.request.user
 
 
 class FollowViewset(viewsets.ModelViewSet):

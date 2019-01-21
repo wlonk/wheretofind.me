@@ -3,6 +3,12 @@ from rest_framework import serializers
 from .models import Alias, Follow, InternetIdentity, User
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("search_enabled",)
+
+
 class FollowSerializer(serializers.ModelSerializer):
     from_user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     to_user = serializers.SlugRelatedField(

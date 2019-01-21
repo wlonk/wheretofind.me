@@ -8,6 +8,7 @@ import './scss/main.scss';
 
 import FavStar from './components/FavStar.vue';
 import EditIdentitiesForm from './components/EditIdentitiesForm.vue';
+import EditAliasForm from './components/EditAliasForm.vue';
 
 const instance = axios.create({
   xsrfCookieName: 'csrftoken',
@@ -36,5 +37,12 @@ Array.from(document.querySelectorAll('#edit-identities-form')).forEach(el => {
   new Vue({
     el,
     render: createElement => createElement(EditIdentitiesForm),
+  });
+});
+
+Array.from(document.querySelectorAll('#edit-aliases-form')).forEach(el => {
+  new Vue({
+    el,
+    render: createElement => createElement(EditAliasForm),
   });
 });

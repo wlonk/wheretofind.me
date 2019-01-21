@@ -2,9 +2,10 @@
   <form @submit.prevent class="clearfix">
     <draggable v-model="identities" :options="draggableOptions" @end="reorder">
       <Identity
-        v-for="identity in identities"
+        v-for="(identity, index) in identities"
         :key="identity.id"
         :identity="identity"
+        :index="index"
         :disabled="identity.disabled"
         @deleteIdentity="destroy"
       />
@@ -58,8 +59,9 @@ export default {
       );
     },
     create() {
+      const newId = Math.max.apply(Math, this.identities.map(i => i.id)) + 1;
       const newIdentity = {
-        id: this.identities.length + 1,
+        id: newId,
         name: '',
         url: '',
         disabled: true,

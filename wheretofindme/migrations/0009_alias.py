@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(max_length=128)),
+                ("name", models.CharField(max_length=128, blank=True)),
                 ("seq", models.IntegerField(null=True)),
                 (
                     "user",

@@ -98,17 +98,28 @@ class UserManager(BaseUserManager.from_queryset(UserQuerySet)):
 class User(AbstractUser):
     objects = UserManager()
 
+    search_enabled = models.BooleanField(default=False)
+
     def follows(self):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
     def first_three(self):
         return self.internetidentity_set.exclude(name="")[:3]
 
+    def first_three_ellipsis(self):
+        return self.internetidentity_set.count() > 3
+
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
 
     def primary_alias(self):
-        return self.alias_set.first()
+        alias = self.alias_set.first()
+        if alias:
+            return alias.name
+        return self.username
+
+    def other_aliases(self):
+        return self.alias_set.values_list("name", flat=True)[1:]
 
 
 class InternetIdentity(models.Model):
@@ -156,7 +167,7 @@ class Alias(models.Model):
         ordering = ("seq", "name")
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, blank=True)
     seq = models.IntegerField(null=True)
 
     def __str__(self):

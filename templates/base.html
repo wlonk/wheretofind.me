@@ -30,21 +30,29 @@
         <div id="nav-bar" class="collapse navbar-collapse">
           <ul class="navbar-nav">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "me" %}">@{{ user.username }}</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@{{ user.username }}</a>
+
+              <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
+                <a class="dropdown-item" href="{% url "me" %}">My profile</a>
+                <a class="dropdown-item" href="{% url "identity-edit" %}">Locations</a>
+                <a class="dropdown-item" href="{% url "alias-edit" %}">Aliases</a>
+                <a class="dropdown-item" href="{% url "follows" %}">Follows</a>
+                <a class="dropdown-item" href="{% url "followers" %}">Followers</a>
+                <a class="dropdown-item" href="{% url "password_change" %}">Password</a>
+              </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "identity-edit" %}">Edit</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "follows" %}">Follows</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "followers" %}">Followers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "password_change" %}">Password</a>
-            </li>
+
+            <form class="form-inline" action="{% url "search" %}">
+              <div class="input-group" role="group" aria-label="Search group">
+                <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-success" type="submit">
+                    <span class="fas fa-search"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
 
             <form class="form-inline" method="post" action="{% url "logout" %}">{% csrf_token %}
               <input class="btn btn-link" type="submit" value="Sign out">

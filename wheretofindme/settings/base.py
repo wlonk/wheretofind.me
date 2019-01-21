@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "django_registration",
     "django_js_reverse",
     "rest_framework",

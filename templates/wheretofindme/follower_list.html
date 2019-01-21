@@ -7,7 +7,7 @@
     <div class="card border-info shadow-sm mb-3">
       <div class="card-header">
         <a href="{% url "user-profile" slug=follow.from_user.username %}">
-          {{ follow.from_user.username }}
+          {{ follow.from_user.primary_alias }}
         </a>
 
         <span class="float-right">

@@ -3,17 +3,28 @@
     <div class="card-body drag-indicator">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
           <input
             type="text"
             class="form-control"
             name="name"
+            :tabindex="nameTabIndex"
             v-model="identity.name"
             @blur="updateIdentity"
             @keyup.enter="updateIdentity"
             :id="nameLabel"
             :disabled="disabled"
           />
+        </div>
+        <div class="col-sm-1">
+          <button
+            type="button"
+            class="btn delete btn-outline-danger float-right"
+            :tabindex="deleteTabIndex"
+            @click="deleteIdentity"
+          >
+            <span class="fas fa-minus-circle"></span>
+          </button>
         </div>
       </div>
       <div class="form-group row">
@@ -23,6 +34,7 @@
             type="text"
             class="form-control"
             name="url"
+            :tabindex="urlTabIndex"
             v-model="identity.url"
             @blur="updateIdentity"
             @keyup.enter="updateIdentity"
@@ -31,17 +43,6 @@
           />
         </div>
       </div>
-      <div>
-        <div class="float-left d-none msg-saving">Saving…</div>
-        <div class="float-left d-none msg-deleting">Deleting…</div>
-        <button
-          type="button"
-          class="btn delete btn-outline-danger float-right"
-          @click="deleteIdentity"
-        >
-          <span class="fas fa-minus-circle"></span>
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -49,13 +50,22 @@
 <script>
 export default {
   name: 'Identity',
-  props: ['identity', 'disabled'],
+  props: ['identity', 'disabled', 'index'],
   computed: {
     nameLabel() {
       return `name-${this.identity.id}`;
     },
     urlLabel() {
       return `url-${this.identity.id}`;
+    },
+    nameTabIndex() {
+      return this.index * 10 + 1;
+    },
+    urlTabIndex() {
+      return this.index * 10 + 2;
+    },
+    deleteTabIndex() {
+      return this.index * 10 + 3;
     },
   },
   methods: {
