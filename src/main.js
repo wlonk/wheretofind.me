@@ -2,6 +2,9 @@ import Vue from 'vue';
 import VueCookie from 'vue-cookie';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+// To support dropdowns, etc.:
+import 'bootstrap';
+import './scss/main.scss';
 
 import FavStar from './components/FavStar.vue';
 import EditIdentitiesForm from './components/EditIdentitiesForm.vue';
