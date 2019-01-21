@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 
 ICONS = defaultdict(
@@ -105,6 +107,9 @@ class User(AbstractUser):
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
 
+    def primary_alias(self):
+        return self.alias_set.first()
+
 
 class InternetIdentity(models.Model):
     class Meta:
@@ -143,3 +148,22 @@ class Follow(models.Model):
 
     from_user = models.ForeignKey(User, on_delete=models.PROTECT)
     to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
+
+
+class Alias(models.Model):
+    class Meta:
+        verbose_name_plural = "Aliases"
+        ordering = ("seq", "name")
+
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128)
+    seq = models.IntegerField(null=True)
+
+    def __str__(self):
+        return f"{self.name!r} for {self.user.username}"
+
+
+@receiver(post_save, sender=User)
+def ensure_alias(sender, instance, created, **kwargs):
+    if not instance.primary_alias():
+        instance.alias_set.create(name=instance.username, seq=0)

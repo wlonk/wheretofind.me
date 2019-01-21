@@ -1,15 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.views.generic.base import RedirectView
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import InternetIdentity, User, Follow
-from .serializers import IdentitySerializer, FollowSerializer
+from .models import Alias, Follow, InternetIdentity, User
+from .serializers import AliasSerializer, FollowSerializer, IdentitySerializer
 
 
 class MeRedirectView(LoginRequiredMixin, RedirectView):
@@ -57,6 +56,23 @@ class FollowersView(LoginRequiredMixin, ListView):
         return Follow.objects.filter(to_user=self.request.user)
 
 
+# API Views
+
+
+class ReorderMixin:
+    @action(detail=False, methods=["POST"])
+    @transaction.atomic
+    def reorder(self, request):
+        ids = {id: seq for (seq, id) in enumerate(request.data)}
+
+        self.get_queryset().update(seq=None)
+        for obj in self.get_queryset():
+            obj.seq = ids.get(obj.id)
+            obj.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
 class FollowViewset(viewsets.ModelViewSet):
     model = Follow
     serializer_class = FollowSerializer
@@ -66,21 +82,17 @@ class FollowViewset(viewsets.ModelViewSet):
         return Follow.objects.filter(from_user=self.request.user)
 
 
-class IdentityViewset(viewsets.ModelViewSet):
+class AliasViewset(ReorderMixin, viewsets.ModelViewSet):
+    model = Alias
+    serializer_class = AliasSerializer
+
+    def get_queryset(self):
+        return Alias.objects.filter(user=self.request.user)
+
+
+class IdentityViewset(ReorderMixin, viewsets.ModelViewSet):
     serializer_class = IdentitySerializer
     model = InternetIdentity
 
     def get_queryset(self):
         return InternetIdentity.objects.filter(user=self.request.user)
-
-    @action(detail=False, methods=['POST'], name='Reorder Identities')
-    @transaction.atomic
-    def reorder(self, request):
-        ids = {id: seq for (seq, id) in enumerate(request.data)}
-
-        self.get_queryset().update(seq=None)
-        for identity in self.get_queryset():
-            identity.seq = ids.get(identity.id)
-            identity.save()
-
-        return Response(None, status=status.HTTP_204_NO_CONTENT)
