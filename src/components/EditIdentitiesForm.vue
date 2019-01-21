@@ -6,7 +6,7 @@
         :key="identity.id"
         :identity="identity"
         :disabled="identity.disabled"
-        @deleteIdentity="destroyIdentity"
+        @deleteIdentity="destroy"
       />
     </draggable>
     <AddIdentityButton @createIdentity="create" />
@@ -76,7 +76,7 @@ export default {
           .catch()
       );
     },
-    destroyIdentity(identity) {
+    destroy(identity) {
       return (
         this.deleteIdentity(identity)
           .then(() => {
