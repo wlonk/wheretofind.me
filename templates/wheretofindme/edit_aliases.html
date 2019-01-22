@@ -11,19 +11,37 @@
   Your first alias is the default, used throughout the site to identify you.
   You can't remove it, but you can change it.
 </p>
+
+
 <form id="edit-aliases-form" class="clearfix">
+  <div class="pb-3 custom-control custom-switch">
+    <input
+      type="checkbox"
+      id="include-in-search"
+      class="custom-control-input"
+      {% if user.search_enabled %}checked{% endif %}
+      />
+    <label class="custom-control-label" for="include-in-search">
+      Include me in search results
+    </label>
+  </div>
   {% for alias in aliases %}
   <div class="alias card bg-light shadow-sm w-100 mb-3" data-id="{{ alias.id }}">
     <div class="card-body">
       <div class="form-group row">
         <label for="name-{{ alias.id }}" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
           <input type="text" class="form-control" id="name-{{ alias.id }}" name="name" value="{{ alias.name }}">
         </div>
+        <div class="col-sm-1" v-if="index > 0">
+          <button
+            type="button"
+            class="btn btn-outline-danger float-right"
+          >
+            <span class="fas fa-minus-circle"></span>
+          </button>
+        </div>
       </div>
-      <button class="btn delete btn-outline-danger float-right">
-        <span class="fas fa-minus-circle"></span>
-      </button>
     </div>
   </div>
   {% endfor %}

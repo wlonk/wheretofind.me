@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import Identity from '@/components/Identity.vue';
+import Alias from '@/components/Alias.vue';
 import MockUrls from '../mockUrls';
 
 window.Urls = MockUrls;
 
-describe('Identity.vue', () => {
+describe('Alias.vue', () => {
   let context;
 
   beforeEach(() => {
@@ -16,35 +16,35 @@ describe('Identity.vue', () => {
       $emit,
       $http,
     };
-    const identity = {
+    const alias = {
       id: 1,
       name: 'Test',
       url: 'https://example.com/',
     };
     const propsData = {
-      identity,
+      alias,
       disabled: false,
     };
-    const wrapper = shallowMount(Identity, { propsData, mocks });
+    const wrapper = shallowMount(Alias, { propsData, mocks });
     context = {
       $emit,
       $http,
-      identity,
+      alias,
       wrapper,
     };
   });
 
   test('update', () => {
-    const { wrapper, $http, identity } = context;
+    const { wrapper, $http, alias } = context;
     wrapper.vm.update();
 
-    expect($http.put).toBeCalledWith('/api/identities/1/', identity);
+    expect($http.put).toBeCalledWith('/api/aliases/1/', alias);
   });
 
   test('destroy', () => {
-    const { wrapper, $emit, identity } = context;
+    const { wrapper, $emit, alias } = context;
     wrapper.vm.destroy();
 
-    expect($emit).toBeCalledWith('destroy', identity);
+    expect($emit).toBeCalledWith('destroy', alias);
   });
 });

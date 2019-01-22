@@ -1,11 +1,11 @@
 import { shallowMount } from '@vue/test-utils';
-import EditIdentitiesForm from '@/components/EditIdentitiesForm.vue';
+import IdentitiesForm from '@/components/IdentitiesForm.vue';
 import MockUrls from '../mockUrls';
 
 jest.mock('axios');
 window.Urls = MockUrls;
 
-describe('EditIdentitiesForm.vue', () => {
+describe('IdentitiesForm.vue', () => {
   let context;
 
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe('EditIdentitiesForm.vue', () => {
 
   test('reorder/Identities', () => {
     const { mocks, data, $http } = context;
-    const wrapper = shallowMount(EditIdentitiesForm, { mocks });
+    const wrapper = shallowMount(IdentitiesForm, { mocks });
     wrapper.setData(data);
     wrapper.vm.reorder();
 
@@ -54,8 +54,9 @@ describe('EditIdentitiesForm.vue', () => {
   });
 
   test('create/NewIdentity', () => {
-    const { mocks, $http } = context;
-    const wrapper = shallowMount(EditIdentitiesForm, { mocks });
+    const { mocks, data, $http } = context;
+    const wrapper = shallowMount(IdentitiesForm, { mocks });
+    wrapper.setData(data);
     wrapper.vm.create().then(() => {
       expect($http.post).toBeCalledWith('/api/identities/', {
         name: '',
@@ -73,7 +74,7 @@ describe('EditIdentitiesForm.vue', () => {
 
   test('destroy/deleteIdentity', () => {
     const { mocks, data, $http } = context;
-    const wrapper = shallowMount(EditIdentitiesForm, { mocks });
+    const wrapper = shallowMount(IdentitiesForm, { mocks });
     wrapper.setData(data);
     wrapper.vm.destroy(data.identities[0]);
 
@@ -87,7 +88,7 @@ describe('EditIdentitiesForm.vue', () => {
 
   test('retrieveIdentities', () => {
     const { mocks, data, $http } = context;
-    const wrapper = shallowMount(EditIdentitiesForm, { mocks });
+    const wrapper = shallowMount(IdentitiesForm, { mocks });
     wrapper.vm.retrieveIdentities(data.identities[0]);
 
     expect($http.get).toBeCalledWith('/api/identities/');

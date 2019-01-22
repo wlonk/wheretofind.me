@@ -104,10 +104,8 @@ class User(AbstractUser):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
     def first_three(self):
-        return self.internetidentity_set.exclude(name="")[:3]
-
-    def first_three_ellipsis(self):
-        return self.internetidentity_set.count() > 3
+        identities = self.internetidentity_set.exclude(name="")[:4]
+        return (identities[:3], len(identities) > 3)
 
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
@@ -176,5 +174,5 @@ class Alias(models.Model):
 
 @receiver(post_save, sender=User)
 def ensure_alias(sender, instance, created, **kwargs):
-    if not instance.primary_alias():
+    if not instance.alias_set.exists():
         instance.alias_set.create(name=instance.username, seq=0)

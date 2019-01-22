@@ -9,8 +9,8 @@
             class="form-control"
             name="name"
             v-model="alias.name"
-            @blur="updateAlias"
-            @keyup.enter="updateAlias"
+            @blur="update"
+            @keyup.enter="update"
             :id="nameLabel"
             :disabled="disabled"
           />
@@ -18,8 +18,8 @@
         <div class="col-sm-1" v-if="index > 0">
           <button
             type="button"
-            class="btn delete btn-outline-danger float-right"
-            @click="deleteAlias"
+            class="btn btn-outline-danger float-right"
+            @click="destroy"
           >
             <span class="fas fa-minus-circle"></span>
           </button>
@@ -39,14 +39,14 @@ export default {
     },
   },
   methods: {
-    updateAlias() {
+    update() {
       const url = window.Urls['api:alias-detail'](this.alias.id);
       const data = this.alias;
       return this.$http.put(url, data);
     },
-    deleteAlias() {
+    destroy() {
       // TODO flash "deleting" div.
-      this.$emit('deleteAlias', this.alias);
+      this.$emit('destroy', this.alias);
     },
   },
 };

@@ -8,9 +8,9 @@
         v-model="userInSearch"
         @change="changeUserSearchStatus"
       />
-      <label class="custom-control-label" for="include-in-search"
-        >Include me in search results</label
-      >
+      <label class="custom-control-label" for="include-in-search">
+        Include me in search results
+      </label>
     </div>
     <draggable v-model="aliases" :options="draggableOptions" @end="reorder">
       <Alias
@@ -19,23 +19,23 @@
         :alias="alias"
         :index="index"
         :disabled="alias.disabled"
-        @deleteAlias="destroy"
+        @destroy="destroy"
       />
     </draggable>
-    <AddAliasButton @createAlias="create" />
+    <AddButton @create="create" />
   </form>
 </template>
 
 <script>
 import Alias from '@/components/Alias.vue';
-import AddAliasButton from '@/components/AddAliasButton.vue';
+import AddButton from '@/components/AddButton.vue';
 import draggable from 'vuedraggable';
 
 export default {
-  name: 'EditAliasForm',
+  name: 'AliasForm',
   components: {
     Alias,
-    AddAliasButton,
+    AddButton,
     draggable,
   },
   props: {
@@ -95,7 +95,7 @@ export default {
     },
     destroy(alias) {
       return (
-        this.deleteAlias(alias)
+        this.destroyAlias(alias)
           .then(() => {
             const index = this.aliases.map(i => i.id).indexOf(alias.id);
             this.aliases.splice(index, 1);
@@ -131,7 +131,7 @@ export default {
       const data = { search_enabled: this.userInSearch };
       return this.$http.patch(url, data);
     },
-    deleteAlias(alias) {
+    destroyAlias(alias) {
       const url = window.Urls['api:alias-detail'](alias.id);
       return this.$http.delete(url);
     },
