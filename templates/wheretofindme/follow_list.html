@@ -23,9 +23,12 @@
         </span>
       </div>
       <div class="card-body">
-        {% for identity in follow.to_user.first_three %}
+        {% for identity in follow.to_user.first_three.0 %}
         {% include "wheretofindme/_identity.html" with identity=identity  %}
         {% endfor %}
+        {% if follow.to_user.first_three.1 %}
+        &hellip;
+        {% endif %}
       </div>
     </div>
   {% empty %}

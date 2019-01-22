@@ -3,11 +3,38 @@
 {% block "main" %}
 <h1>Search results</h1>
 
-<ul>
-{% for user in object_list %}
-<li><a href="{% url "user-profile" slug=user.username %}">{{ user.primary_alias }}<a></li>
-{% empty %}
-<li>Sorry, we couldn't find anyone matching that search.</li>
-{% endfor %}
-</ul>
+<div>
+
+  {% for result in object_list %}
+    <div class="card border-info shadow-sm mb-3">
+      <div class="card-header">
+        <a href="{% url "user-profile" slug=result.username %}">
+          {{ result.primary_alias }}
+        </a>
+
+        <span class="float-right">
+          <button
+            class="favstar btn btn-sm btn-outline-warning{% if result in user.follows %} active{% endif %}"
+            {% if result in user.follows %}aria-pressed="true"{% endif %}
+            data-username="{{ result.username }}"
+            data-active="{% if result in user.follows %}true{% else %}false{% endif %}"
+            disabled
+            >
+            <span class="fas fa-star"></span>
+          </button>
+        </span>
+      </div>
+      <div class="card-body">
+        {% for identity in result.first_three.0 %}
+        {% include "wheretofindme/_identity.html" with identity=identity  %}
+        {% endfor %}
+        {% if result.first_three.1 %}
+        &hellip;
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    Sorry, we couldn't find anyone matching that search.
+  {% endfor %}
+</div>
 {% endblock "main" %}

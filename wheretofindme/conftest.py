@@ -40,3 +40,8 @@ def client(user_factory):
     client.force_login(user)
     client.user = user
     return client
+
+
+@pytest.fixture
+def anon_client():
+    return APIClient()

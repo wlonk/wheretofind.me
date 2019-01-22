@@ -39,9 +39,20 @@ def test_FollowersView(client):
 
 
 @pytest.mark.django_db
-def test_SearchView(client):
-    response = client.get("/search/", {"q": "test"})
-    assert "Search results".encode("utf-8") in response.content
+class TestSearchView:
+    def test_authenticated(self, client):
+        client.user.search_enabled = True
+        client.user.save()
+        response = client.get("/search/", {"q": client.user.username})
+        assert (
+            "Sorry, we couldn't find anyone matching that search".encode("utf-8")
+            in response.content
+        )
+
+    def test_unauthenticated(self, user_factory, anon_client):
+        user_factory(username="searchable", search_enabled=True)
+        response = anon_client.get("/search/", {"q": "searchable"})
+        assert "searchable".encode("utf-8") in response.content
 
 
 @pytest.mark.django_db

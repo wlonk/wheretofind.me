@@ -76,11 +76,14 @@ class SearchView(ListView):
     template_name = "wheretofindme/search.html"
 
     def get_queryset(self):
-        return (
+        qs = (
             User.objects.filter(search_enabled=True)
             .prefetch_related("alias_set")
             .filter(alias__name__search=self.request.GET["q"])
         )
+        if self.request.user.is_authenticated:
+            qs = qs.exclude(id=self.request.user.id)
+        return qs
 
 
 # API Views
