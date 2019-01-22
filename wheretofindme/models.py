@@ -112,7 +112,7 @@ class User(AbstractUser):
 
     def primary_alias(self):
         alias = self.alias_set.first()
-        if alias:
+        if alias and alias.name:
             return alias.name
         return self.username
 

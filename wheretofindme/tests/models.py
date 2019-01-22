@@ -20,6 +20,11 @@ class TestUser:
         user.alias_set.all().delete()
         assert user.primary_alias() == "wanting"
 
+    def test_primary_alias_blank(self, user_factory):
+        user = user_factory(username="wanting")
+        user.alias_set.update(name="")
+        assert user.primary_alias() == "wanting"
+
 
 @pytest.mark.django_db
 class TestInternetIdentity:
