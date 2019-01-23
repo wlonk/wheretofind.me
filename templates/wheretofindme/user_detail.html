@@ -18,8 +18,14 @@
 <h1 class="text-center">
   <small class="text-muted font-italic">Where to find</small>
   <br>
-  {{ object.username }}
+  {{ object.primary_alias }}
 </h1>
+
+{% if object.other_aliases %}
+<p class="col-md-4 offset-md-4 text-muted">
+  a.k.a. {{ object.other_aliases|join:", " }}.
+</p>
+{% endif %}
 
 {% if identities %}
 <div class="container identities-display">

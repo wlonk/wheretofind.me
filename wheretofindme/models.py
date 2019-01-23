@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 
 ICONS = defaultdict(
@@ -96,14 +98,26 @@ class UserManager(BaseUserManager.from_queryset(UserQuerySet)):
 class User(AbstractUser):
     objects = UserManager()
 
+    search_enabled = models.BooleanField(default=False)
+
     def follows(self):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
     def first_three(self):
-        return self.internetidentity_set.exclude(name="")[:3]
+        identities = self.internetidentity_set.exclude(name="")[:4]
+        return (identities[:3], len(identities) > 3)
 
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})
+
+    def primary_alias(self):
+        alias = self.alias_set.first()
+        if alias and alias.name:
+            return alias.name
+        return self.username
+
+    def other_aliases(self):
+        return self.alias_set.values_list("name", flat=True)[1:]
 
 
 class InternetIdentity(models.Model):
@@ -143,3 +157,22 @@ class Follow(models.Model):
 
     from_user = models.ForeignKey(User, on_delete=models.PROTECT)
     to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
+
+
+class Alias(models.Model):
+    class Meta:
+        verbose_name_plural = "Aliases"
+        ordering = ("seq", "name")
+
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=128, blank=True)
+    seq = models.IntegerField(null=True)
+
+    def __str__(self):
+        return f"{self.name!r} for {self.user.username}"
+
+
+@receiver(post_save, sender=User)
+def ensure_alias(sender, instance, created, **kwargs):
+    if not instance.alias_set.exists():
+        instance.alias_set.create(name=instance.username, seq=0)

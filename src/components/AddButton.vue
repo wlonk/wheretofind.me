@@ -1,8 +1,9 @@
 <template>
   <button
     type="button"
+    tabindex="1000"
     class="btn add-identity btn-outline-primary float-right"
-    @click.prevent="createIdentity"
+    @click.prevent="create"
   >
     <span class="fas fa-plus-circle"></span>
   </button>
@@ -10,10 +11,10 @@
 
 <script>
 export default {
-  name: 'AddIdentityButton',
+  name: 'AddButton',
   methods: {
-    createIdentity() {
-      this.$emit('createIdentity');
+    create() {
+      this.$emit('create');
     },
   },
 };

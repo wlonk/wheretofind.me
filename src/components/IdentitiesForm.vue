@@ -2,27 +2,28 @@
   <form @submit.prevent class="clearfix">
     <draggable v-model="identities" :options="draggableOptions" @end="reorder">
       <Identity
-        v-for="identity in identities"
+        v-for="(identity, index) in identities"
         :key="identity.id"
         :identity="identity"
+        :index="index"
         :disabled="identity.disabled"
-        @deleteIdentity="destroy"
+        @destroy="destroy"
       />
     </draggable>
-    <AddIdentityButton @createIdentity="create" />
+    <AddButton @create="create" />
   </form>
 </template>
 
 <script>
 import Identity from '@/components/Identity.vue';
-import AddIdentityButton from '@/components/AddIdentityButton.vue';
+import AddButton from '@/components/AddButton.vue';
 import draggable from 'vuedraggable';
 
 export default {
-  name: 'EditIdentitiesForm',
+  name: 'IdentitiesForm',
   components: {
     Identity,
-    AddIdentityButton,
+    AddButton,
     draggable,
   },
   props: {
@@ -58,8 +59,9 @@ export default {
       );
     },
     create() {
+      const newId = Math.max.apply(Math, this.identities.map(i => i.id)) + 1;
       const newIdentity = {
-        id: this.identities.length + 1,
+        id: newId,
         name: '',
         url: '',
         disabled: true,
@@ -78,7 +80,7 @@ export default {
     },
     destroy(identity) {
       return (
-        this.deleteIdentity(identity)
+        this.destroyIdentity(identity)
           .then(() => {
             const index = this.identities.map(i => i.id).indexOf(identity.id);
             this.identities.splice(index, 1);
@@ -106,7 +108,7 @@ export default {
       const url = window.Urls['api:identity-list']();
       return this.$http.get(url);
     },
-    deleteIdentity(identity) {
+    destroyIdentity(identity) {
       const url = window.Urls['api:identity-detail'](identity.id);
       return this.$http.delete(url);
     },

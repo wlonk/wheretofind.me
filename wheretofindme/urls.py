@@ -23,8 +23,12 @@ from . import views
 from .forms import CustomUserForm
 
 router = routers.DefaultRouter()
-router.register(r"identities", views.IdentityViewset, basename="identity")
-router.register(r"follows", views.FollowViewset, basename="follow")
+router.register("identities", views.IdentityViewset, basename="identity")
+router.register("follows", views.FollowViewset, basename="follow")
+router.register("aliases", views.AliasViewset, basename="alias")
+router_urls = router.urls + [
+    path("profile/", views.ProfileView.as_view(), name="profile")
+]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -35,10 +39,12 @@ urlpatterns = [
     ),
     path("accounts/", include("django_registration.backends.activation.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("api/", include((router.urls, "api"), namespace="api")),
+    path("api/", include((router_urls, "api"), namespace="api")),
     path("@<str:slug>", views.UserProfileView.as_view(), name="user-profile"),
     path("me/", views.MeRedirectView.as_view(), name="me"),
-    path("edit/", views.EditView.as_view(), name="identity-edit"),
+    path("search/", views.SearchView.as_view(), name="search"),
+    path("locations/", views.EditIdentityView.as_view(), name="identity-edit"),
+    path("aliases/", views.EditAliasView.as_view(), name="alias-edit"),
     path("follows/", views.FollowsView.as_view(), name="follows"),
     path("followers/", views.FollowersView.as_view(), name="followers"),
     path("tos/", TemplateView.as_view(template_name="tos.html"), name="tos"),

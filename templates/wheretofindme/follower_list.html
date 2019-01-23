@@ -7,7 +7,7 @@
     <div class="card border-info shadow-sm mb-3">
       <div class="card-header">
         <a href="{% url "user-profile" slug=follow.from_user.username %}">
-          {{ follow.from_user.username }}
+          {{ follow.from_user.primary_alias }}
         </a>
 
         <span class="float-right">
@@ -23,9 +23,12 @@
         </span>
       </div>
       <div class="card-body">
-        {% for identity in follow.from_user.first_three %}
+        {% for identity in follow.from_user.first_three.0 %}
         {% include "wheretofindme/_identity.html" with identity=identity  %}
         {% endfor %}
+        {% if follow.from_user.first_three.1 %}
+        &hellip;
+        {% endif %}
       </div>
     </div>
   {% empty %}

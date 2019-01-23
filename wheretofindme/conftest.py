@@ -24,6 +24,15 @@ class InternetIdentityFactory(factory.django.DjangoModelFactory):
     url = "https://example.com/"
 
 
+@register
+class AliasFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "wheretofindme.Alias"
+
+    user = factory.SubFactory(UserFactory)
+    name = "Test"
+
+
 @pytest.fixture
 def client(user_factory):
     user = user_factory()
@@ -31,3 +40,8 @@ def client(user_factory):
     client.force_login(user)
     client.user = user
     return client
+
+
+@pytest.fixture
+def anon_client():
+    return APIClient()

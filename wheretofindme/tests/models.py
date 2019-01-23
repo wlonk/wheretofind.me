@@ -7,11 +7,23 @@ class TestUser:
         assert user.follows() == []
 
     def test_first_three(self, user):
-        assert not user.first_three()
+        three, ellipsis = user.first_three()
+        assert not three
+        assert not ellipsis
 
     def test_get_absolute_url(self, user_factory):
         user = user_factory(username="magnificent")
         assert user.get_absolute_url() == "/@magnificent"
+
+    def test_primary_alias_missing(self, user_factory):
+        user = user_factory(username="wanting")
+        user.alias_set.all().delete()
+        assert user.primary_alias() == "wanting"
+
+    def test_primary_alias_blank(self, user_factory):
+        user = user_factory(username="wanting")
+        user.alias_set.update(name="")
+        assert user.primary_alias() == "wanting"
 
 
 @pytest.mark.django_db
@@ -38,3 +50,16 @@ class TestInternetIdentity:
     def test_icon_url(self, internet_identity_factory):
         identity = internet_identity_factory(url="https://example.com/")
         assert identity.icon() == "fas fa-link"
+
+
+@pytest.mark.django_db
+class TestAlias:
+    def test_str(self, user_factory, alias_factory):
+        user = user_factory(username="quixotic")
+        alias = alias_factory(name="phobic", user=user)
+        assert str(alias) == "'phobic' for quixotic"
+
+    def test_signal(self, user_factory):
+        user = user_factory(username="hallowed")
+        assert user.alias_set.count() == 1
+        assert user.alias_set.first().name == "hallowed"

@@ -1,15 +1,20 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.views.generic.base import RedirectView
-from django.views.generic.base import TemplateView
+from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
-from .models import InternetIdentity, User, Follow
-from .serializers import IdentitySerializer, FollowSerializer
+from .models import Alias, Follow, InternetIdentity, User
+from .serializers import (
+    AliasSerializer,
+    FollowSerializer,
+    IdentitySerializer,
+    ProfileSerializer,
+)
 
 
 class MeRedirectView(LoginRequiredMixin, RedirectView):
@@ -33,12 +38,21 @@ class UserProfileView(DetailView):
         return context
 
 
-class EditView(LoginRequiredMixin, TemplateView):
+class EditIdentityView(LoginRequiredMixin, TemplateView):
     template_name = "wheretofindme/edit_identities.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["identities"] = self.request.user.internetidentity_set.all()
+        return context
+
+
+class EditAliasView(LoginRequiredMixin, TemplateView):
+    template_name = "wheretofindme/edit_aliases.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["aliases"] = self.request.user.alias_set.all()
         return context
 
 
@@ -57,6 +71,46 @@ class FollowersView(LoginRequiredMixin, ListView):
         return Follow.objects.filter(to_user=self.request.user)
 
 
+class SearchView(ListView):
+    model = User
+    template_name = "wheretofindme/search.html"
+
+    def get_queryset(self):
+        qs = (
+            User.objects.filter(search_enabled=True)
+            .prefetch_related("alias_set")
+            .filter(alias__name__search=self.request.GET["q"])
+        )
+        if self.request.user.is_authenticated:
+            qs = qs.exclude(id=self.request.user.id)
+        return qs
+
+
+# API Views
+
+
+class ReorderMixin:
+    @action(detail=False, methods=["POST"])
+    @transaction.atomic
+    def reorder(self, request):
+        ids = {id: seq for (seq, id) in enumerate(request.data)}
+
+        self.get_queryset().update(seq=None)
+        for obj in self.get_queryset():
+            obj.seq = ids.get(obj.id)
+            obj.save()
+
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
+class ProfileView(RetrieveUpdateAPIView):
+    model = User
+    serializer_class = ProfileSerializer
+
+    def get_object(self):
+        return self.request.user
+
+
 class FollowViewset(viewsets.ModelViewSet):
     model = Follow
     serializer_class = FollowSerializer
@@ -66,21 +120,17 @@ class FollowViewset(viewsets.ModelViewSet):
         return Follow.objects.filter(from_user=self.request.user)
 
 
-class IdentityViewset(viewsets.ModelViewSet):
+class AliasViewset(ReorderMixin, viewsets.ModelViewSet):
+    model = Alias
+    serializer_class = AliasSerializer
+
+    def get_queryset(self):
+        return Alias.objects.filter(user=self.request.user)
+
+
+class IdentityViewset(ReorderMixin, viewsets.ModelViewSet):
     serializer_class = IdentitySerializer
     model = InternetIdentity
 
     def get_queryset(self):
         return InternetIdentity.objects.filter(user=self.request.user)
-
-    @action(detail=False, methods=['POST'], name='Reorder Identities')
-    @transaction.atomic
-    def reorder(self, request):
-        ids = {id: seq for (seq, id) in enumerate(request.data)}
-
-        self.get_queryset().update(seq=None)
-        for identity in self.get_queryset():
-            identity.seq = ids.get(identity.id)
-            identity.save()
-
-        return Response(None, status=status.HTTP_204_NO_CONTENT)
