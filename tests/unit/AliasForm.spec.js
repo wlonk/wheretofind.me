@@ -60,17 +60,20 @@ describe('AliasForm.vue', () => {
     const { mocks, data, $http } = context;
     const wrapper = shallowMount(AliasForm, { mocks });
     wrapper.setData(data);
-    wrapper.vm.create().then(() => {
-      expect($http.post).toBeCalledWith('/api/aliases/', {
-        name: '',
+    wrapper.vm
+      .create()
+      .then(() => {
+        expect($http.post).toBeCalledWith('/api/aliases/', {
+          name: '',
+        });
+        return wrapper.vm.nextTick();
+      })
+      .then(() => {
+        expect(wrapper.vm.aliases).toContain({
+          id: 3,
+          name: '',
+        });
       });
-      // TODO: This seems to be true in hand-testing, but not here. Probably an
-      // async issue?
-      // expect(wrapper.vm.aliases).toContain({
-      //   id: 3,
-      //   name: "",
-      // });
-    });
   });
 
   test('changeUserSearchStatus', () => {
