@@ -33,6 +33,16 @@ class AliasFactory(factory.django.DjangoModelFactory):
     name = "Test"
 
 
+@register
+class FollowFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "wheretofindme.Follow"
+
+    from_user = factory.SubFactory(UserFactory)
+    to_user = factory.SubFactory(UserFactory)
+    nickname = ""
+
+
 @pytest.fixture
 def client(user_factory):
     user = user_factory()

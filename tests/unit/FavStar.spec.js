@@ -11,6 +11,7 @@ describe('FavStar.vue', () => {
   beforeEach(() => {
     const $http = {
       post: jest.fn(),
+      patch: jest.fn(),
       delete: jest.fn(),
     };
     const mocks = {
@@ -66,6 +67,29 @@ describe('FavStar.vue', () => {
     wrapper.vm.follow();
     expect(wrapper.vm.$http.post).toHaveBeenCalledWith('/api/follows/', {
       to_user: 'test',
+      nickname: '',
     });
+  });
+
+  test('showNickname', () => {
+    const { propsData, mocks } = context;
+    propsData.active = true;
+    const wrapper = shallowMount(FavStar, { propsData, mocks });
+
+    wrapper.vm.toggleShowNickname().then(() => {
+      expect(wrapper.vm.showNicknameField).toBeTruthy();
+    });
+  });
+
+  test('updateNickname', () => {
+    const { propsData, mocks } = context;
+    propsData.active = true;
+    const wrapper = shallowMount(FavStar, { propsData, mocks });
+
+    wrapper.vm.updateNickname();
+    expect(wrapper.vm.$http.patch).toHaveBeenCalledWith('/api/follows/test/', {
+      nickname: '',
+    });
+    expect(wrapper.vm.showNicknameField).toBeFalsy();
   });
 });

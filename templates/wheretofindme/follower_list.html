@@ -1,26 +1,26 @@
 {% extends "base.html" %}
+{% load favstar %}
 
 {% block "main" %}
 <h1>Who follows me?</h1>
 <div>
   {% for follow in object_list %}
-    <div class="card border-info shadow-sm mb-3">
+    <div class="card border-info shadow-sm mb-3 position-relative">
       <div class="card-header">
         <a href="{% url "user-profile" slug=follow.from_user.username %}">
           {{ follow.from_user.primary_alias }}
         </a>
 
-        <span class="float-right">
-          <button
-            class="favstar btn btn-sm btn-outline-warning{% if follow.from_user in user.follows %} active{% endif %}"
-            {% if follow.from_user in user.follows %}aria-pressed="true"{% endif %}
-            data-username="{{ follow.from_user.username }}"
-            data-active="{% if follow.from_user in user.follows %}true{% else %}false{% endif %}"
-            disabled
-            >
-            <span class="fas fa-star"></span>
-          </button>
-        </span>
+        <button
+          class="favstar btn btn-sm btn-outline-warning{% if follow.from_user in user.follows %} active{% endif %}"
+          {% if follow.from_user in user.follows %}aria-pressed="true"{% endif %}
+          data-username="{{ follow.from_user.username }}"
+          data-nickname="{% nickname follow.from_user %}"
+          data-active="{% if follow.from_user in user.follows %}true{% else %}false{% endif %}"
+          disabled
+          >
+          <span class="fas fa-star"></span>
+        </button>
       </div>
       <div class="card-body">
         {% for identity in follow.from_user.first_three.0 %}

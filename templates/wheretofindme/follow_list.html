@@ -4,23 +4,22 @@
 <h1>Who do I follow?</h1>
 <div>
   {% for follow in object_list %}
-    <div class="card border-info shadow-sm mb-3">
+    <div class="card border-info shadow-sm mb-3 position-relative">
       <div class="card-header">
         <a href="{% url "user-profile" slug=follow.to_user.username %}">
           {{ follow.to_user.primary_alias }}
         </a>
 
-        <span class="float-right">
-          <button
-            class="favstar btn btn-sm btn-outline-warning{% if follow.to_user in user.follows %} active{% endif %}"
-            {% if follow.to_user in user.follows %}aria-pressed="true"{% endif %}
-            data-username="{{ follow.to_user.username }}"
-            data-active="{% if follow.to_user in user.follows %}true{% else %}false{% endif %}"
-            disabled
-            >
-            <span class="fas fa-star"></span>
-          </button>
-        </span>
+        <button
+          class="favstar btn btn-sm btn-outline-warning{% if follow.to_user in user.follows %} active{% endif %}"
+          {% if follow.to_user in user.follows %}aria-pressed="true"{% endif %}
+          data-username="{{ follow.to_user.username }}"
+          data-nickname="{{ follow.nickname }}"
+          data-active="{% if follow.to_user in user.follows %}true{% else %}false{% endif %}"
+          disabled
+          >
+          <span class="fas fa-star"></span>
+        </button>
       </div>
       <div class="card-body">
         {% for identity in follow.to_user.first_three.0 %}

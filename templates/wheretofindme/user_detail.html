@@ -1,25 +1,31 @@
 {% extends "base.html" %}
+{% load favstar %}
+
+{% block "meta" %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+{% endblock "meta" %}
 
 {% block "main" %}
-{% if user.is_authenticated and object != user %}
-<span class="float-right">
+<div class="position-relative">
+  <h1 class="text-center">
+    <small class="text-muted font-italic">Where to find</small>
+    <br>
+    {{ object.primary_alias }}
+  </h1>
+
+  {% if user.is_authenticated and object != user %}
   <button
     class="favstar btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
     {% if object in user.follows %}aria-pressed="true"{% endif %}
     data-username="{{ object.username }}"
+    data-nickname="{% nickname object %}"
     data-active="{% if object in user.follows %}true{% else %}false{% endif %}"
     disabled
     >
     <span class="fas fa-star"></span>
   </button>
-</span>
-{% endif %}
-
-<h1 class="text-center">
-  <small class="text-muted font-italic">Where to find</small>
-  <br>
-  {{ object.primary_alias }}
-</h1>
+  {% endif %}
+</div>
 
 {% if object.other_aliases %}
 <p class="col-md-4 offset-md-4 text-muted">
