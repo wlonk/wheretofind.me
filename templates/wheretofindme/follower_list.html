@@ -5,34 +5,60 @@
 <h1>Who follows me?</h1>
 <div>
   {% for follow in object_list %}
-    <div class="card border-info shadow-sm mb-3 position-relative">
-      <div class="card-header">
-        <a href="{% url "user-profile" slug=follow.from_user.username %}">
-          {{ follow.from_user.primary_alias }}
-        </a>
+  {% with object=follow.from_user %}
+  <div class="card border-info shadow-sm mb-3 position-relative">
+    <div class="card-header">
+      <a href="{% url "user-profile" slug=object.username %}">
+        {{ object.primary_alias }}
+      </a>
 
-        <button
-          class="favstar btn btn-sm btn-outline-warning{% if follow.from_user in user.follows %} active{% endif %}"
-          {% if follow.from_user in user.follows %}aria-pressed="true"{% endif %}
-          data-username="{{ follow.from_user.username }}"
-          data-nickname="{% nickname follow.from_user %}"
-          data-active="{% if follow.from_user in user.follows %}true{% else %}false{% endif %}"
-          disabled
-          >
-          <span class="fas fa-star"></span>
-        </button>
+      {% if user.is_authenticated and object != user and object in user.follows %}
+      <div class="favstar"
+           data-active="true"
+           data-username="{{ object.username }}"
+           data-nickname="{% nickname object %}"
+           >
+           <div class="input-group dropright">
+             <div class="input-group-prepend">
+               <button type="button" class="btn btn-warning active" disabled>
+                 <span class="fas fa-star"></span>
+                 <span class="pl-3">{% nickname object %}</span>
+               </button>
+             </div>
+             <div class="input-group-append">
+               <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" disabled>
+               </button>
+             </div>
+           </div>
       </div>
-      <div class="card-body">
-        {% for identity in follow.from_user.first_three.0 %}
-        {% include "wheretofindme/_identity.html" with identity=identity  %}
-        {% endfor %}
-        {% if follow.from_user.first_three.1 %}
-        &hellip;
-        {% endif %}
+      {% else %}
+      <div class="favstar"
+           data-active="true"
+           data-username="{{ object.username }}"
+           data-nickname="{% nickname object %}"
+           >
+           <div class="input-group dropright">
+             <div>
+               <button type="button" class="btn btn-outline-warning" disabled>
+                 <span class="fas fa-star"></span>
+               </button>
+             </div>
+           </div>
       </div>
+      {% endif %}
     </div>
+    <div class="card-body">
+      {% for identity in object.first_three.0 %}
+      {% include "wheretofindme/_identity.html" with identity=identity  %}
+      {% endfor %}
+      {% if object.first_three.1 %}
+      &hellip;
+      {% endif %}
+    </div>
+  </div>
+  {% endwith %}
   {% empty %}
-    No one's following you.
+  No one's following you.
   {% endfor %}
 </div>
 {% endblock "main" %}

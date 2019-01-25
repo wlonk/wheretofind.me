@@ -13,17 +13,39 @@
     {{ object.primary_alias }}
   </h1>
 
-  {% if user.is_authenticated and object != user %}
-  <button
-    class="favstar btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
-    {% if object in user.follows %}aria-pressed="true"{% endif %}
+  {% if user.is_authenticated and object != user and object in user.follows %}
+  <div class="favstar"
+    data-active="true"
     data-username="{{ object.username }}"
     data-nickname="{% nickname object %}"
-    data-active="{% if object in user.follows %}true{% else %}false{% endif %}"
-    disabled
     >
-    <span class="fas fa-star"></span>
-  </button>
+    <div class="input-group dropright">
+      <div class="input-group-prepend">
+        <button type="button" class="btn btn-warning active" disabled>
+          <span class="fas fa-star"></span>
+          <span class="pl-3">{% nickname object %}</span>
+        </button>
+      </div>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" disabled>
+        </button>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="favstar"
+    data-active="true"
+    data-username="{{ object.username }}"
+    data-nickname="{% nickname object %}"
+    >
+    <div class="input-group dropright">
+      <div>
+        <button type="button" class="btn btn-outline-warning" disabled>
+          <span class="fas fa-star"></span>
+        </button>
+      </div>
+    </div>
+  </div>
   {% endif %}
 </div>
 
