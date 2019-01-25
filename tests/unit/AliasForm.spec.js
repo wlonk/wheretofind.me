@@ -6,9 +6,7 @@ jest.mock('axios');
 window.Urls = MockUrls;
 
 describe('AliasForm.vue', () => {
-  let context;
-
-  beforeEach(() => {
+  const setup = options => {
     const aliases = [
       {
         id: 1,
@@ -40,16 +38,23 @@ describe('AliasForm.vue', () => {
     const mocks = {
       $http,
     };
-    context = {
-      $http,
-      data: { aliases, userInSearch },
+    const data = { aliases, userInSearch };
+    const mountOptions = {
       mocks,
+      data,
+      ...options,
     };
-  });
+    const wrapper = shallowMount(AliasForm, mountOptions);
+    return {
+      $http,
+      mocks,
+      wrapper,
+      data,
+    };
+  };
 
   test('reorder', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(AliasForm, { mocks });
+    const { data, $http, wrapper } = setup();
     wrapper.setData(data);
     wrapper.vm.reorder();
 
@@ -57,8 +62,7 @@ describe('AliasForm.vue', () => {
   });
 
   test('create/NewAlias', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(AliasForm, { mocks });
+    const { data, $http, wrapper } = setup();
     wrapper.setData(data);
     wrapper.vm
       .create()
@@ -77,8 +81,7 @@ describe('AliasForm.vue', () => {
   });
 
   test('changeUserSearchStatus', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(AliasForm, { mocks });
+    const { data, $http, wrapper } = setup();
     wrapper.setData({ userInSearch: true, aliases: data.aliases });
     wrapper.vm.changeUserSearchStatus().then(() => {
       expect($http.patch).toBeCalledWith('/api/profile/', {
@@ -88,8 +91,7 @@ describe('AliasForm.vue', () => {
   });
 
   test('destroy/destroyAlias', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(AliasForm, { mocks });
+    const { data, $http, wrapper } = setup();
     wrapper.setData(data);
     wrapper.vm.destroy(data.aliases[0]);
 
@@ -101,8 +103,7 @@ describe('AliasForm.vue', () => {
   });
 
   test('retrieveAliases', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(AliasForm, { mocks });
+    const { data, $http, wrapper } = setup();
     wrapper.vm.retrieveAliases(data.aliases[0]);
 
     expect($http.get).toBeCalledWith('/api/aliases/');

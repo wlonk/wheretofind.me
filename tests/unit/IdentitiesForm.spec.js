@@ -6,9 +6,7 @@ jest.mock('axios');
 window.Urls = MockUrls;
 
 describe('IdentitiesForm.vue', () => {
-  let context;
-
-  beforeEach(() => {
+  const setup = options => {
     const data = [
       {
         id: 1,
@@ -37,16 +35,21 @@ describe('IdentitiesForm.vue', () => {
     const mocks = {
       $http,
     };
-    context = {
+    const mountOptions = {
+      mocks,
+      ...options,
+    };
+    const wrapper = shallowMount(IdentitiesForm, mountOptions);
+    return {
+      wrapper,
       $http,
       data: { identities: data },
       mocks,
     };
-  });
+  };
 
   test('reorder/Identities', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(IdentitiesForm, { mocks });
+    const { wrapper, data, $http } = setup();
     wrapper.setData(data);
     wrapper.vm.reorder();
 
@@ -54,8 +57,7 @@ describe('IdentitiesForm.vue', () => {
   });
 
   test('create/NewIdentity', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(IdentitiesForm, { mocks });
+    const { wrapper, data, $http } = setup();
     wrapper.setData(data);
     wrapper.vm
       .create()
@@ -76,8 +78,7 @@ describe('IdentitiesForm.vue', () => {
   });
 
   test('destroy/deleteIdentity', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(IdentitiesForm, { mocks });
+    const { wrapper, data, $http } = setup();
     wrapper.setData(data);
     wrapper.vm.destroy(data.identities[0]);
 
@@ -90,8 +91,7 @@ describe('IdentitiesForm.vue', () => {
   });
 
   test('retrieveIdentities', () => {
-    const { mocks, data, $http } = context;
-    const wrapper = shallowMount(IdentitiesForm, { mocks });
+    const { wrapper, data, $http } = setup();
     wrapper.vm.retrieveIdentities(data.identities[0]);
 
     expect($http.get).toBeCalledWith('/api/identities/');
