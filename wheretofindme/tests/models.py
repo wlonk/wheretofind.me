@@ -25,6 +25,14 @@ class TestUser:
         user.alias_set.update(name="")
         assert user.primary_alias() == "wanting"
 
+    def test_nickname_by(self, user_factory, follow_factory):
+        user1 = user_factory()
+        user2 = user_factory()
+        follow_factory(from_user=user1, to_user=user2, nickname="invention")
+
+        assert user1.nickname_by(user2) == ""
+        assert user2.nickname_by(user1) == "invention"
+
 
 @pytest.mark.django_db
 class TestInternetIdentity:

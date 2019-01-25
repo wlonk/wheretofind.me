@@ -26,6 +26,7 @@ Array.from(document.querySelectorAll('.favstar')).forEach(el => {
     active: el.dataset.active !== 'false',
     username: el.dataset.username,
     small: el.classList.contains('btn-sm'),
+    nickname: el.dataset.nickname,
   };
   new Vue({
     el,

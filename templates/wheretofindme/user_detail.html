@@ -1,25 +1,53 @@
 {% extends "base.html" %}
+{% load favstar %}
+
+{% block "meta" %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+{% endblock "meta" %}
 
 {% block "main" %}
-{% if user.is_authenticated and object != user %}
-<span class="float-right">
-  <button
-    class="favstar btn btn-outline-warning{% if object in user.follows %} active{% endif %}"
-    {% if object in user.follows %}aria-pressed="true"{% endif %}
-    data-username="{{ object.username }}"
-    data-active="{% if object in user.follows %}true{% else %}false{% endif %}"
-    disabled
-    >
-    <span class="fas fa-star"></span>
-  </button>
-</span>
-{% endif %}
+<div class="position-relative">
+  <h1 class="text-center">
+    <small class="text-muted font-italic">Where to find</small>
+    <br>
+    {{ object.primary_alias }}
+  </h1>
 
-<h1 class="text-center">
-  <small class="text-muted font-italic">Where to find</small>
-  <br>
-  {{ object.primary_alias }}
-</h1>
+  {% if user.is_authenticated and object != user and object in user.follows %}
+  <div class="favstar"
+    data-active="true"
+    data-username="{{ object.username }}"
+    data-nickname="{% nickname object %}"
+    >
+    <div class="input-group dropright">
+      <div class="input-group-prepend">
+        <button type="button" class="btn btn-warning active" disabled>
+          <span class="fas fa-star"></span>
+          <span class="pl-3">{% nickname object %}</span>
+        </button>
+      </div>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" disabled>
+        </button>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="favstar"
+    data-active="true"
+    data-username="{{ object.username }}"
+    data-nickname="{% nickname object %}"
+    >
+    <div class="input-group dropright">
+      <div>
+        <button type="button" class="btn btn-outline-warning" disabled>
+          <span class="fas fa-star"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
 
 {% if object.other_aliases %}
 <p class="col-md-4 offset-md-4 text-muted">

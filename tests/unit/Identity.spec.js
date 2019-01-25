@@ -5,9 +5,7 @@ import MockUrls from '../mockUrls';
 window.Urls = MockUrls;
 
 describe('Identity.vue', () => {
-  let context;
-
-  beforeEach(() => {
+  const setup = options => {
     const $emit = jest.fn();
     const $http = {
       put: jest.fn(),
@@ -25,24 +23,29 @@ describe('Identity.vue', () => {
       identity,
       disabled: false,
     };
-    const wrapper = shallowMount(Identity, { propsData, mocks });
-    context = {
+    const mountOptions = {
+      propsData,
+      mocks,
+      ...options,
+    };
+    const wrapper = shallowMount(Identity, mountOptions);
+    return {
       $emit,
       $http,
       identity,
       wrapper,
     };
-  });
+  };
 
   test('update', () => {
-    const { wrapper, $http, identity } = context;
+    const { wrapper, $http, identity } = setup();
     wrapper.vm.update();
 
     expect($http.put).toBeCalledWith('/api/identities/1/', identity);
   });
 
   test('destroy', () => {
-    const { wrapper, $emit, identity } = context;
+    const { wrapper, $emit, identity } = setup();
     wrapper.vm.destroy();
 
     expect($emit).toBeCalledWith('destroy', identity);

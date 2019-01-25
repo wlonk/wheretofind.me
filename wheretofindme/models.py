@@ -119,6 +119,12 @@ class User(AbstractUser):
     def other_aliases(self):
         return self.alias_set.values_list("name", flat=True)[1:]
 
+    def nickname_by(self, other):
+        try:
+            return other.follow_set.get(to_user=self).nickname
+        except Follow.DoesNotExist:
+            return ""
+
 
 class InternetIdentity(models.Model):
     class Meta:
@@ -157,6 +163,7 @@ class Follow(models.Model):
 
     from_user = models.ForeignKey(User, on_delete=models.PROTECT)
     to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
+    nickname = models.CharField(max_length=128, blank=True)
 
 
 class Alias(models.Model):
