@@ -14,7 +14,8 @@
   </h1>
 
   {% if user.is_authenticated and object != user and object in user.follows %}
-  <div class="favstar"
+  <div
+    class="favstar"
     data-active="true"
     data-username="{{ object.username }}"
     data-nickname="{% nickname object %}"
@@ -33,7 +34,9 @@
     </div>
   </div>
   {% else %}
-  <div class="favstar"
+  {% if user.is_authenticated and object != user %}
+  <div
+    class="favstar"
     data-active="false"
     data-username="{{ object.username }}"
     data-nickname="{% nickname object %}"
@@ -46,6 +49,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   {% endif %}
 </div>
 
