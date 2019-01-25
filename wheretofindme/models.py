@@ -119,7 +119,7 @@ class User(AbstractUser):
     def other_aliases(self):
         return self.alias_set.values_list("name", flat=True)[1:]
 
-    def nickname_for(self, other):
+    def nickname_by(self, other):
         try:
             return other.follow_set.get(to_user=self).nickname
         except Follow.DoesNotExist:
