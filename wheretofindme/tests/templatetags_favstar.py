@@ -1,6 +1,6 @@
 import pytest
 
-from ..favstar import nickname
+from wheretofindme.templatetags.favstar import nickname
 
 
 @pytest.mark.django_db
