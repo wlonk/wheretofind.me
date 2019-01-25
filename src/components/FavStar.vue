@@ -33,10 +33,10 @@
           type="button"
           class="btn btn-warning dropdown-toggle dropdown-toggle-split"
           aria-haspopup="true"
-          aria-expanded="false"
+          :aria-expanded="showNicknameField"
           @click="toggleShowNickname"
         >
-          <span class="sr-only">Toggle Dropright</span>
+          <span class="sr-only">Toggle nickname field</span>
         </button>
       </div>
     </div>
@@ -120,6 +120,8 @@ export default {
 <style lang="scss">
 @import '~bootstrap/scss/bootstrap';
 
+// Because this is absolutely positioned, you must put this component inside a
+// postioned element, or it will jump elsewhere in the page. Be warned!
 .favstar {
   position: absolute;
   right: $spacer * 0.5;
