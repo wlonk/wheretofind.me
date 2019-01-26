@@ -118,10 +118,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/bootstrap';
-
 // Because this is absolutely positioned, you must put this component inside a
 // postioned element, or it will jump elsewhere in the page. Be warned!
+$spacer: 1rem;
 .favstar {
   position: absolute;
   right: $spacer * 0.5;
