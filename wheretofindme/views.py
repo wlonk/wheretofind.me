@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.db.models import Case, Value, When
 from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -93,12 +94,9 @@ class ReorderMixin:
     @action(detail=False, methods=["POST"])
     @transaction.atomic
     def reorder(self, request):
-        ids = {id: seq for (seq, id) in enumerate(request.data)}
-
+        whens = [When(id=id, then=Value(seq)) for seq, id in enumerate(request.data)]
         self.get_queryset().update(seq=None)
-        for obj in self.get_queryset():
-            obj.seq = ids.get(obj.id)
-            obj.save()
+        self.get_queryset().update(seq=Case(*whens, default=None))
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
