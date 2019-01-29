@@ -32,6 +32,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = (
         "username",
         "is_staff",
+        "search_enabled",
         internetidentity_count,
         follow_count,
         follower_count,
