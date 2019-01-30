@@ -83,6 +83,8 @@ ICONS = defaultdict(
         "www.gitlab.com": "fab fa-gitlab",
         "etsy.com": "fab fa-etsy",
         "www.etsy.com": "fab fa-etsy",
+        "ravelry.com": "fab fa-ravelry",
+        "www.ravelry.com": "fab fa-ravelry",
     },
 )
 
