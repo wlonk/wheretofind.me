@@ -12,6 +12,7 @@ pytest = "*"
 pytest-django = "*"
 pytest-factoryboy = "*"
 pytest-cov = "*"
+sphinx = "*"
 
 [packages]
 "dj-database-url" = "~=0.5"

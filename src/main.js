@@ -21,6 +21,7 @@ Vue.config.productionTip = false;
 Vue.use(VueCookie);
 Vue.use(VueAxios, instance);
 
+// Attach to all favstars in the document:
 Array.from(document.querySelectorAll('.favstar')).forEach(el => {
   const data = {
     active: el.dataset.active !== 'false',
@@ -34,6 +35,7 @@ Array.from(document.querySelectorAll('.favstar')).forEach(el => {
   });
 });
 
+// Attach to the edit-identities-form if present:
 Array.from(document.querySelectorAll('#edit-identities-form')).forEach(el => {
   new Vue({
     el,
@@ -41,6 +43,7 @@ Array.from(document.querySelectorAll('#edit-identities-form')).forEach(el => {
   });
 });
 
+// Attach to the edit-aliases-form if present:
 Array.from(document.querySelectorAll('#edit-aliases-form')).forEach(el => {
   new Vue({
     el,
