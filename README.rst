@@ -3,8 +3,12 @@ Wheretofind.me
 ==============
 
 .. image:: https://badge.waffle.io/wlonk/wheretofind.me.svg?columns=all
- :target: https://waffle.io/wlonk/wheretofind.me
- :alt: 'Waffle.io - Columns and their card count'
+   :target: https://waffle.io/wlonk/wheretofind.me
+   :alt: 'Waffle.io - Columns and their card count'
+
+.. image:: https://readthedocs.org/projects/where-to-find-me/badge/?version=latest
+   :target: https://where-to-find-me.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
 Server development
 ------------------
