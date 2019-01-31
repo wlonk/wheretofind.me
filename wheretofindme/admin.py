@@ -31,7 +31,7 @@ follower_count.short_description = "Number of Followers"
 class UserAdmin(admin.ModelAdmin):
     list_display = (
         "username",
-        "is_staff",
+        "is_active",
         "search_enabled",
         internetidentity_count,
         follow_count,
