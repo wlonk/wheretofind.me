@@ -85,6 +85,8 @@ ICONS = defaultdict(
         "www.etsy.com": "fab fa-etsy",
         "ravelry.com": "fab fa-ravelry",
         "www.ravelry.com": "fab fa-ravelry",
+        "last.fm": "fab fa-lastfm",
+        "www.last.fm": "fab fa-lastfm",
     },
 )
 
