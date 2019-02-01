@@ -38,6 +38,7 @@ class UserAdmin(admin.ModelAdmin):
         follower_count,
     )
     list_filter = ("is_active", "search_enabled")
+    search_fields = ("username", "email")
 
 
 admin.site.register(User, UserAdmin)
