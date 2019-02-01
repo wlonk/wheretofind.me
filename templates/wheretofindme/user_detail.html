@@ -66,18 +66,41 @@
     <div class="col-md-6 offset-md-3">
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
-          <a rel="me nofollow" href="{{ identity.url }}">
-        {% endif %}
-        <div class="card-body">
-          <span class="{{ identity.icon }}"></span>
-          {% if identity.looks_like_link %}
+        <a rel="me nofollow" href="{{ identity.url }}">
+          <div class="card-body">
+            <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}
-          {% else %}
-            {{ identity.name }}: {{ identity.url }}
+            {% if object.should_show_quality %}
+            <div class="quality-indicator">
+              <span class="quality-{{ identity.quality }} fas fa-thermometer-{% if identity.quality == 0 %}empty{% elif identity.quality == 1 %}half{% elif identity.quality == 2 %}full{% endif %}"></span>
+            </div>
+            {% endif %}
+            {% if identity.tag %}
+            <div class="tag-indicator">
+              <small class="text-muted">
+                <span class="badge badge-pill badge-info">{{ identity.tag }}</span>
+              </small>
+            </div>
+            {% endif %}
+          </div>
+        </a>
+        {% else %}
+        <div class="card-body">
+          <span class="{{ identity.get_icon_display }}"></span>
+          {{ identity.name }}: {{ identity.url }}
+          {% if object.should_show_quality %}
+          <div class="quality-indicator">
+            <span class="quality-{{ identity.quality }} fas fa-thermometer-{% if identity.quality == 0 %}empty{% elif identity.quality == 1 %}half{% elif identity.quality == 2 %}full{% endif %}"></span>
+          </div>
+          {% endif %}
+          {% if identity.tag %}
+          <div class="tag-indicator">
+            <small class="text-muted">
+              <span class="badge badge-pill badge-info">{{ identity.tag }}</span>
+            </small>
+          </div>
           {% endif %}
         </div>
-        {% if identity.looks_like_link %}
-          </a>
         {% endif %}
       </div>
     </div>

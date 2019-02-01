@@ -101,7 +101,14 @@ class TestIdentityViewset:
         internet_identity_factory(user=other_user)
         response = client.get("/api/identities/")
         assert response.json() == [
-            {"id": id1.id, "name": "Test", "url": "https://example.com/"}
+            {
+                "id": id1.id,
+                "name": "Test",
+                "url": "https://example.com/",
+                "tag": "",
+                "quality": 2,
+                "icon": "fas fa-link",
+            }
         ]
 
     def test_reorder(self, client, internet_identity_factory):

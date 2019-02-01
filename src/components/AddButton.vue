@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    tabindex="1000"
+    tabindex="100000"
     class="btn add-identity btn-outline-primary float-right"
     @click.prevent="create"
   >

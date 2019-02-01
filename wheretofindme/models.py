@@ -1,5 +1,4 @@
 from collections import defaultdict
-from urllib.parse import urlparse
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
@@ -90,6 +89,51 @@ ICONS = defaultdict(
     },
 )
 
+ICON_CHOICES = (
+    ("fas fa-link", "fas fa-link"),  # web
+    ("fas fa-envelope", "fas fa-envelope"),  # email
+    ("fab fa-behance", "fab fa-behance"),  # Behance
+    ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
+    ("fab fa-codepen", "fab fa-codepen"),  # Codepen
+    ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
+    ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
+    ("fab fa-discord", "fab fa-discord"),  # Discord
+    ("fab fa-dribbble", "fab fa-dribbble"),  # Dribbble
+    ("fab fa-ello", "fab fa-ello"),  # Ello
+    ("fab fa-etsy", "fab fa-etsy"),  # Etsy
+    ("fab fa-facebook", "fab fa-facebook"),  # Facebook
+    ("fab fa-github", "fab fa-github"),  # GitHub
+    ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
+    ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
+    ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
+    ("fab fa-instagram", "fab fa-instagram"),  # Instagram
+    ("fab fa-keybase", "fab fa-keybase"),  # Keybase
+    ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
+    ("fab fa-lastfm", "fab fa-lastfm"),  # Last
+    ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
+    ("fab fa-medium", "fab fa-medium"),  # Medium
+    ("fab fa-patreon", "fab fa-patreon"),  # Patreon
+    ("fab fa-paypal", "fab fa-paypal"),  # Paypal
+    ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
+    ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
+    ("fab fa-reddit", "fab fa-reddit"),  # Reddit
+    ("fab fa-skype", "fab fa-skype"),  # Skype
+    ("fab fa-slack", "fab fa-slack"),  # Slack
+    ("fab fa-snapchat", "fab fa-snapchat"),  # Snapchat
+    ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
+    ("fab fa-stackoverflow", "fab fa-stackoverflow"),  # Stackoverflow
+    ("fab fa-steam", "fab fa-steam"),  # Steam
+    ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
+    ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
+    ("fab fa-twitch", "fab fa-twitch"),  # Twitch
+    ("fab fa-twitter", "fab fa-twitter"),  # Twitter
+    ("fab fa-untappd", "fab fa-untappd"),  # Untappd
+    ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
+    ("fab fa-youtube", "fab fa-youtube"),  # YouTube
+)
+
+QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
+
 
 class UserQuerySet(models.QuerySet):
     pass
@@ -129,6 +173,12 @@ class User(AbstractUser):
         except Follow.DoesNotExist:
             return ""
 
+    def should_show_quality(self):
+        qualities = self.internetidentity_set.exclude(name="").values_list(
+            "quality", flat=True
+        )
+        return not all(q == qualities[0] for q in qualities)
+
 
 class InternetIdentity(models.Model):
     class Meta:
@@ -140,6 +190,9 @@ class InternetIdentity(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=100, blank=True)
     url = models.CharField(max_length=200, blank=True)
+    icon = models.CharField(max_length=50, choices=ICON_CHOICES, default="fas fa-link")
+    quality = models.PositiveSmallIntegerField(choices=QUALITY_CHOICES, default=2)
+    tag = models.CharField(max_length=50, blank=True)
     seq = models.IntegerField(null=True)
 
     def __str__(self):
@@ -152,12 +205,6 @@ class InternetIdentity(models.Model):
         except ValidationError:
             valid = False
         return self.url.startswith("mailto:") or valid
-
-    def icon(self):
-        if self.url.startswith("mailto:"):
-            return "fas fa-envelope"
-        netloc = urlparse(self.url).netloc
-        return ICONS[netloc]
 
 
 class Follow(models.Model):

@@ -23,3 +23,31 @@ html {
 .hero-logo {
   height: 5em;
 }
+
+.card-footer {
+  line-height: 0;
+}
+
+.quality-0 {
+  color: $red;
+}
+
+.quality-1 {
+  color: $yellow;
+}
+
+.quality-2 {
+  color: $green;
+}
+
+.tag-indicator {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.5rem;;
+}
+
+.quality-indicator {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.5rem;;
+}

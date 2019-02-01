@@ -64,6 +64,8 @@ export default {
         id: newId,
         name: '',
         url: '',
+        quality: 2,
+        icon: 'fas fa-link',
         disabled: true,
       };
       this.identities.push(newIdentity);
@@ -117,9 +119,6 @@ export default {
 </script>
 
 <style scoped>
-.sortable-chosen {
-  opacity: 0;
-}
 .sortable-drag {
   opacity: 1;
 }
