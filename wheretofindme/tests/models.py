@@ -66,6 +66,20 @@ class TestInternetIdentity:
         identity = internet_identity_factory(url="example#1234")
         assert not identity.looks_like_link()
 
+    def test_quality_icon(self, internet_identity_factory):
+        assert (
+            internet_identity_factory(quality=0).quality_img()
+            == "images/quality-low.png"
+        )
+        assert (
+            internet_identity_factory(quality=1).quality_img()
+            == "images/quality-mid.png"
+        )
+        assert (
+            internet_identity_factory(quality=2).quality_img()
+            == "images/quality-high.png"
+        )
+
 
 @pytest.mark.django_db
 class TestAlias:

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load favstar %}
+{% load static favstar %}
 
 {% block "meta" %}
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
@@ -72,7 +72,7 @@
             {{ identity.name }}
             {% if object.should_show_quality %}
             <div class="quality-indicator">
-              <img class="quality-{{ identity.quality }}" src="/static/images/quality-{% if identity.quality == 0 %}low{% elif identity.quality == 1 %}mid{% elif identity.quality == 2 %}high{% endif %}.png" alt="Quality {{ identity.quality }}">
+              <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
             </div>
             {% endif %}
             {% if identity.tag %}
@@ -90,7 +90,7 @@
           {{ identity.name }}: {{ identity.url }}
           {% if object.should_show_quality %}
           <div class="quality-indicator">
-            <img class="quality-{{ identity.quality }}" src="/static/images/quality-{% if identity.quality == 0 %}low{% elif identity.quality == 1 %}mid{% elif identity.quality == 2 %}high{% endif %}.png" alt="Quality {{ identity.quality }}">
+            <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
           </div>
           {% endif %}
           {% if identity.tag %}

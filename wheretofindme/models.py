@@ -206,6 +206,14 @@ class InternetIdentity(models.Model):
             valid = False
         return self.url.startswith("mailto:") or valid
 
+    def quality_img(self):
+        if self.quality == 0:
+            return "images/quality-low.png"
+        if self.quality == 1:
+            return "images/quality-mid.png"
+        if self.quality == 2:
+            return "images/quality-high.png"
+
 
 class Follow(models.Model):
     class Meta:

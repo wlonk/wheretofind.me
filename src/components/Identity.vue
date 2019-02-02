@@ -212,6 +212,7 @@ export default {
       return this.index * 10 + 7;
     },
     qualityPreview() {
+      // TODO: This shouldn't involve explicit use of the /static/ directory.
       switch (this.identity.quality) {
         case 0:
           return ['/static/images/quality-low.png'];
