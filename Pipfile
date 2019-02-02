@@ -13,6 +13,7 @@ pytest-django = "*"
 pytest-factoryboy = "*"
 pytest-cov = "*"
 sphinx = "*"
+beautifulsoup4 = "*"
 
 [packages]
 "dj-database-url" = "~=0.5"

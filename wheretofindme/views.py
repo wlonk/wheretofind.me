@@ -80,10 +80,9 @@ class SearchView(ListView):
         qs = (
             User.objects.filter(search_enabled=True)
             .prefetch_related("alias_set")
-            .filter(alias__name__search=self.request.GET["q"])
+            .filter(alias__name__search=self.request.GET.get("q", ""))
+            .distinct()
         )
-        if self.request.user.is_authenticated:
-            qs = qs.exclude(id=self.request.user.id)
         return qs
 
 
