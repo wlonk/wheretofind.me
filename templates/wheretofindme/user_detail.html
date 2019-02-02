@@ -61,6 +61,11 @@
 
 {% if identities %}
 <div class="container identities-display">
+  {% if "tag" in request.GET %}
+  <div class="text-center mb-3">
+    <a href="{% url "user-profile" slug=object.username %}" class="btn btn-primary btn-sm">clear tag filters</a>
+  </div>
+  {% endif %}
   {% for identity in identities %}
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -77,9 +82,11 @@
             {% endif %}
             {% if identity.tag %}
             <div class="tag-indicator">
-              <small class="text-muted">
-                <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
-              </small>
+              <a href="?tag={{ identity.tag }}">
+                <small class="text-muted">
+                  <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
+                </small>
+              </a>
             </div>
             {% endif %}
           </div>
@@ -95,9 +102,11 @@
           {% endif %}
           {% if identity.tag %}
           <div class="tag-indicator">
-            <small class="text-muted">
-              <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
-            </small>
+            <a href="?tag={{ identity.tag }}">
+              <small class="text-muted">
+                <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
+              </small>
+            </a>
           </div>
           {% endif %}
         </div>

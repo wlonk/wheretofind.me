@@ -10,10 +10,19 @@ def test_MeRedirectView(client):
 
 
 @pytest.mark.django_db
-def test_UserProfileView(user_factory, client):
-    user_factory(username="faithful")
-    response = client.get("/@faithful")
-    assert "Where to find".encode("utf-8") in response.content
+class TestUserProfileView:
+    def test_basic_view(self, user_factory, client):
+        user_factory(username="faithful")
+        response = client.get("/@faithful")
+        assert "Where to find".encode("utf-8") in response.content
+
+    def test_tag_filter(self, user_factory, client, internet_identity_factory):
+        user = user_factory(username="faithful")
+        internet_identity_factory(user=user, tag="unwritten")
+        internet_identity_factory(user=user)
+        response = client.get("/@faithful?tag=unwritten")
+        soup = BeautifulSoup(response.content, "html.parser")
+        assert len(soup.find_all(class_="card")) == 1
 
 
 @pytest.mark.django_db
