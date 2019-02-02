@@ -14,6 +14,7 @@
             @keyup.enter="update"
             :id="nameLabel"
             :disabled="disabled"
+            placeholder="My blog…"
           />
         </div>
         <div class="col-sm-1">
@@ -40,6 +41,7 @@
             @keyup.enter="update"
             :id="urlLabel"
             :disabled="disabled"
+            placeholder="https://example.com/"
           />
         </div>
       </div>

@@ -108,6 +108,11 @@
         what sites you're using these days. It's like a business card for your
         social media presence.
       </p>
+      {% if not user.is_authenticated %}
+      <div class="text-center">
+        <a class="btn btn-primary btn-lg" href="{% url "django_registration_register" %}">Sign up</a>
+      </div>
+      {% endif %}
       {% endblock "main" %}
     </div>
 
