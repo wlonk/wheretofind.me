@@ -64,7 +64,6 @@
   {% for identity in identities %}
   <div class="row">
     <div class="col-md-6 offset-md-3">
-    {% if identity.name %}
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
           <a rel="me nofollow" href="{{ identity.url }}">
@@ -81,21 +80,23 @@
           </a>
         {% endif %}
       </div>
-    {% endif %}
     </div>
   </div>
   {% endfor %}
 </div>
-{% else %}
-<div class="text-center">
-  <em><small>they are stealthy, and have left no trace</small></em>
-</div>
-{% endif %}
-
 <p class="col-md-8 offset-md-2 text-muted">
   <small>Added without your consent? Please
   <a
     href="mailto:admin@wheretofind.me?subject=Where%20to%20Find%20Me%20removal%20request"
     >contact us</a> to remove this entry.</small>
 </p>
+{% else %}
+<div class="text-center">
+{% if object == user %}
+  <em><small>Perhaps you want to <a href="{% url "identity-edit" %}">add some identities</a>?</small></em>
+{% else %}
+  <em><small>they are stealthy, and have left no trace</small></em>
+{% endif %}
+</div>
+{% endif %}
 {% endblock "main" %}
