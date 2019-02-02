@@ -29,7 +29,7 @@ class MeRedirectView(LoginRequiredMixin, RedirectView):
 
 class UserProfileView(DetailView):
     model = User
-    slug_field = "username"
+    slug_field = "username__iexact"
     # We have to set this so it doesn't clobber the `user` context variable:
     context_object_name = "user_in_question"
 
