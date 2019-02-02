@@ -91,7 +91,7 @@ describe('Identity.vue', () => {
   });
 
   describe('qualityPreview', () => {
-    test.each([[0, 'empty'], [1, 'half'], [2, 'full']])(
+    test.each([[0, 'low'], [1, 'mid'], [2, 'high']])(
       'at %i',
       (quality, expected) => {
         const { wrapper } = setup({
@@ -107,13 +107,9 @@ describe('Identity.vue', () => {
             disabled: false,
           },
         });
-        const qualityClasses = wrapper.vm.qualityPreview;
+        const qualitySrc = wrapper.vm.qualityPreview;
 
-        expect(qualityClasses).toEqual([
-          'fas',
-          `fa-thermometer-${expected}`,
-          `quality-${quality}`,
-        ]);
+        expect(qualitySrc).toEqual([`/static/images/quality-${expected}.png`]);
       },
     );
     test('at else', () => {

@@ -88,8 +88,15 @@
             </select>
           </div>
           <div class="col-sm-1">
-            <button type="button" class="btn btn-link float-right">
-              <span :class="qualityPreview"></span>
+            <button
+              type="button"
+              class="btn btn-link float-right quality-preview-wrapper"
+            >
+              <img
+                :src="qualityPreview"
+                :alt="qualityPreview"
+                class="quality-preview"
+              />
             </button>
           </div>
         </div>
@@ -207,11 +214,11 @@ export default {
     qualityPreview() {
       switch (this.identity.quality) {
         case 0:
-          return ['fas', 'fa-thermometer-empty', 'quality-0'];
+          return ['/static/images/quality-low.png'];
         case 1:
-          return ['fas', 'fa-thermometer-half', 'quality-1'];
+          return ['/static/images/quality-mid.png'];
         case 2:
-          return ['fas', 'fa-thermometer-full', 'quality-2'];
+          return ['/static/images/quality-high.png'];
       }
       return [];
     },
@@ -256,5 +263,11 @@ export default {
 }
 .expand-identity:focus {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
+}
+.quality-preview {
+  height: 1.5rem;
+}
+.quality-preview-wrapper {
+  margin-right: -0.25rem;
 }
 </style>
