@@ -55,3 +55,10 @@ html {
     height: 1rem;
   }
 }
+
+/// Crispy Forms and Bootstrap 4 conspire to not show errors that are not
+//younger siblings of a .form-control.is-invalid element. This makes errors on
+//PrependedText elements not show up. So let's just force them to.
+.input-group ~ .invalid-feedback {
+  display: block;
+}
