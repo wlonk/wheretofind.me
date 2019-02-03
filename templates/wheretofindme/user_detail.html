@@ -7,6 +7,15 @@
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
 {% endblock "meta" %}
 
+{% block "opengraph" %}
+<meta property="og:title" content="Where to find {{ object.primary_alias }}" />
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="{{ here }}" />
+<meta property="og:image" content="{% static 'images/logo-50.png' %}" />
+<meta property="og:image:alt" content="Where to Find Me logo" />
+<meta property="og:description" content="A business card for the internet." />
+{% endblock "opengraph" %}
+
 {% block "main" %}
 <div class="position-relative">
   <h1 class="text-center">
