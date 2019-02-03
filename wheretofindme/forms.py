@@ -2,6 +2,8 @@ from crispy_forms.bootstrap import PrependedText
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Layout, Submit
 from django import forms
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 from django_registration import validators
 from django_registration.forms import RegistrationFormUniqueEmail
@@ -44,3 +46,30 @@ class CustomUserForm(RegistrationFormUniqueEmail):
         label=_(u"I have read and agree to the Terms of Service"),
         error_messages={"required": validators.TOS_REQUIRED},
     )
+
+
+class CustomAuthForm(AuthenticationForm):
+    def _get_user_from_email(self, email):
+        return User.objects.filter(email=email).first()
+
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+
+        if username is not None and password:
+            self.user_cache = authenticate(
+                self.request, username=username, password=password
+            )
+            if self.user_cache is None:  # Try again with email
+                user_from_email = self._get_user_from_email(username)
+                if user_from_email:
+                    username = user_from_email.username
+                    self.user_cache = authenticate(
+                        self.request, username=username, password=password
+                    )
+            if self.user_cache is None:
+                raise self.get_invalid_login_error()
+            else:
+                self.confirm_login_allowed(self.user_cache)
+
+        return self.cleaned_data
