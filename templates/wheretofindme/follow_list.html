@@ -63,4 +63,28 @@
   You're not following anyone.
   {% endfor %}
 </div>
+
+<nav aria-label="Follow navigation">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">&lt;</a></li>
+    {% endif %}
+    {% for page in paginator.page_range %}
+    {% if page == page_obj.number %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">
+        {{ page }} <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    {% else %}
+    <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</nav>
 {% endblock "main" %}

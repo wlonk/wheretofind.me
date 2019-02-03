@@ -63,6 +63,7 @@ class EditAliasView(LoginRequiredMixin, TemplateView):
 
 class FollowsView(LoginRequiredMixin, ListView):
     model = Follow
+    paginate_by = 50
 
     def get_queryset(self):
         return Follow.objects.filter(from_user=self.request.user)
@@ -70,6 +71,7 @@ class FollowsView(LoginRequiredMixin, ListView):
 
 class FollowersView(LoginRequiredMixin, ListView):
     model = Follow
+    paginate_by = 50
     template_name = "wheretofindme/follower_list.html"
 
     def get_queryset(self):
