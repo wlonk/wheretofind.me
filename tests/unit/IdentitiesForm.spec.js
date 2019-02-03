@@ -66,13 +66,16 @@ describe('IdentitiesForm.vue', () => {
           name: '',
           url: '',
         });
-        return wrapper.vm.nextTick();
+        return wrapper.vm.$nextTick();
       })
       .then(() => {
-        expect(wrapper.vm.identities).toContain({
+        expect(wrapper.vm.identities).toContainEqual({
           id: 3,
           name: '',
           url: '',
+          disabled: false,
+          quality: 2,
+          icon: 'fas fa-link',
         });
       });
   });
@@ -80,14 +83,19 @@ describe('IdentitiesForm.vue', () => {
   test('destroy/deleteIdentity', () => {
     const { wrapper, data, $http } = setup();
     wrapper.setData(data);
-    wrapper.vm.destroy(data.identities[0]);
-
-    expect($http.delete).toBeCalledWith('/api/identities/1/');
-    expect(wrapper.vm.identities).not.toContain({
-      id: 1,
-      name: 'Test 1',
-      url: 'https://example.com/1',
-    });
+    wrapper.vm
+      .destroy(data.identities[0])
+      .then(() => {
+        expect($http.delete).toBeCalledWith('/api/identities/1/');
+        return wrapper.vm.$nextTick();
+      })
+      .then(() => {
+        expect(wrapper.vm.identities).not.toContainEqual({
+          id: 1,
+          name: 'Test 1',
+          url: 'https://example.com/1',
+        });
+      });
   });
 
   test('retrieveIdentities', () => {

@@ -35,7 +35,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@{{ user.username }}</a>
 
               <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-                <a class="dropdown-item" href="{% url "me" %}">My profile</a>
+                <a class="dropdown-item" href="{% url "user-profile" slug=user.username %}">My profile</a>
                 <a class="dropdown-item" href="{% url "identity-edit" %}">Locations</a>
                 <a class="dropdown-item" href="{% url "alias-edit" %}">Aliases</a>
                 <a class="dropdown-item" href="{% url "follows" %}">Follows</a>

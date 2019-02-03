@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load favstar %}
+{% load static favstar %}
 
 {% block "meta" %}
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
@@ -61,23 +61,55 @@
 
 {% if identities %}
 <div class="container identities-display">
+  {% if "tag" in request.GET %}
+  <div class="text-center mb-3">
+    <a href="{% url "user-profile" slug=object.username %}" class="btn btn-primary btn-sm">clear tag filters</a>
+  </div>
+  {% endif %}
   {% for identity in identities %}
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
-          <a rel="me nofollow" href="{{ identity.url }}">
-        {% endif %}
-        <div class="card-body">
-          <span class="{{ identity.icon }}"></span>
-          {% if identity.looks_like_link %}
+        <a rel="me nofollow" href="{{ identity.url }}">
+          <div class="card-body">
+            <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}
-          {% else %}
-            {{ identity.name }}: {{ identity.url }}
+            {% if object.should_show_quality %}
+            <div class="quality-indicator">
+              <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
+            </div>
+            {% endif %}
+            {% if identity.tag %}
+            <div class="tag-indicator">
+              <a href="?tag={{ identity.tag }}">
+                <small class="text-muted">
+                  <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
+                </small>
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </a>
+        {% else %}
+        <div class="card-body">
+          <span class="{{ identity.get_icon_display }}"></span>
+          {{ identity.name }}: {{ identity.url }}
+          {% if object.should_show_quality %}
+          <div class="quality-indicator">
+            <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
+          </div>
+          {% endif %}
+          {% if identity.tag %}
+          <div class="tag-indicator">
+            <a href="?tag={{ identity.tag }}">
+              <small class="text-muted">
+                <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
+              </small>
+            </a>
+          </div>
           {% endif %}
         </div>
-        {% if identity.looks_like_link %}
-          </a>
         {% endif %}
       </div>
     </div>

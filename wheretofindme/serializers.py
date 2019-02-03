@@ -25,7 +25,7 @@ class IdentitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = InternetIdentity
-        fields = ("id", "name", "url", "user")
+        fields = ("id", "name", "url", "user", "quality", "icon", "tag")
 
 
 class AliasSerializer(serializers.ModelSerializer):

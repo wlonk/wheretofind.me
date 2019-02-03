@@ -70,12 +70,13 @@ describe('AliasForm.vue', () => {
         expect($http.post).toBeCalledWith('/api/aliases/', {
           name: '',
         });
-        return wrapper.vm.nextTick();
+        return wrapper.vm.$nextTick();
       })
       .then(() => {
-        expect(wrapper.vm.aliases).toContain({
+        expect(wrapper.vm.aliases).toContainEqual({
           id: 3,
           name: '',
+          disabled: false,
         });
       });
   });
@@ -93,13 +94,18 @@ describe('AliasForm.vue', () => {
   test('destroy/destroyAlias', () => {
     const { data, $http, wrapper } = setup();
     wrapper.setData(data);
-    wrapper.vm.destroy(data.aliases[0]);
-
-    expect($http.delete).toBeCalledWith('/api/aliases/1/');
-    expect(wrapper.vm.aliases).not.toContain({
-      id: 1,
-      name: 'Test 1',
-    });
+    wrapper.vm
+      .destroy(data.aliases[0])
+      .then(() => {
+        expect($http.delete).toBeCalledWith('/api/aliases/1/');
+        return wrapper.vm.$nextTick();
+      })
+      .then(() => {
+        expect(wrapper.vm.aliases).not.toContainEqual({
+          id: 1,
+          name: 'Test 1',
+        });
+      });
   });
 
   test('retrieveAliases', () => {
