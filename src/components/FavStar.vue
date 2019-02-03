@@ -89,6 +89,7 @@ export default {
       } else {
         callback = this.follow;
       }
+      this.showNicknameField = false;
       callback().catch(() => {
         this.isActive = originalActive;
       });
