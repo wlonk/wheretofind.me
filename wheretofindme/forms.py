@@ -11,7 +11,16 @@ from django_registration.forms import RegistrationFormUniqueEmail
 from .models import User
 
 
-class CustomUserForm(RegistrationFormUniqueEmail):
+class CustomRegistrationForm(RegistrationFormUniqueEmail):
+    """
+    Subclass of RegistrationFormUniqueEmail that adds:
+
+      - Case-insensitive unique requirement for username.
+      - TOS acceptance field
+      - Additional help information to username field.
+      - Crispy Forms Bootstrap4 layout.
+    """
+
     class Meta(RegistrationFormUniqueEmail.Meta):
         model = User
         fields = ("username", "email", "password1", "password2")
@@ -27,9 +36,6 @@ class CustomUserForm(RegistrationFormUniqueEmail):
             " You cannot change this without intervention from an admin, so "
             "consider carefully."
         )
-        self.fields[
-            "tos"
-        ].label = "I have read and agree to the <a href='/tos/'>Terms of Service</a>"
         self.helper = FormHelper()
         self.helper.form_action = "django_registration_register"
         self.helper.layout = Layout(
@@ -43,12 +49,18 @@ class CustomUserForm(RegistrationFormUniqueEmail):
 
     tos = forms.BooleanField(
         widget=forms.CheckboxInput,
-        label=_(u"I have read and agree to the Terms of Service"),
+        label=_(u"I have read and agree to the <a href='/tos/'>Terms of Service</a>"),
         error_messages={"required": validators.TOS_REQUIRED},
     )
 
 
-class CustomAuthForm(AuthenticationForm):
+class CustomAuthenticationForm(AuthenticationForm):
+    """
+    Subclass of AuthenticationForm that overrides the clean method to allow login with
+    either username or email. Both should be unique, per the restrictions on the
+    CustomRegistrationForm form above.
+    """
+
     def _get_user_from_email(self, email):
         return User.objects.filter(email=email).first()
 
