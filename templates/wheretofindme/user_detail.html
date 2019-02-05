@@ -88,7 +88,7 @@
             {{ identity.name }}
             {% if object.should_show_quality %}
             <div class="quality-indicator">
-              <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
+              <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">
             </div>
             {% endif %}
             {% if identity.tag %}
@@ -108,7 +108,7 @@
           {{ identity.name }}: {{ identity.url }}
           {% if object.should_show_quality %}
           <div class="quality-indicator">
-            <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Quality {{ identity.quality }}">
+            <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">
           </div>
           {% endif %}
           {% if identity.tag %}

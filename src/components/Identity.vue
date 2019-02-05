@@ -72,7 +72,7 @@
         </div>
         <div class="form-group row">
           <label :for="qualityLabel" class="col-sm-2 col-form-label"
-            >Quality</label
+            >Signal</label
           >
           <div class="col-sm-9">
             <select
