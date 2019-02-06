@@ -109,7 +109,7 @@ describe('Identity.vue', () => {
         });
         const qualitySrc = wrapper.vm.qualityPreview;
 
-        expect(qualitySrc).toEqual([`/static/images/quality-${expected}.png`]);
+        expect(qualitySrc).toEqual([`/static/images/quality-${expected}.svg`]);
       },
     );
     test('at else', () => {
