@@ -91,6 +91,7 @@
             <button
               type="button"
               class="btn btn-link float-right quality-preview-wrapper"
+              @click="clickQuality"
             >
               <img
                 :src="qualityPreview"
@@ -225,6 +226,10 @@ export default {
     },
   },
   methods: {
+    clickQuality() {
+      this.identity.quality = (this.identity.quality + 1) % 3;
+      this.update();
+    },
     toggleExpanded() {
       this.expandExtras = !this.expandExtras;
     },
@@ -269,6 +274,7 @@ export default {
   height: 1.5rem;
 }
 .quality-preview-wrapper {
+  cursor: pointer;
   margin-right: -0.25rem;
 }
 </style>

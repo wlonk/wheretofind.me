@@ -131,4 +131,19 @@ describe('Identity.vue', () => {
       expect(qualityClasses).toEqual([]);
     });
   });
+
+  test('click signal strength', async () => {
+    const { wrapper, identity } = setup();
+
+    expect(identity.quality).toEqual(2);
+    wrapper.vm.clickQuality();
+    await wrapper.vm.$nextTick();
+    expect(identity.quality).toEqual(0);
+    wrapper.vm.clickQuality();
+    await wrapper.vm.$nextTick();
+    expect(identity.quality).toEqual(1);
+    wrapper.vm.clickQuality();
+    await wrapper.vm.$nextTick();
+    expect(identity.quality).toEqual(2);
+  });
 });
