@@ -85,9 +85,9 @@
       "git add"
     ],
     "*.py": [
-      "isort",
-      "black",
-      "flake8",
+      "pipenv run isort",
+      "pipenv run black",
+      "pipenv run flake8",
       "git add"
     ]
   }

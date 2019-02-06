@@ -35,13 +35,16 @@ root::
 
 Use ``pipenv`` to get the database into a good state::
 
-   $ pipenv sync
+   $ pipenv sync --dev
    $ pipenv run python manage.py migrate
 
 Then get the frontend building::
 
    $ yarn install
    $ yarn serve
+
+Then, you can visit the local site at ``http://localhost:8000/``. The
+terminal output will say ``:8080``, but ignore it, it's a liar.
 
 Dependencies
 ------------
