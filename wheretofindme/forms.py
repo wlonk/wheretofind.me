@@ -44,7 +44,7 @@ class CustomRegistrationForm(RegistrationFormUniqueEmail):
             Field("password1"),
             Field("password2"),
             Field("tos"),
-            Submit("save", "Sign up", css_class="btn btn-primary"),
+            Submit("save", "Sign up", css_class="btn-lg"),
         )
 
     tos = forms.BooleanField(

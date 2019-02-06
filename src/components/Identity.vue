@@ -223,11 +223,11 @@ export default {
       // TODO: This shouldn't involve explicit use of the /static/ directory.
       switch (this.identity.quality) {
         case 0:
-          return ['/static/images/quality-low.png'];
+          return ['/static/images/quality-low.svg'];
         case 1:
-          return ['/static/images/quality-mid.png'];
+          return ['/static/images/quality-mid.svg'];
         case 2:
-          return ['/static/images/quality-high.png'];
+          return ['/static/images/quality-high.svg'];
       }
       return [];
     },
@@ -278,7 +278,7 @@ export default {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
 }
 .quality-preview {
-  height: 1.5rem;
+  height: 1rem;
 }
 .quality-preview-wrapper {
   cursor: pointer;
