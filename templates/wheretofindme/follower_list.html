@@ -1,6 +1,4 @@
 {% extends "base.html" %}
-{% load favstar %}
-
 {% block "title" %}Your followers | {% endblock "title" %}
 
 {% block "main" %}
@@ -14,40 +12,7 @@
         {{ object.primary_alias }}
       </a>
 
-      {% if user.is_authenticated and object != user and object in user.follows %}
-      <div class="favstar"
-           data-active="true"
-           data-username="{{ object.username }}"
-           data-nickname="{% nickname object %}"
-           >
-           <div class="input-group dropright">
-             <div class="input-group-prepend">
-               <button type="button" class="btn btn-warning active" disabled>
-                 <span class="fas fa-star"></span>
-                 <span class="pl-3">{% nickname object %}</span>
-               </button>
-             </div>
-             <div class="input-group-append">
-               <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" disabled>
-               </button>
-             </div>
-           </div>
-      </div>
-      {% else %}
-      <div class="favstar"
-           data-active="false"
-           data-username="{{ object.username }}"
-           data-nickname="{% nickname object %}"
-           >
-           <div class="input-group dropright">
-             <div>
-               <button type="button" class="btn btn-outline-warning" disabled>
-                 <span class="fas fa-star"></span>
-               </button>
-             </div>
-           </div>
-      </div>
-      {% endif %}
+      {% include "wheretofindme/_favstar.html" with object=object %}
     </div>
     <div class="card-body">
       {% for identity in object.first_three.0 %}

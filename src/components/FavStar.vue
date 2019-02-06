@@ -7,6 +7,7 @@
           class="btn btn-outline-warning"
           :class="{ 'btn-sm': small, active: isActive }"
           @click="toggleFavstar"
+          aria-label="favstar"
         >
           <span class="fas fa-star"></span>
           <span
@@ -35,6 +36,7 @@
           aria-haspopup="true"
           :aria-expanded="showNicknameField"
           @click="toggleShowNickname"
+          aria-label="favstar expand"
         >
           <span class="sr-only">Toggle nickname field</span>
         </button>

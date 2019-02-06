@@ -20,6 +20,7 @@
             type="button"
             class="btn btn-outline-danger float-right"
             @click="destroy"
+            aria-label="Remove alias"
           >
             <span class="fas fa-minus-circle"></span>
           </button>

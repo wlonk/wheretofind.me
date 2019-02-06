@@ -10,7 +10,7 @@
         @destroy="destroy"
       />
     </draggable>
-    <AddButton @create="create" />
+    <AddButton @create="create" aria-label="Add identity" />
   </form>
 </template>
 

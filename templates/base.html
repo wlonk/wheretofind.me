@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm" role="navigation">
       <a class="navbar-brand flex-grow-1" href="/">
         <img src="{% static 'images/logo-50.png' %}" class="img-fluid" alt="Where to Find Me logo">
         Where to find me
@@ -50,7 +50,7 @@
               <div class="input-group" role="group" aria-label="Search group">
                 <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-success" type="submit">
+                  <button class="btn btn-outline-success" type="submit" aria-label="Search">
                     <span class="fas fa-search"></span>
                   </button>
                 </div>
@@ -83,7 +83,7 @@
       </div>
     </nav>
 
-    <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+    <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto" role="main">
 
       {% if user.is_authenticated %}
         <noscript>
@@ -119,7 +119,7 @@
     </div>
 
     <div class="container">
-      <footer class="pt-4 my-md-5 pt-md-5 border-top">
+      <footer class="pt-4 my-md-5 pt-md-5 border-top" role="contentinfo">
         <div class="row">
           <div class="col-12 col-md text-center">
             <small class="d-block mb-3 text-muted">&copy; 2018-2019 Kit La Touche</small>

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static favstar %}
+{% load static %}
 
 {% block "title" %}{{ object.primary_alias }} | {% endblock "title" %}
 
@@ -24,44 +24,7 @@
     {{ object.primary_alias }}
   </h1>
 
-  {% if user.is_authenticated and object != user and object in user.follows %}
-  <div
-    class="favstar"
-    data-active="true"
-    data-username="{{ object.username }}"
-    data-nickname="{% nickname object %}"
-    >
-    <div class="input-group dropright">
-      <div class="input-group-prepend">
-        <button type="button" class="btn btn-warning active" disabled>
-          <span class="fas fa-star"></span>
-          <span class="pl-3">{% nickname object %}</span>
-        </button>
-      </div>
-      <div class="input-group-append">
-        <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" disabled>
-        </button>
-      </div>
-    </div>
-  </div>
-  {% else %}
-  {% if user.is_authenticated and object != user %}
-  <div
-    class="favstar"
-    data-active="false"
-    data-username="{{ object.username }}"
-    data-nickname="{% nickname object %}"
-    >
-    <div class="input-group dropright">
-      <div>
-        <button type="button" class="btn btn-outline-warning" disabled>
-          <span class="fas fa-star"></span>
-        </button>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-  {% endif %}
+  {% include "wheretofindme/_favstar.html" with object=object %}
 </div>
 
 {% if object.other_aliases %}
@@ -82,7 +45,7 @@
     <div class="col-md-6 offset-md-3">
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
-        <a rel="me nofollow" href="{{ identity.url }}">
+        <a rel="me nofollow" href="{{ identity.url }}" aria-label="{{ identity.name }}">
           <div class="card-body">
             <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}

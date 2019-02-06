@@ -23,6 +23,7 @@
             class="btn btn-outline-danger float-right"
             :tabindex="destroyTabIndex"
             @click="destroy"
+            aria-label="Remove identity"
           >
             <span class="fas fa-minus-circle"></span>
           </button>
@@ -50,6 +51,7 @@
             class="btn btn-link float-right expand-identity"
             :tabindex="expandTabIndex"
             @click="toggleExpanded"
+            aria-label="Expand identity"
           >
             <span class="fas fa-ellipsis-h"></span>
           </button>
@@ -92,6 +94,7 @@
               type="button"
               class="btn btn-link float-right quality-preview-wrapper"
               @click="clickQuality"
+              aria-label="Toggle signal"
             >
               <img
                 :src="qualityPreview"
@@ -154,7 +157,11 @@
             </select>
           </div>
           <div class="col-sm-1">
-            <button type="button" class="btn btn-link float-right">
+            <button
+              type="button"
+              class="btn btn-link float-right"
+              aria-label="Preview icon"
+            >
               <span :class="identity.icon"></span>
             </button>
           </div>
