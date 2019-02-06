@@ -1,19 +1,13 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+:root {
+  font-size: calc(16px + 0.12vw);
 }
 
 .container {
-  max-width: 960px;
+  max-width: 60em;
 }
 
 .main {
-  max-width: 700px;
+  max-width: 40em;
 }
 
 .navbar-brand img {

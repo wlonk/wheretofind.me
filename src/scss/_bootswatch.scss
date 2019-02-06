@@ -2,15 +2,40 @@
 // Bootswatch
 
 
-// Variables ===================================================================
+// Font Face ===================================================================
 
-$web-font-path: "https://fonts.googleapis.com/css?family=Montserrat" !default;
-@import url($web-font-path);
+@font-face {
+  font-family: 'caroni';
+  src: url('/static/fonts/caroni-regular-webfont.woff2') format('woff2'),
+       url('/static/fonts/caroni-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Root ========================================================================
+
+:root {
+  font-family: $body-font-family;
+}
+
+h1 {
+  small {
+    font-size: 60%;
+  }
+}
 
 // Navbar ======================================================================
 
-.navbar {
+.navbar-brand {
+  align-items: center;
+  display: flex;
   font-family: $headings-font-family;
+  font-size: 1.5rem;
+
+  // better logo alignment
+  img {
+    transform: translateY(-0.1em);
+  }
 }
 
 .bg-dark {
@@ -29,6 +54,10 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Montserrat" !default;
   &,
   &:hover {
     color: $white;
+  }
+
+  &-lg {
+    font-size: 1.25rem;
   }
 
   &-light,
