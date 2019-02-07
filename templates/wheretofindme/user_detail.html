@@ -45,26 +45,26 @@
     <div class="col-md-6 offset-md-3">
       <div class="card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
-        <a rel="me nofollow" href="{{ identity.url }}" aria-label="{{ identity.name }}">
-          <div class="card-body">
+        <div class="card-body">
+          <a rel="me nofollow" href="{{ identity.url }}" aria-label="{{ identity.name }}">
             <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}
             {% if object.should_show_quality %}
-            <div class="quality-indicator">
-              <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">
-            </div>
-            {% endif %}
-            {% if identity.tag %}
-            <div class="tag-indicator">
-              <a href="?tag={{ identity.tag }}">
-                <small class="text-muted">
-                  <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
-                </small>
-              </a>
-            </div>
-            {% endif %}
+          </a>
+          <div class="quality-indicator">
+            <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">
           </div>
-        </a>
+          {% endif %}
+          {% if identity.tag %}
+          <div class="tag-indicator">
+            <a href="?tag={{ identity.tag }}">
+              <small class="text-muted">
+                <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
+              </small>
+            </a>
+          </div>
+          {% endif %}
+        </div>
         {% else %}
         <div class="card-body">
           <span class="{{ identity.get_icon_display }}"></span>

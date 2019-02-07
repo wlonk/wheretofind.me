@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <label :for="urlLabel" class="col-sm-2 col-form-label">URL</label>
+        <label :for="urlLabel" class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-9">
           <input
             type="text"
