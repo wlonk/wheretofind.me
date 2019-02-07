@@ -69,15 +69,15 @@ class TestInternetIdentity:
     def test_quality_icon(self, internet_identity_factory):
         assert (
             internet_identity_factory(quality=0).quality_img()
-            == "images/quality-low.png"
+            == "images/quality-low.svg"
         )
         assert (
             internet_identity_factory(quality=1).quality_img()
-            == "images/quality-mid.png"
+            == "images/quality-mid.svg"
         )
         assert (
             internet_identity_factory(quality=2).quality_img()
-            == "images/quality-high.png"
+            == "images/quality-high.svg"
         )
 
 

@@ -208,11 +208,11 @@ class InternetIdentity(models.Model):
 
     def quality_img(self):
         if self.quality == 0:
-            return "images/quality-low.png"
+            return "images/quality-low.svg"
         if self.quality == 1:
-            return "images/quality-mid.png"
+            return "images/quality-mid.svg"
         if self.quality == 2:
-            return "images/quality-high.png"
+            return "images/quality-high.svg"
 
 
 class Follow(models.Model):
