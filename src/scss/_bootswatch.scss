@@ -2,7 +2,7 @@
 // Bootswatch
 
 
-// Font Face ===================================================================
+// Font Faces ==================================================================
 
 @font-face {
   font-family: 'caroni';
@@ -49,7 +49,7 @@ h1 {
 // Buttons =====================================================================
 
 .btn {
-  font-family: $headings-font-family;
+  font-family: $body-font-family;
 
   &,
   &:hover {
@@ -236,14 +236,14 @@ h1 {
   .thead-dark th {
     background-color: $primary;
     border-color: $table-border-color;
-    font-family: $headings-font-family;
+    font-family: $body-font-family;
   }
 }
 
 // Forms =======================================================================
 
 legend {
-  font-family: $headings-font-family;
+  font-family: $body-font-family;
 }
 
 // Navs ========================================================================
