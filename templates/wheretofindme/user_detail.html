@@ -49,8 +49,8 @@
           <a rel="me nofollow" href="{{ identity.url }}" aria-label="{{ identity.name }}">
             <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}
-            {% if object.should_show_quality %}
           </a>
+          {% if object.should_show_quality %}
           <div class="quality-indicator">
             <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">
           </div>
