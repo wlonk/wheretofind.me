@@ -15,36 +15,11 @@
   we'll display it.
 </p>
 <form id="edit-identities-form" class="clearfix">
-  {% for identity in identities %}
-  <div class="identity card bg-light shadow-sm w-100 mb-3" data-id="{{ identity.id }}">
-    <div class="card-body">
-      <div class="form-group row">
-        <label for="name-{{ identity.id }}" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="name-{{ identity.id }}" name="name" value="{{ identity.name }}" placeholder="My blog…">
-        </div>
-        <div class="col-sm-1">
-          <button type="button" class="btn delete btn-outline-danger float-right" aria-label="Remove identity">
-            <span class="fas fa-minus-circle"></span>
-          </button>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="url-{{ identity.id }}" class="col-sm-2 col-form-label">URL</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="url-{{ identity.id }}" name="url" value="{{ identity.url }}" placeholder="https://example.com/">
-        </div>
-        <div class="col-sm-1">
-          <button type="button" class="btn btn-link float-right expand-identity" aria-label="Expand identity">
-            <span class="fas fa-ellipsis-h"></span>
-          </button>
-        </div>
-      </div>
+  <noscript>
+    <div class="alert alert-danger" role="alert">
+      Sorry! You need to have JavaScript enabled to edit your list of locations.
     </div>
-  </div>
-  {% endfor %}
-  <button type="button" class="btn add-identity btn-outline-primary float-right" aria-label="Add identity">
-    <span class="fas fa-plus-circle"></span>
-  </button>
+  </noscript>
+  {% include "wheretofindme/_loading.svg" %}
 </form>
 {% endblock "main" %}
