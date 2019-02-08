@@ -1,4 +1,14 @@
 {% load favstar %}
+{% comment %}
+This should be kept in rough sync with the FavStar.vue component.
+
+Major differences:
+
+ - The data-* attributes that are used to initialize the Vue component when it
+   takes over.
+ - The disabled attribute that keeps this from acting like a real clickable
+   button when it's not.
+{% endcomment %}
 
 {% if user.is_authenticated and object != user %}
 {% if object in user.follows %}
