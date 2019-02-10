@@ -51,12 +51,14 @@
 }
 
 /// Crispy Forms and Bootstrap 4 conspire to not show errors that are not
-//younger siblings of a .form-control.is-invalid element. This makes errors on
-//PrependedText elements not show up. So let's just force them to.
+/// younger siblings of a .form-control.is-invalid element. This makes errors
+/// on PrependedText elements not show up. So let's just force them to.
 .input-group ~ .invalid-feedback {
   display: block;
 }
 
+/// For whatever reasons, Bootstrap has these inputs 1px too low. Let's fix
+/// that.
 .nav-item .form-inline input {
   transform: translateY(-1px);
 }
