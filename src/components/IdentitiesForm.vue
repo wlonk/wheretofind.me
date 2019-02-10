@@ -34,6 +34,8 @@ export default {
           items: '.identity',
           axis: 'y',
           containment: 'parent',
+          filter: 'input',
+          preventOnFilter: false,
         };
       },
     },
