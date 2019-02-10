@@ -46,6 +46,8 @@ export default {
           items: '.alias',
           axis: 'y',
           containment: 'parent',
+          filter: 'input',
+          preventOnFilter: false,
         };
       },
     },
