@@ -20,7 +20,7 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm" role="navigation">
-      <a class="navbar-brand flex-grow-1" href="/">
+      <a class="navbar-brand" href="/">
         <img src="{% static 'images/logo-50.png' %}" class="img-fluid" alt="Where to Find Me logo">
         where to find me
       </a>
@@ -29,57 +29,52 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="flex-shrink-1">
-        <div id="nav-bar" class="collapse navbar-collapse">
-          <ul class="navbar-nav">
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@{{ user.username }}</a>
-
-              <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-                <a class="dropdown-item" href="{% url "user-profile" slug=user.username %}">My profile</a>
-                <a class="dropdown-item" href="{% url "identity-edit" %}">Locations</a>
-                <a class="dropdown-item" href="{% url "alias-edit" %}">Aliases</a>
-                <a class="dropdown-item" href="{% url "follows" %}">Follows</a>
-                <a class="dropdown-item" href="{% url "followers" %}">Followers</a>
-                <a class="dropdown-item" href="{% url "password_change" %}">Password</a>
-              </div>
-            </li>
-
-            <form class="form-inline" action="{% url "search" %}">
-              <div class="input-group" role="group" aria-label="Search group">
-                <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-success" type="submit" aria-label="Search">
-                    <span class="fas fa-search"></span>
-                  </button>
-                </div>
-              </div>
-            </form>
-
+      <div id="nav-bar" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "user-profile" slug=user.username %}">@{{ user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "identity-edit" %}">Locations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "alias-edit" %}">Aliases</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "follows" %}">Follows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "followers" %}">Followers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "password_change" %}">Password</a>
+          </li>
+          <li class="nav-item">
             <form class="form-inline" method="post" action="{% url "logout" %}">{% csrf_token %}
-              <input class="btn btn-link" type="submit" value="Sign out">
+              <input class="btn btn-link nav-link" type="submit" value="Sign out">
             </form>
-            {% else %}
-            <form class="form-inline" action="{% url "search" %}">
-              <div class="input-group" role="group" aria-label="Search group">
-                <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-success" type="submit">
-                    <span class="fas fa-search"></span>
-                  </button>
-                </div>
-              </div>
-            </form>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "django_registration_register" %}">Sign up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url "login" %}">Sign in</a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "django_registration_register" %}">Sign up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "login" %}">Sign in</a>
+          </li>
+          {% endif %}
+        </ul>
+
+        <form class="form-inline" action="{% url "search" %}">
+          <div class="input-group" role="group" aria-label="Search group">
+            <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-outline-success" type="submit" aria-label="Search">
+                <span class="fas fa-search"></span>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </nav>
 
@@ -122,25 +117,25 @@
       <footer class="pt-4 my-md-5 pt-md-5 border-top" role="contentinfo">
         <div class="row">
           <div class="col-12 col-md text-center">
-            <small class="d-block mb-3 text-muted">&copy; 2018-2019 Kit La Touche</small>
+            <small class="d-block mb-3">&copy; 2018-2019 Kit La Touche</small>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md text-center">
-            <small class="d-block mb-3 text-muted">Please <a href="{% url "user-profile" slug="kit" %}">get in touch</a> if you have any problems or feedback.</small>
+            <small class="d-block mb-3">Please <a href="{% url "user-profile" slug="kit" %}">get in touch</a> if you have any problems or feedback.</small>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md text-center">
-            <small class="d-block mb-3 text-muted">
-              <a href="{% url "tos" %}">Terms of Service</a>.
-              <a href="{% url "about" %}">About</a>.
+            <small class="d-block mb-3">
+              <a href="{% url "tos" %}">Terms of Service</a>
+              <a href="{% url "about" %}">About</a>
             </small>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-md text-center">
-            <small class="d-block mb-3 text-muted">
+            <small class="d-block mb-3">
               <a href="https://ko-fi.com/B0B586NC">Support us on Ko-fi</a>
             </small>
           </div>

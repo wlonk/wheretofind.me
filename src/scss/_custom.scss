@@ -56,3 +56,7 @@
 .input-group ~ .invalid-feedback {
   display: block;
 }
+
+.nav-item .form-inline input {
+  transform: translateY(-1px);
+}

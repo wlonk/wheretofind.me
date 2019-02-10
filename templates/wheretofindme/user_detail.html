@@ -19,7 +19,7 @@
 {% block "main" %}
 <div class="position-relative">
   <h1 class="text-center">
-    <small class="text-muted">where to find</small>
+    <small>where to find</small>
     <br>
     {{ object.primary_alias }}
   </h1>
@@ -28,7 +28,7 @@
 </div>
 
 {% if object.other_aliases %}
-<p class="col-md-8 offset-md-2 text-muted">
+<p class="col-md-8 offset-md-2">
   a.k.a. {{ object.other_aliases|join:", " }}.
 </p>
 {% endif %}
@@ -58,7 +58,7 @@
           {% if identity.tag %}
           <div class="tag-indicator">
             <a href="?tag={{ identity.tag }}">
-              <small class="text-muted">
+              <small>
                 <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
               </small>
             </a>
@@ -77,7 +77,7 @@
           {% if identity.tag %}
           <div class="tag-indicator">
             <a href="?tag={{ identity.tag }}">
-              <small class="text-muted">
+              <small>
                 <span class="badge badge-pill badge-primary">{{ identity.tag }}</span>
               </small>
             </a>
@@ -90,7 +90,7 @@
   </div>
   {% endfor %}
 </div>
-<p class="col-md-8 offset-md-2 text-muted">
+<p class="col-md-8 offset-md-2">
   <small>Added without your consent? Please
   <a
     href="mailto:admin@wheretofind.me?subject=Where%20to%20Find%20Me%20removal%20request"
