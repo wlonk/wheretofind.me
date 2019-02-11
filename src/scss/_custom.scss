@@ -23,15 +23,19 @@
 }
 
 .quality-0 {
-  color: $red;
+  color: $danger;
 }
 
 .quality-1 {
-  color: $yellow;
+  color: $warning;
 }
 
 .quality-2 {
-  color: $green;
+  color: $success;
+}
+
+code {
+  color: $color-secondary-2-3;
 }
 
 .tag-indicator {

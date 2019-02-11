@@ -18,22 +18,22 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black:    #000 !default;
 
-$blue:    #007bff !default;
+$blue:    #0056b3 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #FF7851 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #FFCE67 !default;
-$green:   #56CC9D !default;
-$teal:    #20c997 !default;
-$cyan:    #6CC3D5 !default;
+$pink:    $color-secondary-2-3 !default;
+$red:     $color-secondary-2-4 !default;
+$orange:  #aa4e01 !default;
+$yellow:  $color-secondary-1-3 !default;
+$green:   #1e7e34 !default;
+$teal:    #127155 !default;
+$cyan:    #257383 !default;
 
 $primary:       $color-primary-3 !default;
-$secondary:     $color-secondary-1-3 !default;
+$secondary:     $color-secondary-1-4 !default;
 $success:       $green !default;
 $info:          $cyan !default;
-$warning:       $color-secondary-1-3 !default;
+$warning:       $color-secondary-1-4 !default;
 $danger:        $color-secondary-2-3 !default;
 $light:         $gray-200 !default;
 $dark:          $gray-800 !default;
@@ -67,13 +67,13 @@ $dropdown-link-hover-bg:            $secondary !default;
 
 // Navbar
 
-$navbar-dark-color:                 rgba($white,.6) !default;
+$navbar-dark-color:                 $gray-200 !default;
 $navbar-dark-hover-color:           $white !default;
 
-$navbar-light-color:                rgba($black,.3) !default;
-$navbar-light-hover-color:          $gray-700 !default;
-$navbar-light-active-color:         $gray-700 !default;
-$navbar-light-disabled-color:       rgba($black,.1) !default;
+$navbar-light-color:                $gray-700 !default;
+$navbar-light-hover-color:          $primary !default;
+$navbar-light-active-color:         $primary !default;
+$navbar-light-disabled-color:       $gray-500 !default;
 
 // Pagination
 
