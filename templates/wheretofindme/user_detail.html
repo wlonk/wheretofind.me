@@ -93,13 +93,16 @@
 <p class="col-md-8 offset-md-2 text-muted">
   <small>Added without your consent? Please
   <a
-    href="mailto:admin@wheretofind.me?subject=Where%20to%20Find%20Me%20removal%20request"
+    href="mailto:admin@wheretofind.me?subject=Where%20to%20Find%20Me%20removal%20request%20from%20{{ object.username }}"
     >contact us</a> to remove this entry.</small>
 </p>
 {% else %}
 <div class="text-center">
 {% if object == user %}
-  <em><small>Perhaps you want to <a href="{% url "identity-edit" %}">add some identities</a>?</small></em>
+  <em><small>
+    Perhaps you want to <a href="{% url "identity-edit" %}">add some
+    identities</a>? Or <a href="{% url "alias-edit" %}">opt-in to search</a>?
+  </small></em>
 {% else %}
   <em><small>they are stealthy, and have left no trace</small></em>
 {% endif %}
