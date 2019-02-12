@@ -141,6 +141,6 @@ export default {
 
 <style>
 .alias:first-child {
-  box-shadow: 0 0 5px #20c997 !important;
+  box-shadow: 0 0 5px #207e5f !important;
 }
 </style>
