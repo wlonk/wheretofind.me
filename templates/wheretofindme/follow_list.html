@@ -6,7 +6,7 @@
 <div>
   {% for follow in object_list %}
   {% with object=follow.to_user %}
-  <div class="card border-info shadow-sm mb-3 position-relative">
+  <div class="preview-card card border-info shadow-sm mb-3 position-relative">
     <div class="card-header">
       <a href="{% url "user-profile" slug=object.username %}">
         {{ object.primary_alias }}

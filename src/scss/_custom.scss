@@ -18,7 +18,8 @@
   height: 5em;
 }
 
-.card-body {
+.preview-card .card-body,
+.detail-card .card-body {
   overflow: scroll;
   max-height: 8rem;
 }
