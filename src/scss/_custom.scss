@@ -62,8 +62,14 @@ code {
   display: block;
 }
 
-/// For whatever reasons, Bootstrap has these inputs 1px too low. Let's fix
-/// that.
-.nav-item .form-inline input {
-  transform: translateY(-1px);
+.dropdown-item,
+.dropdown-item .btn-link {
+  border-radius: 0 !important;
+  color: #000;
+}
+
+.dropdown-item:hover,
+.dropdown-item .btn-link:hover {
+  color: #fff;
+  background-color: #905D13;
 }

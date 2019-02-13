@@ -19,64 +19,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm" role="navigation">
-      <a class="navbar-brand" href="/">
-        <img src="{% static 'images/logo-50.png' %}" class="img-fluid" alt="Where to Find Me logo">
-        where to find me
-      </a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-bar" aria-controls="nav-bar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div id="nav-bar" class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "user-profile" slug=user.username %}">@{{ user.username }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "identity-edit" %}">Locations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "alias-edit" %}">Aliases</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "follows" %}">Follows</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "followers" %}">Followers</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "password_change" %}">Password</a>
-          </li>
-          <li class="nav-item">
-            <form class="form-inline" method="post" action="{% url "logout" %}">{% csrf_token %}
-              <input class="btn btn-link nav-link" type="submit" value="Sign out">
-            </form>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "django_registration_register" %}">Sign up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url "login" %}">Sign in</a>
-          </li>
-          {% endif %}
-        </ul>
-
-        <form class="form-inline" action="{% url "search" %}">
-          <div class="input-group" role="group" aria-label="Search group">
-            <input class="form-control" type="search" placeholder="Search" name="q" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-outline-success" type="submit" aria-label="Search">
-                <span class="fas fa-search"></span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </nav>
+    {% include "_navbar.html" %}
 
     <div class="main px-3 py-3 pt-md-5 pb-md-4 mx-auto" role="main">
 
