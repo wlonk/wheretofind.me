@@ -6,11 +6,6 @@ class TestUser:
     def test_follows(self, user):
         assert user.follows() == []
 
-    def test_first_three(self, user):
-        three, ellipsis = user.first_three()
-        assert not three
-        assert not ellipsis
-
     def test_get_absolute_url(self, user_factory):
         user = user_factory(username="magnificent")
         assert user.get_absolute_url() == "/@magnificent"
