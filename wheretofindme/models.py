@@ -151,9 +151,8 @@ class User(AbstractUser):
     def follows(self):
         return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
 
-    def first_three(self):
-        identities = self.internetidentity_set.exclude(name="")[:4]
-        return (identities[:3], len(identities) > 3)
+    def identities(self):
+        return self.internetidentity_set.exclude(name="")
 
     def get_absolute_url(self):
         return reverse("user-profile", kwargs={"slug": self.username})

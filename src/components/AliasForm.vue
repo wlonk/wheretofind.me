@@ -141,7 +141,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .alias:first-child {
   box-shadow: 0 0 5px #207e5f !important;
 }

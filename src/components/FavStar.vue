@@ -120,7 +120,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 // Because this is absolutely positioned, you must put this component inside a
 // postioned element, or it will jump elsewhere in the page. Be warned!
 $spacer: 1rem;

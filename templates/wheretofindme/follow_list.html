@@ -15,12 +15,9 @@
       {% include "wheretofindme/_favstar.html" with object=object %}
     </div>
     <div class="card-body">
-      {% for identity in object.first_three.0 %}
+      {% for identity in object.identities %}
       {% include "wheretofindme/_identity.html" with identity=identity  %}
       {% endfor %}
-      {% if object.first_three.1 %}
-      &hellip;
-      {% endif %}
     </div>
   </div>
   {% endwith %}
