@@ -17,7 +17,7 @@
             placeholder="My blog…"
           />
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-1 mt-2 mt-sm-0">
           <button
             type="button"
             class="btn btn-outline-danger float-right"
