@@ -11,6 +11,10 @@ const iconGuesses = [
     val: 'fab fa-behance',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('blogger.com'),
+    val: 'fab fa-blogger',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('bitbucket.org'),
     val: 'fab fa-bitbucket',
   },
