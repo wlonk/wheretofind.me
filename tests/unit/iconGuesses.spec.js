@@ -3,6 +3,7 @@ import iconGuesses from '@/iconGuesses';
 describe('iconGuesses', () => {
   test.each([
     ['behance.net'],
+    ['blogger.com'],
     ['bitbucket.org'],
     ['codepen.io'],
     ['deviantart.com'],
