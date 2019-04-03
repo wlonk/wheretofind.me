@@ -149,7 +149,7 @@ class User(AbstractUser):
     search_enabled = models.BooleanField(default=False)
 
     def follows(self):
-        return [f.to_user for f in self.follow_set.prefetch_related("to_user")]
+        return [f.to_user for f in self.follower.prefetch_related("to_user")]
 
     def identities(self):
         return self.internetidentity_set.exclude(name="")
@@ -168,7 +168,7 @@ class User(AbstractUser):
 
     def nickname_by(self, other):
         try:
-            return other.follow_set.get(to_user=self).nickname
+            return other.follower.get(to_user=self).nickname
         except Follow.DoesNotExist:
             return ""
 
@@ -219,8 +219,10 @@ class Follow(models.Model):
         ordering = ("to_user__username", "from_user__username")
         unique_together = (("from_user", "to_user"),)
 
-    from_user = models.ForeignKey(User, on_delete=models.PROTECT)
-    to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
+    from_user = models.ForeignKey(
+        User, on_delete=models.PROTECT, related_name="follower"
+    )
+    to_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="followed")
     nickname = models.CharField(max_length=128, blank=True)
 
 

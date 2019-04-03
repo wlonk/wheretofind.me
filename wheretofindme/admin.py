@@ -15,7 +15,7 @@ internetidentity_count.short_description = "Number of Identities"
 
 
 def follow_count(obj):
-    return obj.follow_set.count()
+    return obj.follower.count()
 
 
 follow_count.short_description = "Number of Follows"

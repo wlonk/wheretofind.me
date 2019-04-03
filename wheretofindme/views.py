@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from django.db.models import Case, Value, When
+from django.db.models import Case, Q, Value, When
 from django.views.generic.base import RedirectView, TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -83,10 +83,16 @@ class SearchView(ListView):
     template_name = "wheretofindme/search.html"
 
     def get_queryset(self):
+        search = self.request.GET.get("q", "")
+        filter = Q(alias__name__search=search, search_enabled=True)
+        if self.request.user.is_authenticated:
+            filter |= Q(
+                followed__from_user=self.request.user, followed__nickname__search=search
+            ) | Q(followed__from_user=self.request.user, alias__name__search=search)
         qs = (
-            User.objects.filter(search_enabled=True)
-            .prefetch_related("alias_set")
-            .filter(alias__name__search=self.request.GET.get("q", ""))
+            User.objects.prefetch_related("alias_set")
+            .prefetch_related("followed")
+            .filter(filter)
             .distinct()
         )
         return qs
