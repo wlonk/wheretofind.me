@@ -71,6 +71,15 @@ class TestSearchView:
         response = client.get("/search/", {"q": "searchable"})
         assert "searchable".encode("utf-8") in response.content
 
+    def test_search_followed(self, anon_client, user_factory, follow_factory):
+        user = user_factory(username="banana", search_enabled=True)
+        followed = user_factory(username="searchable", search_enabled=False)
+        follow_factory(from_user=user, to_user=followed, nickname="Alex Rodriguez")
+        client = APIClient()
+        client.force_login(user)
+        response = client.get("/search/", {"q": "Rodriguez"})
+        assert "searchable".encode("utf-8") in response.content
+
     def test_duplicate_aliases(self, user_factory, alias_factory):
         user = user_factory(username="searchable", search_enabled=True)
         alias_factory(user=user, name="Search Daly")
