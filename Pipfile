@@ -24,7 +24,7 @@ whitenoise = "~=4.1"
 "django-crispy-forms" = "~=1.7"
 Django = "~=2.2"
 "django-registration" = "~=3.0"
-"django-sendgrid-v5" = "~=0.7"
+"django-sendgrid-v5" = "~=0.8"
 djangorestframework = "~=3.9"
 django-js-reverse = "~=0.8"
 
