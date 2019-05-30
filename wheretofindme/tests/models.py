@@ -75,6 +75,13 @@ class TestInternetIdentity:
             == "images/quality-high.svg"
         )
 
+    def test_icon_to_search(self, internet_identity_factory):
+        assert internet_identity_factory(icon="fas fa-link").icon_to_search() == ""
+        assert (
+            internet_identity_factory(icon="fab fa-mastodon").icon_to_search()
+            == "mastodon"
+        )
+
 
 @pytest.mark.django_db
 class TestAlias:

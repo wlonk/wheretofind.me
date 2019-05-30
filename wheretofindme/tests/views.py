@@ -50,6 +50,17 @@ def test_FollowersView(client):
 
 
 @pytest.mark.django_db
+class TestFriendByServiceView:
+    def test_no_search(self, client):
+        response = client.get("/by-service/", data={"q": ""})
+        assert "Who's on the null service".encode("utf-8") in response.content
+
+    def test_mastodon_search(self, client):
+        response = client.get("/by-service/", data={"q": "mastodon"})
+        assert "Who's on Mastodon".encode("utf-8") in response.content
+
+
+@pytest.mark.django_db
 class TestSearchView:
     def test_no_match(self, anon_client, user_factory):
         user_factory(username="wistful", search_enabled=True)

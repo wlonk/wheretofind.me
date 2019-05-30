@@ -132,6 +132,49 @@ ICON_CHOICES = (
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
 )
 
+ICON_HUMAN_NAMES = {
+    "link": "web",
+    "envelope": "email",
+    "behance": "Behance",
+    "bitbucket": "Bitbucket",
+    "codepen": "Codepen",
+    "deviantart": "Deviantart",
+    "diaspora": "Diaspora",
+    "discord": "Discord",
+    "dribbble": "Dribbble",
+    "ello": "Ello",
+    "etsy": "Etsy",
+    "facebook": "Facebook",
+    "github": "GitHub",
+    "gitlab": "Gitlab",
+    "goodreads": "Goodreads",
+    "google-plus-g": "Google Plus",
+    "instagram": "Instagram",
+    "keybase": "Keybase",
+    "kickstarter": "Kickstarter",
+    "lastfm": "Last",
+    "mastodon": "Mastodon",
+    "medium": "Medium",
+    "patreon": "Patreon",
+    "paypal": "Paypal",
+    "pinterest": "Pinterest",
+    "ravelry": "Ravelry",
+    "reddit": "Reddit",
+    "skype": "Skype",
+    "slack": "Slack",
+    "snapchat": "Snapchat",
+    "soundcloud": "Soundcloud",
+    "stackoverflow": "Stackoverflow",
+    "steam": "Steam",
+    "teamspeak": "Teamspeak",
+    "tumblr": "Tumblr",
+    "twitch": "Twitch",
+    "twitter": "Twitter",
+    "untappd": "Untappd",
+    "vimeo": "Vimeo",
+    "youtube": "YouTube",
+}
+
 QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
 
 
@@ -212,6 +255,12 @@ class InternetIdentity(models.Model):
             return "images/quality-mid.svg"
         if self.quality == 2:
             return "images/quality-high.svg"
+
+    def icon_to_search(self):
+        if self.icon.startswith("fab fa-"):
+            _, search = self.icon.split("-", 1)
+            return search
+        return ""
 
 
 class Follow(models.Model):

@@ -53,6 +53,7 @@ urlpatterns = [
     path("aliases/", views.EditAliasView.as_view(), name="alias-edit"),
     path("follows/", views.FollowsView.as_view(), name="follows"),
     path("followers/", views.FollowersView.as_view(), name="followers"),
+    path("by-service/", views.FriendsByService.as_view(), name="by-service"),
     path("tos/", TemplateView.as_view(template_name="tos.html"), name="tos"),
     path("about/", TemplateView.as_view(template_name="about.html"), name="about"),
     path("", TemplateView.as_view(template_name="base.html"), name="root"),

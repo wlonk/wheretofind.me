@@ -9,7 +9,7 @@ from rest_framework.decorators import action
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.response import Response
 
-from .models import Alias, Follow, InternetIdentity, User
+from .models import ICON_HUMAN_NAMES, Alias, Follow, InternetIdentity, User
 from .serializers import (
     AliasSerializer,
     FollowSerializer,
@@ -95,6 +95,35 @@ class SearchView(ListView):
             .filter(filter)
             .distinct()
         )
+        return qs
+
+
+class FriendsByService(LoginRequiredMixin, ListView):
+    model = User
+    template_name = "wheretofindme/friends_by_users.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search = self.request.GET.get("q", "")
+        if search:
+            service_name = ICON_HUMAN_NAMES.get(search, search)
+            is_a_fediverse = search in ("mastodon", "diaspora")
+        else:
+            service_name = "the null service"
+            is_a_fediverse = False
+        context["service_name"] = service_name
+        context["is_a_fediverse"] = is_a_fediverse
+        return context
+
+    def get_queryset(self):
+        search = self.request.GET.get("q", "")
+        if not search:
+            return User.objects.none()
+        qs = User.objects.filter(
+            followed__from_user=self.request.user,
+            # This is a dumb hack to get the right type for an Identity:
+            internetidentity__icon=f"fab fa-{search}",
+        ).distinct()
         return qs
 
 

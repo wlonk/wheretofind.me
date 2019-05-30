@@ -1,0 +1,7 @@
+{% if identity.icon_to_search %}
+<a href="{% url "by-service" %}?q={{ identity.icon_to_search }}">
+  <span class="{{ identity.icon }}"></span>
+</a>
+{% else %}
+<span class="{{ identity.icon }}"></span>
+{% endif %}
