@@ -41,7 +41,7 @@ describe('AliasForm.vue', () => {
     const data = { aliases, userInSearch };
     const mountOptions = {
       mocks,
-      data,
+      data: () => data,
       ...options,
     };
     const wrapper = shallowMount(AliasForm, mountOptions);
