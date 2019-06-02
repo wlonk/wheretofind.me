@@ -46,8 +46,8 @@
       <div class="detail-card card bg-light shadow-sm mb-3">
         {% if identity.looks_like_link %}
         <div class="card-body">
+          {% include "wheretofindme/_identity_icon.html" %}
           <a rel="me nofollow" href="{{ identity.url }}" aria-label="{{ identity.name }}">
-            <span class="{{ identity.get_icon_display }}"></span>
             {{ identity.name }}
           </a>
           {% if object.should_show_quality %}
@@ -67,7 +67,7 @@
         </div>
         {% else %}
         <div class="card-body">
-          <span class="{{ identity.get_icon_display }}"></span>
+          {% include "wheretofindme/_identity_icon.html" %}
           {{ identity.name }}: {{ identity.url }}
           {% if object.should_show_quality %}
           <div class="quality-indicator">

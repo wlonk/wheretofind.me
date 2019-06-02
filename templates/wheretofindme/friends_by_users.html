@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block "title" %}Who's on {{ service_name }} | {% endblock "title" %}
+
+{% block "main" %}
+<h1>Who's on {{ service_name }}</h1>
+
+{% if is_a_fediverse %}
+<p>
+  If you're searching for a Fediverse service, like Mastodon or Diaspora, we
+  may be missing some of your friends! We can't always tell from the
+  information provided whether a given link is on a Fediverse service.
+  Apologies!
+</p>
+{% endif %}
+
+<div>
+  {% for object in object_list %}
+  <div class="preview-card card border-info shadow-sm mb-3">
+    <div class="card-header">
+      <a href="{% url "user-profile" slug=object.username %}">
+        {{ object.primary_alias }}
+      </a>
+
+      {% include "wheretofindme/_favstar.html" with object=object %}
+    </div>
+    <div class="card-body">
+      {% for identity in object.identities %}
+      {% include "wheretofindme/_identity.html" with identity=identity  %}
+      {% endfor %}
+    </div>
+  </div>
+  {% empty %}
+  Sorry, we couldn't find anyone you follow who's on {{ service_name }}.
+  {% if service_name == "the null service" %} You know that's not a real thing,
+  right?{% endif %}
+  {% endfor %}
+</div>
+{% endblock "main" %}
