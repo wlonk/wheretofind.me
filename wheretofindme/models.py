@@ -86,6 +86,10 @@ ICONS = defaultdict(
         "www.ravelry.com": "fab fa-ravelry",
         "last.fm": "fab fa-lastfm",
         "www.last.fm": "fab fa-lastfm",
+        "telegram.org": "fab fa-telegram",
+        "www.telegram.org": "fab fa-telegram",
+        "linkedin.com": "fab fa-linkedin",
+        "www.linkedin.com": "fab fa-linkedin",
     },
 )
 
@@ -130,6 +134,8 @@ ICON_CHOICES = (
     ("fab fa-untappd", "fab fa-untappd"),  # Untappd
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
+    ("fab fa-telegram", "fab fa-telegram"),  # Telegram
+    ("fab fa-linkedin", "fab fa-linkedin"),  # LinkedIn
 )
 
 ICON_HUMAN_NAMES = {
@@ -173,6 +179,8 @@ ICON_HUMAN_NAMES = {
     "untappd": "Untappd",
     "vimeo": "Vimeo",
     "youtube": "YouTube",
+    "telegram": "Telegram",
+    "linkedin": "LinkedIn",
 }
 
 QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
