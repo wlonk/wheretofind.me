@@ -24,6 +24,8 @@
     "node-sass": "^4.11.0",
     "popper.js": "^1.14.6",
     "sass-loader": "^8.0.0",
+    "serialize-javascript": "^2.1.2",
+    "set-value": "^3.0.1",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.4",
     "vue-cookie": "^1.1.4",
