@@ -7,8 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     {% block "opengraph" %}
+	<meta property="og:title" content="WhereToFind.Me" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://wheretofind.me/" />
+	<meta property="og:image" content="{% static 'images/logo-with-bg.png' %}" />
+	<meta property="og:image:alt" content="Where to Find Me logo" />
+	<meta property="og:description" content="A calling card for the internet." />
     {% endblock "opengraph" %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo-50.png' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/logo-with-bg.png' %}"/>
     {% block "meta" %}{% endblock "meta" %}
 
     <title>{% block "title" %}{% endblock "title" %}Where to find me</title>
