@@ -11,7 +11,10 @@
         @upload-started="startUpload"
       />
     </draggable>
-    <SaveButton v-bind:allUploadsComplete="allUploadsComplete" />
+    <SaveButton
+      v-bind:allUploadsComplete="allUploadsComplete"
+      aria-label="Save current identities"
+    />
     <AddButton @create="create" aria-label="Add identity" />
   </form>
 </template>
@@ -63,6 +66,8 @@ export default {
     });
   },
   methods: {
+    // wraps Promises returned by $http methods so that the number of active uploads can be tracked; use for any request calls that the
+    // user will want to see the status of.
     startUpload(uploadRequestPromise) {
       this.runningUploads += 1;
       console.log('uploads', this.runningUploads);
@@ -72,6 +77,7 @@ export default {
       this.runningUploads -= 1;
       return passThrough;
     },
+
     reorder() {
       return (
         this.reorderIdentities()

@@ -258,6 +258,7 @@ export default {
       const url = window.Urls['api:identity-detail'](this.identity.id);
       const data = this.identity;
       const req = this.$http.put(url, data);
+      // emit the Promise created by the $http call so that the state of the upload can be tracked if so desired
       this.$emit('upload-started', req);
       return req;
     },
