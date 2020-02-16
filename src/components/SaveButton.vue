@@ -59,18 +59,17 @@ export default {
   margin-left: 5px;
 }
 
-/* this makes double-extra-sure that Either the spinner or the checkmark is shown - Vue was rendering both briefly on my machine during the transition */
-.inline-status-display:last-of-type:not(:first-of-type) {
-  display: none;
-}
-
 .spin-quick-endless {
-  animation: spin 1s infinite linear;
+  animation: spin 0.75s infinite linear;
   /* TODO: prefixed versions? */
 }
 
 .spin-enter-active {
-  animation: spin 0.5s linear;
+  animation: spin 0.75s ease-out;
+}
+
+.spin-leave-active {
+  display: none;
 }
 
 @keyframes spin {
