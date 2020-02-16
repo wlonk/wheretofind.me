@@ -3,6 +3,7 @@
     <button
       @click="showSaveAnimation"
       class="btn add-identity btn-outline-primary float-left"
+      v-bind:disabled="!allUploadsComplete"
     >
       Save
       <i
