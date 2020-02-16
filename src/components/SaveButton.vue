@@ -66,6 +66,7 @@ export default {
 
 .spin-quick-endless {
   animation: spin 1s infinite linear;
+  /* TODO: prefixed versions? */
 }
 
 .spin-enter-active {

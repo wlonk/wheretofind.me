@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     // wraps Promises returned by $http methods so that the number of active uploads can be tracked; use for any request calls that the
-    // user will want to see the status of.
+    // user will want to see the status of by calling this.startUpload(this.$http.post/get/delete(...))
     startUpload(uploadRequestPromise) {
       this.runningUploads += 1;
       console.log('uploads', this.runningUploads);
