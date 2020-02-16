@@ -8,8 +8,10 @@
         :index="index"
         :disabled="identity.disabled"
         @destroy="destroy"
+        @upload-started="startUpload"
       />
     </draggable>
+    <SaveButton v-bind:allUploadsComplete="allUploadsComplete" />
     <AddButton @create="create" aria-label="Add identity" />
   </form>
 </template>
@@ -17,6 +19,7 @@
 <script>
 import Identity from '@/components/Identity.vue';
 import AddButton from '@/components/AddButton.vue';
+import SaveButton from '@/components/SaveButton.vue';
 import draggable from 'vuedraggable';
 
 export default {
@@ -25,6 +28,7 @@ export default {
     Identity,
     AddButton,
     draggable,
+    SaveButton,
   },
   props: {
     draggableOptions: {
@@ -43,7 +47,13 @@ export default {
   data() {
     return {
       identities: [],
+      runningUploads: 0,
     };
+  },
+  computed: {
+    allUploadsComplete() {
+      return this.runningUploads === 0;
+    },
   },
   created() {
     // TODO: this approach has a flash as the original DOM elements are
@@ -53,6 +63,15 @@ export default {
     });
   },
   methods: {
+    startUpload(uploadRequestPromise) {
+      this.runningUploads += 1;
+      console.log('uploads', this.runningUploads);
+      return uploadRequestPromise.then(this.finishUpload);
+    },
+    finishUpload(passThrough) {
+      this.runningUploads -= 1;
+      return passThrough;
+    },
     reorder() {
       return (
         this.reorderIdentities()
@@ -97,8 +116,7 @@ export default {
     reorderIdentities() {
       const url = window.Urls['api:identity-reorder']();
       const data = this.identities.map(i => i.id);
-
-      return this.$http.post(url, data);
+      return this.startUpload(this.$http.post(url, data));
     },
     createNewIdentity() {
       const url = window.Urls['api:identity-list']();
@@ -106,15 +124,16 @@ export default {
         name: '',
         url: '',
       };
-      return this.$http.post(url, data);
+      return this.startUpload(this.$http.post(url, data));
     },
     retrieveIdentities() {
       const url = window.Urls['api:identity-list']();
+
       return this.$http.get(url);
     },
     destroyIdentity(identity) {
       const url = window.Urls['api:identity-detail'](identity.id);
-      return this.$http.delete(url);
+      return this.startUpload(this.$http.delete(url));
     },
   },
 };
