@@ -257,7 +257,9 @@ export default {
     update() {
       const url = window.Urls['api:identity-detail'](this.identity.id);
       const data = this.identity;
-      return this.$http.put(url, data);
+      const req = this.$http.put(url, data);
+      this.$emit('upload-started', req);
+      return req;
     },
     destroy() {
       // TODO flash "deleting" div.
