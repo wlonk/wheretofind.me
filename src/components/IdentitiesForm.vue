@@ -70,7 +70,6 @@ export default {
     // user will want to see the status of by calling this.startUpload(this.$http.post/get/delete(...))
     startUpload(uploadRequestPromise) {
       this.runningUploads += 1;
-      console.log('uploads', this.runningUploads);
       return uploadRequestPromise.then(this.finishUpload);
     },
     finishUpload(passThrough) {

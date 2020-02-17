@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import IdentitiesForm from '@/components/IdentitiesForm.vue';
+import Identity from '@/components/Identity.vue';
 import MockUrls from '../mockUrls';
 
 jest.mock('axios');
@@ -108,20 +109,26 @@ describe('IdentitiesForm.vue', () => {
   test('runningUploads count is properly incremented and decremented', async () => {
     const { wrapper, data } = setup();
     wrapper.setData(data);
+    await wrapper.vm.$nextTick(); // so that the child Identity components are created
     expect(wrapper.vm.allUploadsComplete).toBe(true);
     expect(wrapper.vm.runningUploads).toBe(0);
-    const uploadOne = wrapper.vm.create();
+    const createReq = wrapper.vm.create();
     expect(wrapper.vm.allUploadsComplete).toBe(false);
     expect(wrapper.vm.runningUploads).toBe(1);
-    const uploadTwo = wrapper.vm.destroy(data.identities[0]);
+    const destroyReq = wrapper.vm.destroy(data.identities[0]);
     expect(wrapper.vm.allUploadsComplete).toBe(false);
     expect(wrapper.vm.runningUploads).toBe(2);
-    const uploadThree = wrapper.vm.reorder();
+    const reorderReq = wrapper.vm.reorder();
     expect(wrapper.vm.allUploadsComplete).toBe(false);
     expect(wrapper.vm.runningUploads).toBe(3);
-    await uploadThree;
-    await uploadTwo;
-    await uploadOne;
+    const updateReq = Promise.resolve('~ update request response ~');
+    wrapper.find(Identity).vm.$emit('upload-started', updateReq);
+    expect(wrapper.vm.allUploadsComplete).toBe(false);
+    expect(wrapper.vm.runningUploads).toBe(4);
+    await createReq;
+    await destroyReq;
+    await reorderReq;
+    await updateReq;
     expect(wrapper.vm.allUploadsComplete).toBe(true);
     expect(wrapper.vm.runningUploads).toBe(0);
   });

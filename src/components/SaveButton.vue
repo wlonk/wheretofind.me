@@ -1,20 +1,18 @@
 <template>
-  <span>
-    <button
-      @click="showSaveAnimation"
-      class="btn btn-outline-primary float-left"
-      v-bind:disabled="!allUploadsComplete"
-    >
-      Save
-      <i
-        v-if="spinning"
-        class="fas fa-spinner inline-status-display spinning"
-      ></i>
-      <transition name="spin">
-        <i v-if="!spinning" class="fas fa-check inline-status-display"></i>
-      </transition>
-    </button>
-  </span>
+  <button
+    @click="showSaveAnimation"
+    class="btn btn-outline-primary float-left"
+    v-bind:disabled="!allUploadsComplete"
+  >
+    Save
+    <i
+      v-if="spinning"
+      class="fas fa-spinner inline-status-display spinning"
+    ></i>
+    <transition name="spin">
+      <i v-if="!spinning" class="fas fa-check inline-status-display"></i>
+    </transition>
+  </button>
 </template>
 
 <script>
