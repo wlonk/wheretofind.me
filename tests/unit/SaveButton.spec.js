@@ -9,13 +9,13 @@ describe('SaveButton.vue', () => {
   test('Goes into spinnning mode after click and stops after 400ms (unless already spinning because !allUploadsComplete)', () => {
     jest.useFakeTimers();
     wrapper.find('button').trigger('click');
-    expect(wrapper.vm.justBeenClicked).toBe(true);
+    expect(wrapper.vm.animatingDueToClick).toBe(true);
     expect(wrapper.vm.spinning).toBe(true);
     jest.advanceTimersByTime(401);
-    expect(wrapper.vm.justBeenClicked).toBe(false);
+    expect(wrapper.vm.animatingDueToClick).toBe(false);
     wrapper.setProps({ allUploadsComplete: false });
     wrapper.find('button').trigger('click');
-    expect(wrapper.vm.justBeenClicked).toBe(false);
+    expect(wrapper.vm.animatingDueToClick).toBe(false);
   });
   test('Goes into spinning mode when !allUploadsComplete', () => {
     wrapper.setProps({ allUploadsComplete: false });

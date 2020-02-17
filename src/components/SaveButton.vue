@@ -2,32 +2,26 @@
   <span>
     <button
       @click="showSaveAnimation"
-      class="btn add-identity btn-outline-primary float-left"
+      class="btn btn-outline-primary float-left"
       v-bind:disabled="!allUploadsComplete"
     >
       Save
       <i
-        key="checkmark"
         v-if="spinning"
-        class="fas fa-spinner inline-status-display spin-quick-endless"
+        class="fas fa-spinner inline-status-display spinning"
       ></i>
       <transition name="spin">
-        <i
-          key="spinner"
-          v-if="!spinning"
-          class="fas fa-check inline-status-display"
-        ></i>
+        <i v-if="!spinning" class="fas fa-check inline-status-display"></i>
       </transition>
     </button>
   </span>
 </template>
 
 <script>
-// if something is saving or the button's just been clicked, display the spinner; otherwise, display the checkmark
 export default {
   data() {
     return {
-      justBeenClicked: false,
+      animatingDueToClick: false,
     };
   },
   props: {
@@ -38,15 +32,18 @@ export default {
   },
   computed: {
     spinning() {
-      return !this.allUploadsComplete || this.justBeenClicked; //TODO: figure out if justBeenClicked is monitored accurately for this
+      // making Absolutely Sure that both of these are accessed and thus registered as dependencies for the property, despite short-circuit evaluation
+      const a = !this.allUploadsComplete;
+      const b = this.animatingDueToClick;
+      return a || b;
     },
   },
   methods: {
     showSaveAnimation() {
       if (this.allUploadsComplete) {
-        this.justBeenClicked = true;
+        this.animatingDueToClick = true;
         setTimeout(() => {
-          this.justBeenClicked = false;
+          this.animatingDueToClick = false;
         }, 400);
       }
     },
@@ -59,15 +56,14 @@ export default {
   margin-left: 5px;
 }
 
-.spin-quick-endless {
+.spinning {
   animation: spin 0.75s infinite linear;
-  /* TODO: prefixed versions? */
 }
 
+/* used by the "spin" transition element */
 .spin-enter-active {
   animation: spin 0.75s ease-out;
 }
-
 .spin-leave-active {
   display: none;
 }
