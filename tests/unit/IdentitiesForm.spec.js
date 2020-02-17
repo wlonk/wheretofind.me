@@ -109,6 +109,7 @@ describe('IdentitiesForm.vue', () => {
     const { wrapper, data } = setup();
     wrapper.setData(data);
     expect(wrapper.vm.allUploadsComplete).toBe(true);
+    expect(wrapper.vm.runningUploads).toBe(0);
     const uploadOne = wrapper.vm.create();
     expect(wrapper.vm.allUploadsComplete).toBe(false);
     expect(wrapper.vm.runningUploads).toBe(1);

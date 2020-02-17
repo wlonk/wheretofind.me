@@ -13,7 +13,9 @@ describe('SaveButton.vue', () => {
     expect(wrapper.vm.spinning).toBe(true);
     jest.advanceTimersByTime(401);
     expect(wrapper.vm.animatingDueToClick).toBe(false);
+    expect(wrapper.vm.spinning).toBe(false);
     wrapper.setProps({ allUploadsComplete: false });
+    expect(wrapper.vm.spinning).toBe(true);
     wrapper.find('button').trigger('click');
     expect(wrapper.vm.animatingDueToClick).toBe(false);
   });
