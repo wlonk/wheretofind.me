@@ -104,4 +104,24 @@ describe('IdentitiesForm.vue', () => {
 
     expect($http.get).toBeCalledWith('/api/identities/');
   });
+
+  test('runningUploads count is properly incremented and decremented', async () => {
+    const { wrapper, data } = setup();
+    wrapper.setData(data);
+    expect(wrapper.vm.allUploadsComplete).toBe(true);
+    const uploadOne = wrapper.vm.create();
+    expect(wrapper.vm.allUploadsComplete).toBe(false);
+    expect(wrapper.vm.runningUploads).toBe(1);
+    const uploadTwo = wrapper.vm.destroy(data.identities[0]);
+    expect(wrapper.vm.allUploadsComplete).toBe(false);
+    expect(wrapper.vm.runningUploads).toBe(2);
+    const uploadThree = wrapper.vm.reorder();
+    expect(wrapper.vm.allUploadsComplete).toBe(false);
+    expect(wrapper.vm.runningUploads).toBe(3);
+    await uploadThree;
+    await uploadTwo;
+    await uploadOne;
+    expect(wrapper.vm.allUploadsComplete).toBe(true);
+    expect(wrapper.vm.runningUploads).toBe(0);
+  });
 });

@@ -5,10 +5,11 @@ import MockUrls from '../mockUrls';
 window.Urls = MockUrls;
 
 describe('Identity.vue', () => {
+  const putRequestPromise = Promise.resolve('put request result');
   const setup = options => {
     const $emit = jest.fn();
     const $http = {
-      put: jest.fn(),
+      put: jest.fn().mockReturnValue(putRequestPromise),
     };
     const mocks = {
       $emit,
@@ -41,10 +42,11 @@ describe('Identity.vue', () => {
   };
 
   test('update', () => {
-    const { wrapper, $http, identity } = setup();
+    const { wrapper, $http, identity, $emit } = setup();
     wrapper.vm.update();
 
     expect($http.put).toBeCalledWith('/api/identities/1/', identity);
+    expect($emit).toBeCalledWith('upload-started', putRequestPromise);
   });
 
   test('destroy', () => {
