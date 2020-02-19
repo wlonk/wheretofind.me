@@ -1,14 +1,18 @@
 <template>
   <form @submit.prevent class="clearfix">
     <draggable v-model="identities" :options="draggableOptions" @end="reorder">
-      <Identity
-        v-for="(identity, index) in identities"
-        :key="identity.id"
-        :identity="identity"
-        :index="index"
-        :disabled="identity.disabled"
-        @destroy="destroy"
-      />
+      <transition-group name="rearrange">
+        <Identity
+          v-for="(identity, index) in identities"
+          :key="identity.id"
+          :identity="identity"
+          :index="index"
+          :disabled="identity.disabled"
+          @destroy="destroy"
+          @moved="identityMoved"
+          ref="identityEls"
+        />
+      </transition-group>
     </draggable>
     <AddButton @create="create" aria-label="Add identity" />
   </form>
@@ -53,6 +57,48 @@ export default {
     });
   },
   methods: {
+    identityMoved(e) {
+      let newIndex;
+      if (e.direction === 'up' && e.index > 0) {
+        newIndex = e.index - 1;
+      } else if (
+        e.direction === 'down' &&
+        e.index < this.identities.length - 1
+      ) {
+        newIndex = e.index + 1;
+      } else {
+        return;
+      }
+      const movingIdentity = this.identities[e.index];
+      this.identities.splice(e.index, 1);
+      this.identities.splice(newIndex, 0, movingIdentity);
+
+      let transitionEnded = false;
+      const keepElementInView = () => {
+        if (e.el.getBoundingClientRect().bottom > window.innerHeight) {
+          e.el.scrollIntoView(false);
+        } else if (e.el.getBoundingClientRect().top < 0) {
+          e.el.scrollIntoView(true);
+        }
+        if (!transitionEnded) {
+          window.requestAnimationFrame(keepElementInView);
+        }
+      };
+
+      e.el.addEventListener('transitionstart', keepElementInView);
+      const cleanUpAfterTransition = () => {
+        transitionEnded = true;
+        e.el.removeEventListener('transitionstart', keepElementInView);
+        e.el.removeEventListener('transitionend', cleanUpAfterTransition);
+      };
+      e.el.addEventListener('transitionend', cleanUpAfterTransition);
+
+      this.$nextTick(() => {
+        e.handle.focus();
+      });
+
+      this.reorder();
+    },
     reorder() {
       return (
         this.reorderIdentities()
@@ -123,5 +169,8 @@ export default {
 <style scoped>
 .sortable-drag {
   opacity: 1;
+}
+.rearrange-move {
+  transition: transform 0.5s;
 }
 </style>
