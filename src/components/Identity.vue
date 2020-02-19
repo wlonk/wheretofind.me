@@ -1,6 +1,12 @@
 <template>
-  <div class="identity card bg-light shadow-sm w-100 mb-3">
-    <div class="card-body drag-indicator">
+  <div
+    class="identity card bg-light shadow-sm w-100 mb-3"
+    style="display: flex;flex-direction: row;"
+  >
+    <div
+      class="card-body drag-indicator"
+      style="display: flex;flex-direction: column;"
+    >
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -168,6 +174,14 @@
         </div>
       </div>
     </div>
+    <div
+      @keydown.prevent.stop.up.down="rearrangeSelf"
+      :tabIndex="moveTabIndex"
+      style="display: flex; align-self: center; margin-right: 15px;"
+      ref="rearrangeHandle"
+    >
+      <i class="fas fa-arrows-alt fa-lg"></i>
+    </div>
   </div>
 </template>
 
@@ -219,6 +233,9 @@ export default {
     destroyTabIndex() {
       return this.index * 10 + 7;
     },
+    moveTabIndex() {
+      return this.index * 10 + 8;
+    },
     qualityPreview() {
       // TODO: This shouldn't involve explicit use of the /static/ directory.
       switch (this.identity.quality) {
@@ -233,6 +250,23 @@ export default {
     },
   },
   methods: {
+    rearrangeSelf(e) {
+      if (e.keyCode === 38) {
+        this.$emit('moved', {
+          index: this.index,
+          direction: 'up',
+          handle: this.$refs.rearrangeHandle,
+          el: this.$el,
+        });
+      } else if (e.keyCode === 40) {
+        this.$emit('moved', {
+          index: this.index,
+          direction: 'down',
+          handle: this.$refs.rearrangeHandle,
+          el: this.$el,
+        });
+      }
+    },
     clickQuality() {
       this.identity.quality = (this.identity.quality + 1) % 3;
       this.update();
