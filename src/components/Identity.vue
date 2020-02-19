@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="identity card bg-light shadow-sm w-100 mb-3"
-    style="display: flex;flex-direction: row;"
-  >
-    <div
-      class="card-body drag-indicator"
-      style="display: flex;flex-direction: column;"
-    >
+  <div class="identity card bg-light shadow-sm w-100 mb-3 flex-row">
+    <div class="card-body drag-indicator flex-column">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -177,7 +171,7 @@
     <div
       @keydown.prevent.stop.up.down="rearrangeSelf"
       :tabIndex="moveTabIndex"
-      style="display: flex; align-self: center; margin-right: 15px;"
+      class="rearrange-handle"
       ref="rearrangeHandle"
     >
       <i class="fas fa-arrows-alt fa-lg"></i>
@@ -251,20 +245,17 @@ export default {
   },
   methods: {
     rearrangeSelf(e) {
+      const eventObject = {
+        index: this.index,
+        handle: this.$refs.rearrangeHandle, // needed so that the form can keep the handle in focus after rearranging things
+        el: this.$el, // needed so that the form can monitor whether this identity's html element is still in view or not
+      };
       if (e.keyCode === 38) {
-        this.$emit('moved', {
-          index: this.index,
-          direction: 'up',
-          handle: this.$refs.rearrangeHandle,
-          el: this.$el,
-        });
+        eventObject.direction = 'up';
+        this.$emit('moved', eventObject);
       } else if (e.keyCode === 40) {
-        this.$emit('moved', {
-          index: this.index,
-          direction: 'down',
-          handle: this.$refs.rearrangeHandle,
-          el: this.$el,
-        });
+        eventObject.direction = 'down';
+        this.$emit('moved', eventObject);
       }
     },
     clickQuality() {
@@ -317,5 +308,11 @@ export default {
 .quality-preview-wrapper {
   cursor: pointer;
   margin-right: -0.25rem;
+}
+.rearrange-handle {
+  display: flex;
+  align-self: center;
+  margin-right: 1.25rem;
+  cursor: grab;
 }
 </style>
