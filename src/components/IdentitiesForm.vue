@@ -73,7 +73,10 @@ export default {
       this.identities.splice(e.index, 1);
       this.identities.splice(newIndex, 0, movingIdentity);
 
+      // for the duration of the transition as identities are moved around, this code calls requestAnimationFrame and
+      // changes the window's scroll position per frame to make sure the moved identity stays in view.
       let transitionEnded = false;
+      // this function does all the work and is added as a transitionstart event listener:
       const keepElementInView = () => {
         if (e.el.getBoundingClientRect().bottom > window.innerHeight) {
           e.el.scrollIntoView(false);
@@ -84,20 +87,22 @@ export default {
           window.requestAnimationFrame(keepElementInView);
         }
       };
-
-      e.el.addEventListener('transitionstart', keepElementInView);
+      // this function removes the event listeners once they've outlived their usefulness and is added as a transitionend listener:
       const cleanUpAfterTransition = () => {
         transitionEnded = true;
         e.el.removeEventListener('transitionstart', keepElementInView);
         e.el.removeEventListener('transitionend', cleanUpAfterTransition);
       };
+      // and this is where the listeners are actually added:
+      e.el.addEventListener('transitionstart', keepElementInView);
       e.el.addEventListener('transitionend', cleanUpAfterTransition);
 
+      // this makes sure that the handle that was just used to move elements stays in focus:
       this.$nextTick(() => {
         e.handle.focus();
       });
 
-      this.reorder();
+      this.reorder(); // save changes
     },
     reorder() {
       return (
