@@ -8,8 +8,13 @@
         :index="index"
         :disabled="identity.disabled"
         @destroy="destroy"
+        @request-started="trackRequest"
       />
     </draggable>
+    <SaveButton
+      v-bind:allRequestsComplete="allRequestsComplete"
+      aria-label="Save current identities"
+    />
     <AddButton @create="create" aria-label="Add identity" />
   </form>
 </template>
@@ -17,6 +22,7 @@
 <script>
 import Identity from '@/components/Identity.vue';
 import AddButton from '@/components/AddButton.vue';
+import SaveButton from '@/components/SaveButton.vue';
 import draggable from 'vuedraggable';
 
 export default {
@@ -25,6 +31,7 @@ export default {
     Identity,
     AddButton,
     draggable,
+    SaveButton,
   },
   props: {
     draggableOptions: {
@@ -43,7 +50,13 @@ export default {
   data() {
     return {
       identities: [],
+      runningRequests: 0,
     };
+  },
+  computed: {
+    allRequestsComplete() {
+      return this.runningRequests === 0;
+    },
   },
   created() {
     // TODO: this approach has a flash as the original DOM elements are
@@ -53,6 +66,17 @@ export default {
     });
   },
   methods: {
+    // wraps Promises returned by $http methods so that the number of active requests can be tracked; use for any request calls that the
+    // user will want to see the status of by calling this.trackRequest(this.$http.post/get/delete(...))
+    trackRequest(requestRequestPromise) {
+      this.runningRequests += 1;
+      return requestRequestPromise.then(this.requestFinished);
+    },
+    requestFinished(passThrough) {
+      this.runningRequests -= 1;
+      return passThrough;
+    },
+
     reorder() {
       return (
         this.reorderIdentities()
@@ -61,7 +85,11 @@ export default {
       );
     },
     create() {
-      const newId = Math.max.apply(Math, this.identities.map(i => i.id)) + 1;
+      const newId =
+        Math.max.apply(
+          Math,
+          this.identities.map(i => i.id),
+        ) + 1;
       const newIdentity = {
         id: newId,
         name: '',
@@ -97,8 +125,7 @@ export default {
     reorderIdentities() {
       const url = window.Urls['api:identity-reorder']();
       const data = this.identities.map(i => i.id);
-
-      return this.$http.post(url, data);
+      return this.trackRequest(this.$http.post(url, data));
     },
     createNewIdentity() {
       const url = window.Urls['api:identity-list']();
@@ -106,15 +133,16 @@ export default {
         name: '',
         url: '',
       };
-      return this.$http.post(url, data);
+      return this.trackRequest(this.$http.post(url, data));
     },
     retrieveIdentities() {
       const url = window.Urls['api:identity-list']();
+
       return this.$http.get(url);
     },
     destroyIdentity(identity) {
       const url = window.Urls['api:identity-detail'](identity.id);
-      return this.$http.delete(url);
+      return this.trackRequest(this.$http.delete(url));
     },
   },
 };
