@@ -35,7 +35,6 @@ class UserProfileView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["here"] = self.request.build_absolute_uri()
         qs = context["object"].identities()
         if "tag" in self.request.GET:
             qs = qs.filter(tag=self.request.GET["tag"])
