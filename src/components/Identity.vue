@@ -1,5 +1,5 @@
 <template>
-  <div class="identity card bg-light shadow-sm w-100 mb-3 flex-row">
+  <div class="identity card bg-light shadow-sm w-100 mb-3 flex-sm-row">
     <div class="card-body drag-indicator flex-column">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
@@ -313,6 +313,7 @@ export default {
   display: flex;
   align-self: center;
   margin-right: 1.25rem;
+  margin-bottom: 1.25rem;
   cursor: grab;
 }
 </style>
