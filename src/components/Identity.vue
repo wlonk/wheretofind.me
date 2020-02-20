@@ -1,6 +1,16 @@
 <template>
-  <div class="identity card bg-light shadow-sm w-100 mb-3 flex-sm-row">
-    <div class="card-body drag-indicator flex-column">
+  <div
+    class="identity card bg-light shadow-sm w-100 mb-3 flex-sm-row"
+    style="justify-content:space-between;"
+  >
+    <div class="card-control-icon edit-button">
+      <i
+        class="fas"
+        :class="completelyCollapsed ? 'fa-pencil-alt' : 'fa-caret-square-up'"
+        @click="completelyCollapsed = !completelyCollapsed"
+      ></i>
+    </div>
+    <div v-if="!completelyCollapsed" class="card-body flex-column">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -168,10 +178,16 @@
         </div>
       </div>
     </div>
+    <div style="display:flex;align-self:center;align-items:center;" v-else>
+      <div class="card-control-icon" v-if="completelyCollapsed">
+        <i :class="identity.icon"></i>
+      </div>
+      {{ identity.name }}
+    </div>
     <div
       @keydown.prevent.stop.up.down="rearrangeSelf"
       :tabIndex="moveTabIndex"
-      class="rearrange-handle"
+      class="card-control-icon rearrange-handle"
       ref="rearrangeHandle"
     >
       <i class="fas fa-arrows-alt fa-lg"></i>
@@ -188,6 +204,7 @@ export default {
   data() {
     return {
       expandExtras: false,
+      completelyCollapsed: !this.identity.new,
     };
   },
   computed: {
@@ -293,9 +310,6 @@ export default {
 </script>
 
 <style scoped>
-.drag-indicator {
-  cursor: grab;
-}
 .identity {
   background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
 }
@@ -309,11 +323,20 @@ export default {
   cursor: pointer;
   margin-right: -0.25rem;
 }
-.rearrange-handle {
+@media screen and (max-width: 576px) {
+  .card-control-icon {
+    align-self: center;
+  }
+}
+.card-control-icon {
   display: flex;
-  align-self: center;
-  margin-right: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding: 1.25rem 0.75rem 1.25rem 0.75rem;
+  height: fit-content;
+}
+.rearrange-handle {
   cursor: grab;
+}
+.edit-button {
+  cursor: pointer;
 }
 </style>

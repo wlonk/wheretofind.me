@@ -131,6 +131,7 @@ export default {
         quality: 2,
         icon: 'fas fa-link',
         disabled: true,
+        new: true,
       };
       this.identities.push(newIdentity);
       return (
