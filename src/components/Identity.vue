@@ -1,16 +1,20 @@
 <template>
   <div
-    class="identity card bg-light shadow-sm w-100 mb-3 flex-sm-row"
+    class="identity card bg-light shadow-sm w-100 mb-3"
+    :class="editing ? 'flex-row' : 'flex-sm-row'"
     style="justify-content:space-between;"
   >
-    <div class="card-control-icon edit-button">
+    <button
+      class="btn btn-link edit-button"
+      :tabindex="editButtonTabIndex"
+      @click="editing = !editing"
+    >
       <i
         class="fas"
-        :class="completelyCollapsed ? 'fa-pencil-alt' : 'fa-caret-square-up'"
-        @click="completelyCollapsed = !completelyCollapsed"
+        :class="editing ? 'fa-pencil-alt' : 'fa-caret-square-up'"
       ></i>
-    </div>
-    <div v-if="!completelyCollapsed" class="card-body flex-column">
+    </button>
+    <div v-if="!editing" class="card-body flex-column">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -179,9 +183,6 @@
       </div>
     </div>
     <div style="display:flex;align-self:center;align-items:center;" v-else>
-      <div class="card-control-icon" v-if="completelyCollapsed">
-        <i :class="identity.icon"></i>
-      </div>
       {{ identity.name }}
     </div>
     <div
@@ -204,7 +205,7 @@ export default {
   data() {
     return {
       expandExtras: false,
-      completelyCollapsed: !this.identity.new,
+      editing: !this.identity.new,
     };
   },
   computed: {
@@ -223,29 +224,32 @@ export default {
     iconLabel() {
       return `icon-${this.identity.id}`;
     },
-    nameTabIndex() {
+    editButtonTabIndex() {
       return this.index * 10 + 1;
     },
-    urlTabIndex() {
+    nameTabIndex() {
       return this.index * 10 + 2;
     },
-    expandTabIndex() {
+    urlTabIndex() {
       return this.index * 10 + 3;
     },
-    tagTabIndex() {
+    expandTabIndex() {
       return this.index * 10 + 4;
     },
-    qualityTabIndex() {
+    tagTabIndex() {
       return this.index * 10 + 5;
     },
-    iconTabIndex() {
+    qualityTabIndex() {
       return this.index * 10 + 6;
     },
-    destroyTabIndex() {
+    iconTabIndex() {
       return this.index * 10 + 7;
     },
-    moveTabIndex() {
+    destroyTabIndex() {
       return this.index * 10 + 8;
+    },
+    moveTabIndex() {
+      return this.index * 10 + 9;
     },
     qualityPreview() {
       // TODO: This shouldn't involve explicit use of the /static/ directory.
@@ -323,20 +327,21 @@ export default {
   cursor: pointer;
   margin-right: -0.25rem;
 }
-@media screen and (max-width: 576px) {
-  .card-control-icon {
-    align-self: center;
-  }
-}
 .card-control-icon {
   display: flex;
   padding: 1.25rem 0.75rem 1.25rem 0.75rem;
   height: fit-content;
+  align-self: center;
+}
+@media screen and (max-width: 576px) {
+  .card-control-icon {
+    padding: 0.75rem;
+  }
 }
 .rearrange-handle {
   cursor: grab;
 }
-.edit-button {
-  cursor: pointer;
+.edit-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
 }
 </style>
