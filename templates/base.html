@@ -9,7 +9,7 @@
     {% block "opengraph" %}
 	<meta property="og:title" content="WhereToFind.Me" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://wheretofind.me/" />
+	<meta property="og:url" content="{{request.build_absolute_uri}}" />
 	<meta property="og:image" content="{% static 'images/logo-with-bg.png' %}" />
 	<meta property="og:image:alt" content="Where to Find Me logo" />
 	<meta property="og:description" content="A calling card for the internet." />
