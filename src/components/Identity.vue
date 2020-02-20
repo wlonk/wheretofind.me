@@ -1,20 +1,21 @@
 <template>
   <div
     class="identity card bg-light shadow-sm w-100 mb-3"
-    :class="editing ? 'flex-row' : 'flex-sm-row'"
+    :class="editing ? 'flex-sm-row' : 'flex-row'"
     style="justify-content:space-between;"
   >
     <button
+      aria-label="Edit identity"
       class="btn btn-link edit-button"
       :tabindex="editButtonTabIndex"
       @click="editing = !editing"
     >
       <i
         class="fas"
-        :class="editing ? 'fa-pencil-alt' : 'fa-caret-square-up'"
+        :class="editing ? 'fa-caret-square-up' : 'fa-pencil-alt'"
       ></i>
     </button>
-    <div v-if="!editing" class="card-body flex-column">
+    <div v-if="editing" class="card-body flex-column">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -182,7 +183,7 @@
         </div>
       </div>
     </div>
-    <div style="display:flex;align-self:center;align-items:center;" v-else>
+    <div style="display:flex;align-self:center;" v-if="!editing">
       {{ identity.name }}
     </div>
     <div
@@ -205,7 +206,7 @@ export default {
   data() {
     return {
       expandExtras: false,
-      editing: !this.identity.new,
+      editing: this.identity.new,
     };
   },
   computed: {
