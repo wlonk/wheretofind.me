@@ -58,6 +58,7 @@ export default {
   cursor: grab;
 }
 .alias {
-  background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
+  background: url('../images/draghandle-right.png') no-repeat bottom 2px right
+    3px;
 }
 </style>

@@ -3,11 +3,8 @@
     <draggable
       v-model="identities"
       :options="draggableOptions"
-      @start="draggingInProgress = true"
-      @end="
-        draggingInProgress = false;
-        reorder();
-      "
+      @start="startDrag"
+      @end="endDrag"
     >
       <transition-group :name="!draggingInProgress ? 'rearrange' : ''">
         <Identity
@@ -74,37 +71,56 @@ export default {
     },
   },
   created() {
-    // TODO: this approach has a flash as the original DOM elements are
+    // TODO: this approach has a flash as the original DOM elements are //
     // replaced by the Vue ones.
     this.retrieveIdentities().then(resp => {
       this.identities = resp.data;
     });
   },
   methods: {
+    /* Dragging-related methods */
+    startDrag() {
+      this.draggingInProgress = true;
+    },
+    endDrag() {
+      this.draggingInProgress = false;
+      this.reorder();
+    },
     identityMoved(e) {
+      /// e: {
+      ///   direction: 'up' | 'down',
+      ///   index: number,
+      ///   el: Element,
+      /// }
       let newIndex;
-      if (e.direction === 'up' && e.index > 0) {
+      const validUp = e.direction === 'up' && e.index > 0;
+      const validDown =
+        e.direction === 'down' && e.index < this.identities.length - 1;
+      if (validUp) {
         newIndex = e.index - 1;
-      } else if (
-        e.direction === 'down' &&
-        e.index < this.identities.length - 1
-      ) {
+      } else if (validDown) {
         newIndex = e.index + 1;
       } else {
         return;
       }
+
       const movingIdentity = this.identities[e.index];
       this.identities.splice(e.index, 1);
       this.identities.splice(newIndex, 0, movingIdentity);
 
-      // for the duration of the transition as identities are moved around, this code calls requestAnimationFrame and
-      // changes the window's scroll position per frame to make sure the moved identity stays in view.
+      // For the duration of the transition as identities are moved around,
+      // this code calls requestAnimationFrame and changes the window's scroll
+      // position per frame to make sure the moved identity stays in view.
       let transitionEnded = false;
-      // this function does all the work and is added as a transitionstart event listener:
+      // this function does all the work and is added as a transitionstart
+      // event listener:
       const keepElementInView = () => {
-        if (e.el.getBoundingClientRect().bottom > window.innerHeight) {
+        const belowView =
+          e.el.getBoundingClientRect().bottom > window.innerHeight;
+        const aboveView = e.el.getBoundingClientRect().top < 0;
+        if (belowView) {
           e.el.scrollIntoView(false);
-        } else if (e.el.getBoundingClientRect().top < 0) {
+        } else if (aboveView) {
           e.el.scrollIntoView(true);
         }
         if (!transitionEnded) {
@@ -112,7 +128,8 @@ export default {
         }
       };
 
-      // this function removes the event listeners once they've outlived their usefulness and is added as a transitionend listener:
+      // This function removes the event listeners once they've outlived their
+      // usefulness and is added as a transitionend listener:
       const cleanUpAfterTransition = () => {
         transitionEnded = true;
         e.el.removeEventListener('transitionstart', keepElementInView);
@@ -122,25 +139,19 @@ export default {
       e.el.addEventListener('transitionstart', keepElementInView);
       e.el.addEventListener('transitionend', cleanUpAfterTransition);
 
-      // this makes sure that the handle that was just used to move elements stays in focus:
+      // This makes sure that the handle that was just used to move elements
+      // stays in focus:
       this.$nextTick(() => {
         e.handle.focus();
       });
 
-      this.reorder(); // save changes
+      this.reorder();
     },
 
-    // wraps Promises returned by $http methods so that the number of active requests can be tracked; use for any request calls that the
-    // user will want to see the status of by calling this.trackRequest(this.$http.post/get/delete(...))
-    trackRequest(requestRequestPromise) {
-      this.runningRequests += 1;
-      return requestRequestPromise.then(this.requestFinished);
-    },
-    requestFinished(passThrough) {
-      this.runningRequests -= 1;
-      return passThrough;
-    },
-
+    /* Event handlers
+     *
+     * These defer the actual API interaction to the API call methods.
+     */
     reorder() {
       return (
         this.reorderIdentities()
@@ -186,7 +197,20 @@ export default {
           .catch()
       );
     },
-    // API calls:
+
+    /* Wrapper helpers to track oustanding calls
+     *
+     */
+    trackRequest(requestRequestPromise) {
+      this.runningRequests += 1;
+      return requestRequestPromise.then(this.requestFinished);
+    },
+    requestFinished(passThrough) {
+      this.runningRequests -= 1;
+      return passThrough;
+    },
+
+    /* API calls: */
     reorderIdentities() {
       const url = window.Urls['api:identity-reorder']();
       const data = this.identities.map(i => i.id);
@@ -202,7 +226,6 @@ export default {
     },
     retrieveIdentities() {
       const url = window.Urls['api:identity-list']();
-
       return this.$http.get(url);
     },
     destroyIdentity(identity) {

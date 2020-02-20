@@ -1,21 +1,6 @@
 <template>
-  <div
-    class="identity card bg-light shadow-sm w-100 mb-3"
-    :class="editing ? 'flex-sm-row' : 'flex-row'"
-    style="justify-content:space-between;"
-  >
-    <button
-      aria-label="Edit identity"
-      class="btn btn-link edit-button"
-      :tabindex="editButtonTabIndex"
-      @click="editing = !editing"
-    >
-      <i
-        class="fas"
-        :class="editing ? 'fa-caret-square-up' : 'fa-pencil-alt'"
-      ></i>
-    </button>
-    <div v-if="editing" class="card-body flex-column">
+  <div class="identity card bg-light shadow-sm w-100 mb-3">
+    <div class="card-body">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -184,20 +169,11 @@
       </div>
     </div>
     <div
-      style="display:flex;align-self:center;align-items:center;"
-      v-if="!editing"
-    >
-      <i style="margin-right:10px;" class="fa-sm" :class="identity.icon"></i>
-      {{ identity.name }}
-    </div>
-    <div
       @keydown.prevent.stop.up.down="rearrangeSelf"
       :tabIndex="moveTabIndex"
-      class="card-control-icon rearrange-handle"
+      class="card-control-icon"
       ref="rearrangeHandle"
-    >
-      <i class="fas fa-arrows-alt fa-lg"></i>
-    </div>
+    ></div>
   </div>
 </template>
 
@@ -210,7 +186,6 @@ export default {
   data() {
     return {
       expandExtras: false,
-      editing: this.identity.new,
     };
   },
   computed: {
@@ -273,8 +248,12 @@ export default {
     rearrangeSelf(e) {
       const eventObject = {
         index: this.index,
-        handle: this.$refs.rearrangeHandle, // needed so that the form can keep the handle in focus after rearranging things
-        el: this.$el, // needed so that the form can monitor whether this identity's html element is still in view or not
+        // Needed so that the form can keep the handle in focus after
+        // rearranging things:
+        handle: this.$refs.rearrangeHandle,
+        // Needed so that the form can monitor whether this identity's html
+        // element is still in view or not:
+        el: this.$el,
       };
       if (e.keyCode === 38) {
         eventObject.direction = 'up';
@@ -323,7 +302,8 @@ export default {
 
 <style scoped>
 .identity {
-  background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
+  background: url('../images/draghandle-right.png') no-repeat bottom 2px right
+    3px;
 }
 .expand-identity:focus {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
@@ -336,18 +316,17 @@ export default {
   margin-right: -0.25rem;
 }
 .card-control-icon {
-  display: flex;
-  padding: 1.25rem 0.75rem 1.25rem 0.75rem;
-  height: fit-content;
-  align-self: center;
+  bottom: 0;
+  cursor: grab;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  width: 30px;
 }
 @media screen and (max-width: 576px) {
   .card-control-icon {
     padding: 0.75rem;
   }
-}
-.rearrange-handle {
-  cursor: grab;
 }
 .edit-button:focus {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
