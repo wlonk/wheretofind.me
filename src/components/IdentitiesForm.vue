@@ -1,7 +1,15 @@
 <template>
   <form @submit.prevent class="clearfix">
-    <draggable v-model="identities" :options="draggableOptions" @end="reorder">
-      <transition-group name="rearrange">
+    <draggable
+      v-model="identities"
+      :options="draggableOptions"
+      @start="draggingInProgress = true"
+      @end="
+        draggingInProgress = false;
+        reorder();
+      "
+    >
+      <transition-group :name="!draggingInProgress ? 'rearrange' : ''">
         <Identity
           v-for="(identity, index) in identities"
           :key="identity.id"
@@ -10,7 +18,6 @@
           :disabled="identity.disabled"
           @destroy="destroy"
           @moved="identityMoved"
-          ref="identityEls"
         />
       </transition-group>
     </draggable>
@@ -36,10 +43,13 @@ export default {
       default() {
         return {
           items: '.identity',
+          handle: '.rearrange-handle',
           axis: 'y',
           containment: 'parent',
           filter: 'input',
           preventOnFilter: false,
+          animation: 300,
+          ghostClass: 'identity-placeholder',
         };
       },
     },
@@ -47,6 +57,7 @@ export default {
   data() {
     return {
       identities: [],
+      draggingInProgress: false,
     };
   },
   created() {
@@ -176,6 +187,6 @@ export default {
   opacity: 1;
 }
 .rearrange-move {
-  transition: transform 0.5s;
+  transition: transform 0.3s;
 }
 </style>
