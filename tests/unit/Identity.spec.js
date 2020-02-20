@@ -93,27 +93,28 @@ describe('Identity.vue', () => {
   });
 
   describe('qualityPreview', () => {
-    test.each([[0, 'low'], [1, 'mid'], [2, 'high']])(
-      'at %i',
-      (quality, expected) => {
-        const { wrapper } = setup({
-          propsData: {
-            identity: {
-              id: 1,
-              name: 'Test',
-              url: 'https://example.com/',
-              tag: '',
-              quality,
-              icon: 'fas fa-link',
-            },
-            disabled: false,
+    test.each([
+      [0, 'low'],
+      [1, 'mid'],
+      [2, 'high'],
+    ])('at %i', (quality, expected) => {
+      const { wrapper } = setup({
+        propsData: {
+          identity: {
+            id: 1,
+            name: 'Test',
+            url: 'https://example.com/',
+            tag: '',
+            quality,
+            icon: 'fas fa-link',
           },
-        });
-        const qualitySrc = wrapper.vm.qualityPreview;
+          disabled: false,
+        },
+      });
+      const qualitySrc = wrapper.vm.qualityPreview;
 
-        expect(qualitySrc).toEqual([`/static/images/quality-${expected}.svg`]);
-      },
-    );
+      expect(qualitySrc).toEqual([`/static/images/quality-${expected}.svg`]);
+    });
     test('at else', () => {
       const { wrapper } = setup({
         propsData: {
