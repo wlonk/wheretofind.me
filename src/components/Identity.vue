@@ -183,7 +183,11 @@
         </div>
       </div>
     </div>
-    <div style="display:flex;align-self:center;" v-if="!editing">
+    <div
+      style="display:flex;align-self:center;align-items:center;"
+      v-if="!editing"
+    >
+      <i style="margin-right:10px;" class="fa-sm" :class="identity.icon"></i>
       {{ identity.name }}
     </div>
     <div
