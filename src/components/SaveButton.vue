@@ -2,7 +2,7 @@
   <button
     @click="showSaveAnimation"
     class="btn btn-outline-primary float-left"
-    v-bind:disabled="!allUploadsComplete"
+    v-bind:disabled="!allRequestsComplete"
   >
     Save
     <i
@@ -23,7 +23,7 @@ export default {
     };
   },
   props: {
-    allUploadsComplete: {
+    allRequestsComplete: {
       type: Boolean,
       required: true,
     },
@@ -31,14 +31,14 @@ export default {
   computed: {
     spinning() {
       // making Absolutely Sure that both of these are accessed and thus registered as dependencies for the property, despite short-circuit evaluation
-      const a = !this.allUploadsComplete;
+      const a = !this.allRequestsComplete;
       const b = this.animatingDueToClick;
       return a || b;
     },
   },
   methods: {
     showSaveAnimation() {
-      if (this.allUploadsComplete) {
+      if (this.allRequestsComplete) {
         this.animatingDueToClick = true;
         setTimeout(() => {
           this.animatingDueToClick = false;

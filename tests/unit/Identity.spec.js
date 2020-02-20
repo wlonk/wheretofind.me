@@ -46,7 +46,7 @@ describe('Identity.vue', () => {
     wrapper.vm.update();
 
     expect($http.put).toBeCalledWith('/api/identities/1/', identity);
-    expect($emit).toBeCalledWith('upload-started', putRequestPromise);
+    expect($emit).toBeCalledWith('request-started', putRequestPromise);
   });
 
   test('destroy', () => {

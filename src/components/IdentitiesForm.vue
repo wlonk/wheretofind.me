@@ -8,11 +8,11 @@
         :index="index"
         :disabled="identity.disabled"
         @destroy="destroy"
-        @upload-started="trackUpload"
+        @request-started="trackRequest"
       />
     </draggable>
     <SaveButton
-      v-bind:allUploadsComplete="allUploadsComplete"
+      v-bind:allRequestsComplete="allRequestsComplete"
       aria-label="Save current identities"
     />
     <AddButton @create="create" aria-label="Add identity" />
@@ -50,12 +50,12 @@ export default {
   data() {
     return {
       identities: [],
-      runningUploads: 0,
+      runningRequests: 0,
     };
   },
   computed: {
-    allUploadsComplete() {
-      return this.runningUploads === 0;
+    allRequestsComplete() {
+      return this.runningRequests === 0;
     },
   },
   created() {
@@ -66,14 +66,14 @@ export default {
     });
   },
   methods: {
-    // wraps Promises returned by $http methods so that the number of active uploads can be tracked; use for any request calls that the
-    // user will want to see the status of by calling this.trackUpload(this.$http.post/get/delete(...))
-    trackUpload(uploadRequestPromise) {
-      this.runningUploads += 1;
-      return uploadRequestPromise.then(this.uploadFinished);
+    // wraps Promises returned by $http methods so that the number of active requests can be tracked; use for any request calls that the
+    // user will want to see the status of by calling this.trackRequest(this.$http.post/get/delete(...))
+    trackRequest(requestRequestPromise) {
+      this.runningRequests += 1;
+      return requestRequestPromise.then(this.requestFinished);
     },
-    uploadFinished(passThrough) {
-      this.runningUploads -= 1;
+    requestFinished(passThrough) {
+      this.runningRequests -= 1;
       return passThrough;
     },
 
@@ -125,7 +125,7 @@ export default {
     reorderIdentities() {
       const url = window.Urls['api:identity-reorder']();
       const data = this.identities.map(i => i.id);
-      return this.trackUpload(this.$http.post(url, data));
+      return this.trackRequest(this.$http.post(url, data));
     },
     createNewIdentity() {
       const url = window.Urls['api:identity-list']();
@@ -133,7 +133,7 @@ export default {
         name: '',
         url: '',
       };
-      return this.trackUpload(this.$http.post(url, data));
+      return this.trackRequest(this.$http.post(url, data));
     },
     retrieveIdentities() {
       const url = window.Urls['api:identity-list']();
@@ -142,7 +142,7 @@ export default {
     },
     destroyIdentity(identity) {
       const url = window.Urls['api:identity-detail'](identity.id);
-      return this.trackUpload(this.$http.delete(url));
+      return this.trackRequest(this.$http.delete(url));
     },
   },
 };
