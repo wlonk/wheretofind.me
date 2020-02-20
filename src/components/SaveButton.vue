@@ -30,7 +30,9 @@ export default {
   },
   computed: {
     spinning() {
-      // making Absolutely Sure that both of these are accessed and thus registered as dependencies for the property, despite short-circuit evaluation
+      // make Absolutely Sure that both of these are accessed and thus
+      // registered as dependencies for the property, despite short-circuit
+      // evaluation
       const a = !this.allRequestsComplete;
       const b = this.animatingDueToClick;
       return a || b;
