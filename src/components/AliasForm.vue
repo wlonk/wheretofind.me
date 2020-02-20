@@ -77,7 +77,11 @@ export default {
       );
     },
     create() {
-      const newId = Math.max.apply(Math, this.aliases.map(a => a.id)) + 1;
+      const newId =
+        Math.max.apply(
+          Math,
+          this.aliases.map(a => a.id),
+        ) + 1;
       const newAlias = {
         id: newId,
         name: '',

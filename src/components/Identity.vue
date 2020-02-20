@@ -308,7 +308,10 @@ export default {
     update() {
       const url = window.Urls['api:identity-detail'](this.identity.id);
       const data = this.identity;
-      return this.$http.put(url, data);
+      const req = this.$http.put(url, data);
+      // emit the Promise created by the $http call so that the state of the request can be tracked if so desired
+      this.$emit('request-started', req);
+      return req;
     },
     destroy() {
       // TODO flash "deleting" div.
