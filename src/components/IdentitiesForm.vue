@@ -85,26 +85,16 @@ export default {
       );
     },
     create() {
-      const newId =
-        Math.max.apply(
-          Math,
-          this.identities.map(i => i.id),
-        ) + 1;
-      const newIdentity = {
-        id: newId,
-        name: '',
-        url: '',
-        quality: 2,
-        icon: 'fas fa-link',
+      const placeholder = {
+        id: `placeholder-${Math.floor(Math.random() * 1e7)}`,
         disabled: true,
       };
-      this.identities.push(newIdentity);
+      this.identities.push(placeholder);
       return (
         this.createNewIdentity()
           .then(resp => {
-            const { id } = resp.data;
-            newIdentity.disabled = false;
-            newIdentity.id = id;
+            const insertAt = this.identities.indexOf(placeholder);
+            this.identities.splice(insertAt, 1, resp.data);
           })
           // TODO: display error state.
           .catch()
@@ -129,10 +119,7 @@ export default {
     },
     createNewIdentity() {
       const url = window.Urls['api:identity-list']();
-      const data = {
-        name: '',
-        url: '',
-      };
+      const data = {};
       return this.trackRequest(this.$http.post(url, data));
     },
     retrieveIdentities() {
