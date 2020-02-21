@@ -171,7 +171,7 @@
     <div
       @keydown.prevent.stop.up.down="rearrangeSelf"
       :tabIndex="moveTabIndex"
-      class="card-control-icon"
+      class="card-control-icon rearrange-handle"
       ref="rearrangeHandle"
     ></div>
   </div>
@@ -203,9 +203,6 @@ export default {
     },
     iconLabel() {
       return `icon-${this.identity.id}`;
-    },
-    editButtonTabIndex() {
-      return this.index * 10 + 1;
     },
     nameTabIndex() {
       return this.index * 10 + 2;
@@ -322,11 +319,6 @@ export default {
   position: absolute;
   right: 0;
   width: 30px;
-}
-@media screen and (max-width: 576px) {
-  .card-control-icon {
-    padding: 0.75rem;
-  }
 }
 .edit-button:focus {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);

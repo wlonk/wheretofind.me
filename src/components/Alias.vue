@@ -11,6 +11,7 @@
             v-model="alias.name"
             @blur="update"
             @keyup.enter="update"
+            :tabindex="nameTabIndex"
             :id="nameLabel"
             :disabled="disabled"
           />
@@ -21,12 +22,19 @@
             class="btn btn-outline-danger float-right"
             @click="destroy"
             aria-label="Remove alias"
+            :tabindex="destroyTabIndex"
           >
             <span class="fas fa-minus-circle"></span>
           </button>
         </div>
       </div>
     </div>
+    <div
+      @keydown.prevent.stop.up.down="rearrangeSelf"
+      :tabIndex="moveTabIndex"
+      class="card-control-icon rearrange-handle"
+      ref="rearrangeHandle"
+    ></div>
   </div>
 </template>
 
@@ -38,8 +46,35 @@ export default {
     nameLabel() {
       return `name-${this.alias.id}`;
     },
+    nameTabIndex() {
+      return this.index * 10 + 1;
+    },
+    destroyTabIndex() {
+      return this.index * 10 + 1;
+    },
+    moveTabIndex() {
+      return this.index * 10 + 3;
+    },
   },
   methods: {
+    rearrangeSelf(e) {
+      const eventObject = {
+        index: this.index,
+        // Needed so that the form can keep the handle in focus after
+        // rearranging things:
+        handle: this.$refs.rearrangeHandle,
+        // Needed so that the form can monitor whether this identity's html
+        // element is still in view or not:
+        el: this.$el,
+      };
+      if (e.keyCode === 38) {
+        eventObject.direction = 'up';
+        this.$emit('moved', eventObject);
+      } else if (e.keyCode === 40) {
+        eventObject.direction = 'down';
+        this.$emit('moved', eventObject);
+      }
+    },
     update() {
       const url = window.Urls['api:alias-detail'](this.alias.id);
       const data = this.alias;
@@ -60,5 +95,13 @@ export default {
 .alias {
   background: url('../images/draghandle-right.png') no-repeat bottom 2px right
     3px;
+}
+.card-control-icon {
+  bottom: 0;
+  cursor: grab;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  width: 30px;
 }
 </style>
