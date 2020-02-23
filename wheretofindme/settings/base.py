@@ -77,13 +77,12 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG", type_=boolish)
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "localhost:8000",
-    "127.0.0.1",
-    "127.0.0.1:8000",
-    "wheretofind.me",
-]
+if DEBUG:
+    # in debug mode, allow the site to be accessed by other machines, regardless of the
+    # server's current address as shown by the Host header. useful for testing on mobile
+    ALLOWED_HOSTS = ["*"]
+else:
+    ALLOWED_HOSTS = ["wheretofind.me", "127.0.0.1:8000", "localhost:8000"]
 
 # HTTPS and HSTS
 SECURE_SSL_REDIRECT = env("SECURE_SSL_REDIRECT", default=not DEBUG, type_=boolish)
@@ -147,9 +146,16 @@ WSGI_APPLICATION = "wheretofindme.wsgi.application"
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 if os.name == "nt":
-	DATABASES = {'default': {'NAME': 'wheretofindme', 'USER': 'postgres', 'PASSWORD': env("WTFME_PASSWORD"), 'ENGINE': 'django.db.backends.postgresql_psycopg2'}}
+    DATABASES = {
+        "default": {
+            "NAME": "wheretofindme",
+            "USER": "postgres",
+            "PASSWORD": env("WTFME_PASSWORD"),
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+        }
+    }
 else:
-	DATABASES = {'default': dj_database_url.config(default="postgres:///wheretofindme")}
+    DATABASES = {"default": dj_database_url.config(default="postgres:///wheretofindme")}
 
 
 # Password validation

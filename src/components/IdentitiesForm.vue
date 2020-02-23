@@ -49,11 +49,10 @@ export default {
           items: '.identity',
           handle: '.rearrange-handle',
           axis: 'y',
-          containment: 'parent',
-          filter: 'input',
-          preventOnFilter: false,
-          animation: 300,
+          animation: 200,
           ghostClass: 'identity-placeholder',
+          scroll: true,
+          scrollSensitivity: 60,
         };
       },
     },
@@ -242,6 +241,6 @@ export default {
   opacity: 1;
 }
 .rearrange-move {
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
 </style>
