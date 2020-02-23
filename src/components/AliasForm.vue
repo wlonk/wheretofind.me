@@ -51,14 +51,13 @@ export default {
       type: Object,
       default() {
         return {
-          items: '.alias',
+          animation: 200,
           axis: 'y',
-          containment: 'parent',
-          filter: 'input',
-          preventOnFilter: false,
-          handle: '.rearrange-handle',
-          animation: 300,
           ghostClass: 'alias-placeholder',
+          handle: '.rearrange-handle',
+          items: '.alias',
+          scroll: true,
+          scrollSensitivity: 60,
         };
       },
     },
@@ -235,6 +234,6 @@ export default {
   opacity: 1;
 }
 .rearrange-move {
-  transition: transform 0.3s;
+  transition: transform 0.2s;
 }
 </style>

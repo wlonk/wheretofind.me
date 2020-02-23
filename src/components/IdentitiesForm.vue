@@ -46,11 +46,11 @@ export default {
       type: Object,
       default() {
         return {
-          items: '.identity',
-          handle: '.rearrange-handle',
-          axis: 'y',
           animation: 200,
+          axis: 'y',
           ghostClass: 'identity-placeholder',
+          handle: '.rearrange-handle',
+          items: '.identity',
           scroll: true,
           scrollSensitivity: 60,
         };

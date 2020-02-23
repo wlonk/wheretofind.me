@@ -77,12 +77,13 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG", type_=boolish)
 
-if DEBUG:
-    # in debug mode, allow the site to be accessed by other machines, regardless of the
-    # server's current address as shown by the Host header. useful for testing on mobile
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = ["wheretofind.me", "127.0.0.1:8000", "localhost:8000"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "localhost:8000",
+    "127.0.0.1",
+    "127.0.0.1:8000",
+    "wheretofind.me",
+]
 
 # HTTPS and HSTS
 SECURE_SSL_REDIRECT = env("SECURE_SSL_REDIRECT", default=not DEBUG, type_=boolish)
