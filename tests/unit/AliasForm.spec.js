@@ -38,7 +38,12 @@ describe('AliasForm.vue', () => {
     const mocks = {
       $http,
     };
-    const data = { aliases, userInSearch };
+    const data = {
+      aliases,
+      userInSearch,
+      draggingInProgress: false,
+      runningRequests: 0,
+    };
     const mountOptions = {
       mocks,
       data: () => data,
@@ -113,5 +118,132 @@ describe('AliasForm.vue', () => {
     wrapper.vm.retrieveAliases(data.aliases[0]);
 
     expect($http.get).toBeCalledWith('/api/aliases/');
+  });
+
+  test('startDrag', () => {
+    const { wrapper } = setup();
+    wrapper.vm.startDrag();
+    expect(wrapper.vm.draggingInProgress).toBeTruthy();
+  });
+
+  test('endDrag', () => {
+    const { wrapper } = setup();
+    wrapper.vm.reorder = jest.fn();
+    wrapper.vm.endDrag();
+    expect(wrapper.vm.draggingInProgress).toBeFalsy();
+    expect(wrapper.vm.reorder).toHaveBeenCalled();
+  });
+
+  describe('aliasMoved', () => {
+    test('invalid', () => {
+      const { wrapper } = setup();
+      const event = {
+        direction: 'up',
+        index: 0,
+      };
+      wrapper.vm.reorder = jest.fn();
+      wrapper.vm.aliasMoved(event);
+      expect(wrapper.vm.reorder).not.toHaveBeenCalled();
+    });
+
+    test('validUp', () => {
+      const { wrapper } = setup();
+      const event = {
+        direction: 'up',
+        index: 1,
+        handle: {
+          focus: jest.fn(),
+        },
+        el: {
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          getBoundingClientRect: jest.fn(),
+          scrollIntoView: jest.fn(),
+        },
+      };
+      wrapper.vm.$nextTick = jest.fn().mockImplementation(cb => cb());
+      wrapper.vm.reorder = jest.fn();
+      wrapper.vm.aliasMoved(event);
+      expect(wrapper.vm.reorder).toHaveBeenCalled();
+    });
+
+    test('validDown', () => {
+      const { wrapper } = setup();
+      const event = {
+        direction: 'down',
+        index: 0,
+        handle: {
+          focus: jest.fn(),
+        },
+        el: {
+          addEventListener: jest.fn(),
+          removeEventListener: jest.fn(),
+          getBoundingClientRect: jest.fn(),
+          scrollIntoView: jest.fn(),
+        },
+      };
+      wrapper.vm.$nextTick = jest.fn().mockImplementation(cb => cb());
+      wrapper.vm.reorder = jest.fn();
+      wrapper.vm.aliasMoved(event);
+      expect(wrapper.vm.reorder).toHaveBeenCalled();
+    });
+
+    test('scroll events', () => {
+      let transitionstart;
+      let transitionend;
+      const { wrapper } = setup();
+      window.innerHeight = 5;
+      window.requestAnimationFrame = jest.fn();
+      const event = {
+        direction: 'up',
+        index: 1,
+        handle: {
+          focus: jest.fn(),
+        },
+        el: {
+          addEventListener: (evt, cb) => {
+            switch (evt) {
+              case 'transitionstart':
+                transitionstart = cb;
+                break;
+              case 'transitionend':
+                transitionend = cb;
+                break;
+            }
+          },
+          removeEventListener: jest.fn(),
+          getBoundingClientRect: jest.fn().mockImplementation(() => ({
+            top: 1,
+            bottom: 10,
+          })),
+          scrollIntoView: jest.fn(),
+        },
+      };
+      wrapper.vm.$nextTick = jest.fn().mockImplementation(cb => cb());
+      wrapper.vm.reorder = jest.fn();
+      wrapper.vm.aliasMoved(event);
+
+      transitionstart();
+      expect(event.el.scrollIntoView).toHaveBeenCalledWith(false);
+
+      event.el.getBoundingClientRect = jest.fn().mockImplementation(() => ({
+        top: -1,
+        bottom: 1,
+      }));
+      event.el.scrollIntoView.mockClear();
+      transitionstart();
+      expect(event.el.scrollIntoView).toHaveBeenCalledWith(true);
+
+      event.el.getBoundingClientRect = jest.fn().mockImplementation(() => ({
+        top: 1,
+        bottom: 1,
+      }));
+      event.el.scrollIntoView.mockClear();
+      transitionstart();
+      expect(event.el.scrollIntoView).not.toHaveBeenCalled();
+
+      transitionend();
+      expect(event.el.removeEventListener).toHaveBeenCalled();
+    });
   });
 });

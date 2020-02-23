@@ -123,6 +123,7 @@ export default {
         } else if (aboveView) {
           e.el.scrollIntoView(true);
         }
+        /* istanbul ignore else */
         if (!transitionEnded) {
           window.requestAnimationFrame(keepElementInView);
         }

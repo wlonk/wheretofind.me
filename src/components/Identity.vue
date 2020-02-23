@@ -252,13 +252,17 @@ export default {
         // element is still in view or not:
         el: this.$el,
       };
-      if (e.keyCode === 38) {
-        eventObject.direction = 'up';
-        this.$emit('moved', eventObject);
-      } else if (e.keyCode === 40) {
-        eventObject.direction = 'down';
-        this.$emit('moved', eventObject);
+      switch (e.keyCode) {
+        case 38:
+          eventObject.direction = 'up';
+          break;
+        case 40:
+          eventObject.direction = 'down';
+          break;
+        // No default is necessary, as the Vue template bindings prevent any
+        // other possible values.
       }
+      this.$emit('moved', eventObject);
     },
     clickQuality() {
       this.identity.quality = (this.identity.quality + 1) % 3;
