@@ -168,21 +168,18 @@
         </div>
       </div>
     </div>
-    <div
-      @keydown.prevent.stop.up.down="rearrangeSelf"
-      :tabIndex="moveTabIndex"
-      class="card-control-icon rearrange-handle"
-      ref="rearrangeHandle"
-    ></div>
+    <DragHandle :itemIndex="index" :tabIndex="moveTabIndex" />
   </div>
 </template>
 
 <script>
 import iconGuesses from '../iconGuesses';
+import DragHandle from '@/components/DragHandle.vue';
 
 export default {
   name: 'Identity',
   props: ['identity', 'disabled', 'index'],
+  components: { DragHandle },
   data() {
     return {
       expandExtras: false,

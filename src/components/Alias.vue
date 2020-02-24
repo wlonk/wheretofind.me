@@ -1,6 +1,6 @@
 <template>
   <div class="alias card bg-light shadow-sm w-100 mb-3">
-    <div class="card-body drag-indicator">
+    <div class="card-body">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -29,19 +29,17 @@
         </div>
       </div>
     </div>
-    <div
-      @keydown.prevent.stop.up.down="rearrangeSelf"
-      :tabIndex="moveTabIndex"
-      class="card-control-icon rearrange-handle"
-      ref="rearrangeHandle"
-    ></div>
+    <DragHandle :tabIndex="moveTabIndex" :itemIndex="index" />
   </div>
 </template>
 
 <script>
+import DragHandle from '@/components/DragHandle.vue';
+
 export default {
   name: 'Alias',
   props: ['alias', 'disabled', 'index'],
+  components: { DragHandle },
   computed: {
     nameLabel() {
       return `name-${this.alias.id}`;
@@ -57,28 +55,6 @@ export default {
     },
   },
   methods: {
-    rearrangeSelf(e) {
-      const eventObject = {
-        index: this.index,
-        // Needed so that the form can keep the handle in focus after
-        // rearranging things:
-        handle: this.$refs.rearrangeHandle,
-        // Needed so that the form can monitor whether this identity's html
-        // element is still in view or not:
-        el: this.$el,
-      };
-      switch (e.keyCode) {
-        case 38:
-          eventObject.direction = 'up';
-          break;
-        case 40:
-          eventObject.direction = 'down';
-          break;
-        // No default is necessary, as the Vue template bindings prevent any
-        // other possible values.
-      }
-      this.$emit('moved', eventObject);
-    },
     update() {
       const url = window.Urls['api:alias-detail'](this.alias.id);
       const data = this.alias;
@@ -93,19 +69,8 @@ export default {
 </script>
 
 <style scoped>
-.drag-indicator {
-  cursor: grab;
-}
 .alias {
   background: url('../images/draghandle-right.png') no-repeat bottom 2px right
     3px;
-}
-.card-control-icon {
-  bottom: 0;
-  cursor: grab;
-  height: 30px;
-  position: absolute;
-  right: 0;
-  width: 30px;
 }
 </style>
