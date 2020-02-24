@@ -1,5 +1,5 @@
 <template>
-  <div class="identity card bg-light shadow-sm w-100 mb-3">
+  <div class="identity draggable-item card bg-light shadow-sm w-100 mb-3">
     <div class="card-body">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>

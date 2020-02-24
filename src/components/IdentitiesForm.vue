@@ -1,12 +1,7 @@
 <template>
   <form @submit.prevent class="clearfix">
-    <draggable
-      v-model="identities"
-      :options="draggableOptions"
-      @start="startDrag"
-      @end="endDrag"
-    >
-      <transition-group :name="!draggingInProgress ? 'rearrange' : ''">
+    <DraggableList v-model="identities" @reordered="reorder">
+      <template v-slot:listItems="eventHandlers">
         <Identity
           v-for="(identity, index) in identities"
           :key="identity.id"
@@ -14,11 +9,11 @@
           :index="index"
           :disabled="identity.disabled"
           @destroy="destroy"
-          @moved="identityMoved"
+          @moved="eventHandlers.moved"
           @request-started="trackRequest"
         />
-      </transition-group>
-    </draggable>
+      </template>
+    </DraggableList>
     <SaveButton
       v-bind:allRequestsComplete="allRequestsComplete"
       aria-label="Save current identities"
@@ -31,36 +26,19 @@
 import Identity from '@/components/Identity.vue';
 import AddButton from '@/components/AddButton.vue';
 import SaveButton from '@/components/SaveButton.vue';
-import draggable from 'vuedraggable';
+import DraggableList from '@/components/DraggableList.vue';
 
 export default {
   name: 'IdentitiesForm',
   components: {
     Identity,
     AddButton,
-    draggable,
+    DraggableList,
     SaveButton,
-  },
-  props: {
-    draggableOptions: {
-      type: Object,
-      default() {
-        return {
-          animation: 200,
-          axis: 'y',
-          ghostClass: 'identity-placeholder',
-          handle: '.rearrange-handle',
-          items: '.identity',
-          scroll: true,
-          scrollSensitivity: 60,
-        };
-      },
-    },
   },
   data() {
     return {
       identities: [],
-      draggingInProgress: false,
       runningRequests: 0,
     };
   },
@@ -77,82 +55,12 @@ export default {
     });
   },
   methods: {
-    /* Dragging-related methods */
-    startDrag() {
-      this.draggingInProgress = true;
-    },
-    endDrag() {
-      this.draggingInProgress = false;
-      this.reorder();
-    },
-    identityMoved(e) {
-      /// e: {
-      ///   direction: 'up' | 'down',
-      ///   index: number,
-      ///   el: Element,
-      /// }
-      let newIndex;
-      const validUp = e.direction === 'up' && e.index > 0;
-      const validDown =
-        e.direction === 'down' && e.index < this.identities.length - 1;
-      if (validUp) {
-        newIndex = e.index - 1;
-      } else if (validDown) {
-        newIndex = e.index + 1;
-      } else {
-        return;
-      }
-
-      const movingIdentity = this.identities[e.index];
-      this.identities.splice(e.index, 1);
-      this.identities.splice(newIndex, 0, movingIdentity);
-
-      // For the duration of the transition as identities are moved around,
-      // this code calls requestAnimationFrame and changes the window's scroll
-      // position per frame to make sure the moved identity stays in view.
-      let transitionEnded = false;
-      // this function does all the work and is added as a transitionstart
-      // event listener:
-      const keepElementInView = () => {
-        const belowView =
-          e.el.getBoundingClientRect().bottom > window.innerHeight;
-        const aboveView = e.el.getBoundingClientRect().top < 0;
-        if (belowView) {
-          e.el.scrollIntoView(false);
-        } else if (aboveView) {
-          e.el.scrollIntoView(true);
-        }
-        /* istanbul ignore else */
-        if (!transitionEnded) {
-          window.requestAnimationFrame(keepElementInView);
-        }
-      };
-
-      // This function removes the event listeners once they've outlived their
-      // usefulness and is added as a transitionend listener:
-      const cleanUpAfterTransition = () => {
-        transitionEnded = true;
-        e.el.removeEventListener('transitionstart', keepElementInView);
-        e.el.removeEventListener('transitionend', cleanUpAfterTransition);
-      };
-      // and this is where the listeners are actually added:
-      e.el.addEventListener('transitionstart', keepElementInView);
-      e.el.addEventListener('transitionend', cleanUpAfterTransition);
-
-      // This makes sure that the handle that was just used to move elements
-      // stays in focus:
-      this.$nextTick(() => {
-        e.handle.focus();
-      });
-
-      this.reorder();
-    },
-
     /* Event handlers
      *
      * These defer the actual API interaction to the API call methods.
      */
     reorder() {
+      console.log('reorder event received');
       return (
         this.reorderIdentities()
           // TODO: revert to pre-sorted order on error.
@@ -160,11 +68,7 @@ export default {
       );
     },
     create() {
-      const newId =
-        Math.max.apply(
-          Math,
-          this.identities.map(i => i.id),
-        ) + 1;
+      const newId = Math.max.apply(Math, this.identities.map(i => i.id)) + 1;
       const newIdentity = {
         id: newId,
         name: '',
@@ -239,8 +143,5 @@ export default {
 <style scoped>
 .sortable-drag {
   opacity: 1;
-}
-.rearrange-move {
-  transition: transform 0.2s;
 }
 </style>
