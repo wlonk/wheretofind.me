@@ -239,28 +239,6 @@ export default {
     },
   },
   methods: {
-    rearrangeSelf(e) {
-      const eventObject = {
-        index: this.index,
-        // Needed so that the form can keep the handle in focus after
-        // rearranging things:
-        handle: this.$refs.rearrangeHandle,
-        // Needed so that the form can monitor whether this identity's html
-        // element is still in view or not:
-        el: this.$el,
-      };
-      switch (e.keyCode) {
-        case 38:
-          eventObject.direction = 'up';
-          break;
-        case 40:
-          eventObject.direction = 'down';
-          break;
-        // No default is necessary, as the Vue template bindings prevent any
-        // other possible values.
-      }
-      this.$emit('moved', eventObject);
-    },
     clickQuality() {
       this.identity.quality = (this.identity.quality + 1) % 3;
       this.update();

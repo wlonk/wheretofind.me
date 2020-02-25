@@ -150,40 +150,4 @@ describe('Identity.vue', () => {
     await wrapper.vm.$nextTick();
     expect(identity.quality).toEqual(2);
   });
-
-  describe('rearrangeSelf', () => {
-    test('emits up', async () => {
-      const { wrapper, $emit } = setup();
-      await wrapper
-        .find({ ref: 'rearrangeHandle' })
-        .trigger('keydown', { keyCode: 38 });
-      expect($emit).toHaveBeenCalledWith('moved', {
-        index: 0,
-        handle: wrapper.vm.$refs.rearrangeHandle,
-        el: wrapper.vm.$el,
-        direction: 'up',
-      });
-    });
-
-    test('emits down', async () => {
-      const { wrapper, $emit } = setup();
-      await wrapper
-        .find({ ref: 'rearrangeHandle' })
-        .trigger('keydown', { keyCode: 40 });
-      expect($emit).toHaveBeenCalledWith('moved', {
-        index: 0,
-        handle: wrapper.vm.$refs.rearrangeHandle,
-        el: wrapper.vm.$el,
-        direction: 'down',
-      });
-    });
-
-    test('ignores anything else', async () => {
-      const { wrapper, $emit } = setup();
-      await wrapper
-        .find({ ref: 'rearrangeHandle' })
-        .trigger('keydown', { keyCode: 37 });
-      expect($emit).not.toHaveBeenCalled();
-    });
-  });
 });

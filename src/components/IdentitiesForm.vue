@@ -68,7 +68,11 @@ export default {
       );
     },
     create() {
-      const newId = Math.max.apply(Math, this.identities.map(i => i.id)) + 1;
+      const newId =
+        Math.max.apply(
+          Math,
+          this.identities.map(i => i.id),
+        ) + 1;
       const newIdentity = {
         id: newId,
         name: '',
