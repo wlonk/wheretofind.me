@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import AliasForm from '@/components/AliasForm.vue';
 import MockUrls from '../mockUrls';
 
@@ -38,13 +38,18 @@ describe('AliasForm.vue', () => {
     const mocks = {
       $http,
     };
-    const data = { aliases, userInSearch };
+    const data = {
+      aliases,
+      userInSearch,
+      draggingInProgress: false,
+      runningRequests: 0,
+    };
     const mountOptions = {
       mocks,
       data: () => data,
       ...options,
     };
-    const wrapper = shallowMount(AliasForm, mountOptions);
+    const wrapper = mount(AliasForm, mountOptions);
     return {
       $http,
       mocks,

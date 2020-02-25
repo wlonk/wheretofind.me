@@ -22,6 +22,7 @@ describe('Alias.vue', () => {
     const propsData = {
       alias,
       disabled: false,
+      index: 1,
     };
     const defaults = {
       mocks,

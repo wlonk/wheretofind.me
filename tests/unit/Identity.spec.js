@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Identity from '@/components/Identity.vue';
 import MockUrls from '../mockUrls';
 
@@ -26,13 +26,14 @@ describe('Identity.vue', () => {
     const propsData = {
       identity,
       disabled: false,
+      index: 0,
     };
     const mountOptions = {
       propsData,
       mocks,
       ...options,
     };
-    const wrapper = shallowMount(Identity, mountOptions);
+    const wrapper = mount(Identity, mountOptions);
     return {
       $emit,
       $http,

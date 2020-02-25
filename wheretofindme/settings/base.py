@@ -147,9 +147,16 @@ WSGI_APPLICATION = "wheretofindme.wsgi.application"
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 if os.name == "nt":
-	DATABASES = {'default': {'NAME': 'wheretofindme', 'USER': 'postgres', 'PASSWORD': env("WTFME_PASSWORD"), 'ENGINE': 'django.db.backends.postgresql_psycopg2'}}
+    DATABASES = {
+        "default": {
+            "NAME": "wheretofindme",
+            "USER": "postgres",
+            "PASSWORD": env("WTFME_PASSWORD"),
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+        }
+    }
 else:
-	DATABASES = {'default': dj_database_url.config(default="postgres:///wheretofindme")}
+    DATABASES = {"default": dj_database_url.config(default="postgres:///wheretofindme")}
 
 
 # Password validation

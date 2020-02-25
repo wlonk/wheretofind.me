@@ -1,16 +1,19 @@
 <template>
   <form @submit.prevent class="clearfix">
-    <draggable v-model="identities" :options="draggableOptions" @end="reorder">
-      <Identity
-        v-for="(identity, index) in identities"
-        :key="identity.id"
-        :identity="identity"
-        :index="index"
-        :disabled="identity.disabled"
-        @destroy="destroy"
-        @request-started="trackRequest"
-      />
-    </draggable>
+    <DraggableList v-model="identities" @reordered="reorder">
+      <template v-slot:listItems="eventHandlers">
+        <Identity
+          v-for="(identity, index) in identities"
+          :key="identity.id"
+          :identity="identity"
+          :index="index"
+          :disabled="identity.disabled"
+          @destroy="destroy"
+          @moved="eventHandlers.moved"
+          @request-started="trackRequest"
+        />
+      </template>
+    </DraggableList>
     <SaveButton
       v-bind:allRequestsComplete="allRequestsComplete"
       aria-label="Save current identities"
@@ -23,29 +26,15 @@
 import Identity from '@/components/Identity.vue';
 import AddButton from '@/components/AddButton.vue';
 import SaveButton from '@/components/SaveButton.vue';
-import draggable from 'vuedraggable';
+import DraggableList from '@/components/DraggableList.vue';
 
 export default {
   name: 'IdentitiesForm',
   components: {
     Identity,
     AddButton,
-    draggable,
+    DraggableList,
     SaveButton,
-  },
-  props: {
-    draggableOptions: {
-      type: Object,
-      default() {
-        return {
-          items: '.identity',
-          axis: 'y',
-          containment: 'parent',
-          filter: 'input',
-          preventOnFilter: false,
-        };
-      },
-    },
   },
   data() {
     return {
@@ -59,25 +48,19 @@ export default {
     },
   },
   created() {
-    // TODO: this approach has a flash as the original DOM elements are
+    // TODO: this approach has a flash as the original DOM elements are //
     // replaced by the Vue ones.
     this.retrieveIdentities().then(resp => {
       this.identities = resp.data;
     });
   },
   methods: {
-    // wraps Promises returned by $http methods so that the number of active requests can be tracked; use for any request calls that the
-    // user will want to see the status of by calling this.trackRequest(this.$http.post/get/delete(...))
-    trackRequest(requestRequestPromise) {
-      this.runningRequests += 1;
-      return requestRequestPromise.then(this.requestFinished);
-    },
-    requestFinished(passThrough) {
-      this.runningRequests -= 1;
-      return passThrough;
-    },
-
+    /* Event handlers
+     *
+     * These defer the actual API interaction to the API call methods.
+     */
     reorder() {
+      console.log('reorder event received');
       return (
         this.reorderIdentities()
           // TODO: revert to pre-sorted order on error.
@@ -97,6 +80,7 @@ export default {
         quality: 2,
         icon: 'fas fa-link',
         disabled: true,
+        new: true,
       };
       this.identities.push(newIdentity);
       return (
@@ -121,7 +105,20 @@ export default {
           .catch()
       );
     },
-    // API calls:
+
+    /* Wrapper helpers to track oustanding calls
+     *
+     */
+    trackRequest(requestRequestPromise) {
+      this.runningRequests += 1;
+      return requestRequestPromise.then(this.requestFinished);
+    },
+    requestFinished(passThrough) {
+      this.runningRequests -= 1;
+      return passThrough;
+    },
+
+    /* API calls: */
     reorderIdentities() {
       const url = window.Urls['api:identity-reorder']();
       const data = this.identities.map(i => i.id);
@@ -137,7 +134,6 @@ export default {
     },
     retrieveIdentities() {
       const url = window.Urls['api:identity-list']();
-
       return this.$http.get(url);
     },
     destroyIdentity(identity) {

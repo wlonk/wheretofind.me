@@ -12,16 +12,19 @@
         Include me in search results
       </label>
     </div>
-    <draggable v-model="aliases" :options="draggableOptions" @end="reorder">
-      <Alias
-        v-for="(alias, index) in aliases"
-        :key="alias.id"
-        :alias="alias"
-        :index="index"
-        :disabled="alias.disabled"
-        @destroy="destroy"
-      />
-    </draggable>
+    <DraggableList v-model="aliases" @reordered="reorder">
+      <template v-slot:listItems="eventListeners">
+        <Alias
+          v-for="(alias, index) in aliases"
+          :key="alias.id"
+          :alias="alias"
+          :index="index"
+          :disabled="alias.disabled"
+          @moved="eventListeners.moved"
+          @destroy="destroy"
+        />
+      </template>
+    </DraggableList>
     <AddButton @create="create" aria-label="Add alias" />
   </form>
 </template>
@@ -29,28 +32,14 @@
 <script>
 import Alias from '@/components/Alias.vue';
 import AddButton from '@/components/AddButton.vue';
-import draggable from 'vuedraggable';
+import DraggableList from '@/components/DraggableList.vue';
 
 export default {
   name: 'AliasForm',
   components: {
     Alias,
     AddButton,
-    draggable,
-  },
-  props: {
-    draggableOptions: {
-      type: Object,
-      default() {
-        return {
-          items: '.alias',
-          axis: 'y',
-          containment: 'parent',
-          filter: 'input',
-          preventOnFilter: false,
-        };
-      },
-    },
+    DraggableList,
   },
   data() {
     return {
@@ -148,5 +137,8 @@ export default {
 <style scoped>
 .alias:first-child {
   box-shadow: 0 0 5px #207e5f !important;
+}
+.sortable-drag {
+  opacity: 1;
 }
 </style>

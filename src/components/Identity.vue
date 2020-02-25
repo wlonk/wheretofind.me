@@ -1,6 +1,6 @@
 <template>
-  <div class="identity card bg-light shadow-sm w-100 mb-3">
-    <div class="card-body drag-indicator">
+  <div class="identity draggable-item card bg-light shadow-sm w-100 mb-3">
+    <div class="card-body">
       <div class="form-group row">
         <label :for="nameLabel" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-9">
@@ -168,15 +168,18 @@
         </div>
       </div>
     </div>
+    <DragHandle :itemIndex="index" :tabIndex="moveTabIndex" />
   </div>
 </template>
 
 <script>
 import iconGuesses from '../iconGuesses';
+import DragHandle from '@/components/DragHandle.vue';
 
 export default {
   name: 'Identity',
   props: ['identity', 'disabled', 'index'],
+  components: { DragHandle },
   data() {
     return {
       expandExtras: false,
@@ -199,25 +202,28 @@ export default {
       return `icon-${this.identity.id}`;
     },
     nameTabIndex() {
-      return this.index * 10 + 1;
-    },
-    urlTabIndex() {
       return this.index * 10 + 2;
     },
-    expandTabIndex() {
+    urlTabIndex() {
       return this.index * 10 + 3;
     },
-    tagTabIndex() {
+    expandTabIndex() {
       return this.index * 10 + 4;
     },
-    qualityTabIndex() {
+    tagTabIndex() {
       return this.index * 10 + 5;
     },
-    iconTabIndex() {
+    qualityTabIndex() {
       return this.index * 10 + 6;
     },
-    destroyTabIndex() {
+    iconTabIndex() {
       return this.index * 10 + 7;
+    },
+    destroyTabIndex() {
+      return this.index * 10 + 8;
+    },
+    moveTabIndex() {
+      return this.index * 10 + 9;
     },
     qualityPreview() {
       // TODO: This shouldn't involve explicit use of the /static/ directory.
@@ -271,11 +277,9 @@ export default {
 </script>
 
 <style scoped>
-.drag-indicator {
-  cursor: grab;
-}
 .identity {
-  background: url('../images/draghandle.png') no-repeat bottom 2px left 3px;
+  background: url('../images/draghandle-right.png') no-repeat bottom 2px right
+    3px;
 }
 .expand-identity:focus {
   box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
@@ -286,5 +290,16 @@ export default {
 .quality-preview-wrapper {
   cursor: pointer;
   margin-right: -0.25rem;
+}
+.card-control-icon {
+  bottom: 0;
+  cursor: grab;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  width: 30px;
+}
+.edit-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(120, 194, 173, 0.25);
 }
 </style>

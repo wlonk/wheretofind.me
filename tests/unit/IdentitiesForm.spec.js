@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import IdentitiesForm from '@/components/IdentitiesForm.vue';
 import Identity from '@/components/Identity.vue';
 import MockUrls from '../mockUrls';
@@ -38,9 +38,14 @@ describe('IdentitiesForm.vue', () => {
     };
     const mountOptions = {
       mocks,
+      data: () => ({
+        identities: [...data],
+        draggingInProgress: false,
+        runningRequests: 0,
+      }),
       ...options,
     };
-    const wrapper = shallowMount(IdentitiesForm, mountOptions);
+    const wrapper = mount(IdentitiesForm, mountOptions);
     return {
       wrapper,
       $http,
