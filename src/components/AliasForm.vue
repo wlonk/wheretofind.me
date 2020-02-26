@@ -66,23 +66,16 @@ export default {
       );
     },
     create() {
-      const newId =
-        Math.max.apply(
-          Math,
-          this.aliases.map(a => a.id),
-        ) + 1;
-      const newAlias = {
-        id: newId,
-        name: '',
+      const placeholder = {
+        id: `placeholder-${Math.floor(Math.random() * 1e7)}`,
         disabled: true,
       };
-      this.aliases.push(newAlias);
+      this.aliases.push(placeholder);
       return (
         this.createNewAlias()
           .then(resp => {
-            const { id } = resp.data;
-            newAlias.disabled = false;
-            newAlias.id = id;
+            const insertAt = this.aliases.indexOf(placeholder);
+            this.aliases.splice(insertAt, 1, resp.data);
           })
           // TODO: display error state.
           .catch()
