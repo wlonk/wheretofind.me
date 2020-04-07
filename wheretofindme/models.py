@@ -1,6 +1,5 @@
 from collections import defaultdict
 
-from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
@@ -186,17 +185,7 @@ ICON_HUMAN_NAMES = {
 QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
 
 
-class UserQuerySet(models.QuerySet):
-    pass
-
-
-class UserManager(BaseUserManager.from_queryset(UserQuerySet)):
-    pass
-
-
 class User(AbstractUser):
-    objects = UserManager()
-
     search_enabled = models.BooleanField(default=False)
 
     def follows(self):
