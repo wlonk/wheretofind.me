@@ -11,7 +11,7 @@ Server development
 
 You will need:
 
-* Python 3.7 or later (``brew install python@3.7``)
+* Python 3.8 or later (``brew install python@3.8``)
 * Pipenv (``brew install pipenv``)
 * PostgreSQL (``brew install postgres`` or Postgres.app_)
 * yarn (``brew install yarn``)
