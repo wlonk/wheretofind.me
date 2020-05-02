@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.7.2-node
+      - image: circleci/python:3.8.2-node
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -50,7 +50,7 @@ jobs:
         
   test-server:
     docker:
-      - image: circleci/python:3.7.2
+      - image: circleci/python:3.8.2
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -79,7 +79,7 @@ jobs:
 
   test-client:
     docker:
-      - image: circleci/python:3.7.2-node
+      - image: circleci/python:3.8.2-node
 
     working_directory: ~/repo
 
