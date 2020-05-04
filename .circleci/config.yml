@@ -18,13 +18,13 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - v2-dependencies-py-
+          - v3-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - v3-dependencies-py-
 
       - restore_cache:
           keys:
-          - v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v2-dependencies-js-
+          - v3-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v3-dependencies-js-
 
       - run:
           name: Install Python dependencies
@@ -40,13 +40,13 @@ jobs:
       - save_cache:
           paths:
             - ".venv"
-          key: v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: v3-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v3-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
@@ -69,8 +69,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          - v2-dependencies-py-
+          - v3-dependencies-py-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          - v3-dependencies-py-
 
       - run:
           name: run python tests
@@ -88,8 +88,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v2-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v2-dependencies-js-
+          - v3-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v3-dependencies-js-
 
       - run:
           name: run javascript tests
