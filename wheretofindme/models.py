@@ -20,6 +20,8 @@ ICONS = defaultdict(
         "keybase.io": "fab fa-keybase",
         "www.keybase.io": "fab fa-keybase",
         "mastodon.social": "fab fa-mastodon",
+        "pixelfed.social": "fa fa-pixelfed",
+        "element.io": "fa fa-matrix-org",
         "plus.google.com": "fab fa-google-plus-g",
         "twitch.tv": "fab fa-twitch",
         "www.twitch.tv": "fab fa-twitch",
@@ -114,10 +116,12 @@ ICON_CHOICES = (
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
+    ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
+    ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
     ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
     ("fab fa-reddit", "fab fa-reddit"),  # Reddit
     ("fab fa-skype", "fab fa-skype"),  # Skype
@@ -159,10 +163,12 @@ ICON_HUMAN_NAMES = {
     "kickstarter": "Kickstarter",
     "lastfm": "Last",
     "mastodon": "Mastodon",
+    "matrix-org": "Matrix",
     "medium": "Medium",
     "patreon": "Patreon",
     "paypal": "Paypal",
     "pinterest": "Pinterest",
+    "pixelfed": "Pixelfed",
     "ravelry": "Ravelry",
     "reddit": "Reddit",
     "skype": "Skype",

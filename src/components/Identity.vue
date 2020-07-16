@@ -135,10 +135,12 @@
               <option value="fab fa-kickstarter">Kickstarter</option>
               <option value="fab fa-lastfm">Last</option>
               <option value="fab fa-mastodon">Mastodon</option>
+              <option value="fa fa-matrix-org">Matrix</option>
               <option value="fab fa-medium">Medium</option>
               <option value="fab fa-patreon">Patreon</option>
               <option value="fab fa-paypal">Paypal</option>
               <option value="fab fa-pinterest">Pinterest</option>
+              <option value="fa fa-pixelfed">Pixelfed</option>
               <option value="fab fa-ravelry">Ravelry</option>
               <option value="fab fa-reddit">Reddit</option>
               <option value="fab fa-skype">Skype</option>
