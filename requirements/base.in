@@ -4,7 +4,7 @@ psycopg2-binary~=2.8
 pytz==2020.1
 whitenoise~=4.1
 django-crispy-forms~=1.8
-Django~=2.2
+Django~=3.0
 django-registration~=3.0
 django-sendgrid-v5~=0.8
 djangorestframework~=3.10

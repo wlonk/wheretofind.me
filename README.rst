@@ -37,6 +37,10 @@ Set up your virtualenv with your preferred method. For me, using
    $ pip install pip-tools
    $ pip-sync requirements/dev.txt requirements/base.txt
 
+You'll have to read the contents of your ``.env`` file into your local
+shell's environment. You may want to set up a system to do this each
+time you activate this virtualenv.
+
 Then get the database into a good state::
 
    $ python manage.py migrate
@@ -55,8 +59,7 @@ Dependencies
 To add Python dependencies, add them to ``requirements/{dev,base}.in``,
 then recompile the locks::
 
-   $ pip-compile requirements/base.in
-   $ pip-compile requirements/dev.in
+   $ pip-compile requirements/base.in && pip-compile requirements/dev.in
 
 To add JavaScript dependencies::
 
