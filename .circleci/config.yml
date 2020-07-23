@@ -29,8 +29,8 @@ jobs:
       - run:
           name: Install Python dependencies
           command: |
-            sudo pip install pipenv
-            pipenv install --dev
+            sudo pip install pip-tools
+            pip-sync requirements/dev.txt requirements/base.txt
 
       - run:
           name: Install Javascript dependencies
@@ -75,7 +75,7 @@ jobs:
       - run:
           name: run python tests
           command: |
-            pipenv run pytest
+            pytest
 
   test-client:
     docker:

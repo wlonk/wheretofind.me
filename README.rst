@@ -12,9 +12,9 @@ Server development
 You will need:
 
 * Python 3.8 or later (``brew install python@3.8``)
-* Pipenv (``brew install pipenv``)
 * PostgreSQL (``brew install postgres`` or Postgres.app_)
 * yarn (``brew install yarn``)
+* virtualenv
 
 .. _Postgres.app: https://postgresapp.com/
 
@@ -29,10 +29,17 @@ root::
    export DJANGO_DEBUG=True
    export SENDGRID_API_KEY=INVALID
 
-Use ``pipenv`` to get the database into a good state::
+Set up your virtualenv with your preferred method. For me, using
+``virtualenvwrapper`` and ``pyenv``, this looks like::
 
-   $ pipenv sync --dev
-   $ pipenv run python manage.py migrate
+   $ mkvirtualenv wheretofindme --python=$(pyenv which python3.8)
+   $ setvirtualenvproject
+   $ pip install pip-tools
+   $ pip-sync requirements/dev.txt requirements/base.txt
+
+Then get the database into a good state::
+
+   $ python manage.py migrate
 
 Then get the frontend building::
 
@@ -45,9 +52,11 @@ terminal output will say ``:8080``, but ignore it, it's a liar.
 Dependencies
 ------------
 
-To add Python dependencies::
+To add Python dependencies, add them to ``requirements/{dev,base}.in``,
+then recompile the locks::
 
-   $ pipenv install (--dev) <dep name>
+   $ pip-compile requirements/base.in
+   $ pip-compile requirements/dev.in
 
 To add JavaScript dependencies::
 
