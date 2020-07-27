@@ -39,7 +39,8 @@ Set up your virtualenv with your preferred method. For me, using
 
 You'll have to read the contents of your ``.env`` file into your local
 shell's environment. You may want to set up a system to do this each
-time you activate this virtualenv.
+time you activate this virtualenv. For one way to do this, see
+:ref:`env-vars` below.
 
 Then get the database into a good state::
 
@@ -77,3 +78,24 @@ You can run them easily with ``yarn js:test:unit``.
 
 We require 100% test coverage on both parts. We will gladly help you
 with any test-writing issues you may have.
+
+.. _env-vars:
+
+Setting environment variables automatically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you use ``virtualenvwrapper``, one way to automatically set your
+environment variables when you activate your virtualenv is to use the
+``postactivate`` hook. Having activated your virtualenv, edit
+``$VIRTUAL_ENV/bin/postactivate`` to contain the following code::
+
+   if [[ -e .env ]]; then
+       # Strip comment lines out of the .env file, and read
+       # the rest in to the environment.
+       export $(grep -v "^[ \t]*#" .env)
+   fi
+
+This will read your ``.env`` file into your shell's environment each
+time you activate the virtualenv. It does no cleanup on deactivation; I
+must admit I've never found that important enough to be worth the
+trouble of implementing!
