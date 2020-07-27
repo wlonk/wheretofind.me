@@ -1,0 +1,10 @@
+isort
+black==19.10b0
+flake8
+ipython
+pytest
+pytest-django
+pytest-factoryboy
+pytest-cov
+sphinx
+beautifulsoup4

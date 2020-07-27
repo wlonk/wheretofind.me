@@ -12,9 +12,9 @@ Server development
 You will need:
 
 * Python 3.8 or later (``brew install python@3.8``)
-* Pipenv (``brew install pipenv``)
 * PostgreSQL (``brew install postgres`` or Postgres.app_)
 * yarn (``brew install yarn``)
+* virtualenv
 
 .. _Postgres.app: https://postgresapp.com/
 
@@ -29,10 +29,22 @@ root::
    export DJANGO_DEBUG=True
    export SENDGRID_API_KEY=INVALID
 
-Use ``pipenv`` to get the database into a good state::
+Set up your virtualenv with your preferred method. For me, using
+``virtualenvwrapper`` and ``pyenv``, this looks like::
 
-   $ pipenv sync --dev
-   $ pipenv run python manage.py migrate
+   $ mkvirtualenv wheretofindme --python=$(pyenv which python3.8)
+   $ setvirtualenvproject
+   $ pip install pip-tools
+   $ pip-sync requirements/dev.txt requirements/base.txt
+
+You'll have to read the contents of your ``.env`` file into your local
+shell's environment. You may want to set up a system to do this each
+time you activate this virtualenv. For one way to do this, see
+:ref:`env-vars` below.
+
+Then get the database into a good state::
+
+   $ python manage.py migrate
 
 Then get the frontend building::
 
@@ -45,9 +57,10 @@ terminal output will say ``:8080``, but ignore it, it's a liar.
 Dependencies
 ------------
 
-To add Python dependencies::
+To add Python dependencies, add them to ``requirements/{dev,base}.in``,
+then recompile the locks::
 
-   $ pipenv install (--dev) <dep name>
+   $ pip-compile requirements/base.in && pip-compile requirements/dev.in
 
 To add JavaScript dependencies::
 
@@ -65,3 +78,24 @@ You can run them easily with ``yarn js:test:unit``.
 
 We require 100% test coverage on both parts. We will gladly help you
 with any test-writing issues you may have.
+
+.. _env-vars:
+
+Setting environment variables automatically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you use ``virtualenvwrapper``, one way to automatically set your
+environment variables when you activate your virtualenv is to use the
+``postactivate`` hook. Having activated your virtualenv, edit
+``$VIRTUAL_ENV/bin/postactivate`` to contain the following code::
+
+   if [[ -e .env ]]; then
+       # Strip comment lines out of the .env file, and read
+       # the rest in to the environment.
+       export $(grep -v "^[ \t]*#" .env)
+   fi
+
+This will read your ``.env`` file into your shell's environment each
+time you activate the virtualenv. It does no cleanup on deactivation; I
+must admit I've never found that important enough to be worth the
+trouble of implementing!
