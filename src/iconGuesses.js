@@ -24,7 +24,11 @@ const iconGuesses = [
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('blogger.com'),
-    val: 'fab fa-blogger',
+    val: 'fab fa-blogger-b',
+  },
+  {
+    fn: url => parseUrl(url).hostname.endsWith('blogspot.com'),
+    val: 'fab fa-blogger-b',
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('bitbucket.org'),

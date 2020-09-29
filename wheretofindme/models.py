@@ -99,6 +99,9 @@ ICONS = defaultdict(
         "500px.com": "fab fa-500px",
         "www.500px.com": "fab fa-500px",
         "bandcamp.com": "fab fa-bandcamp",
+        "blogspot.com": "fab fa-blogger-b",
+        "blogger.com": "fab fa-blogger-b",
+        "www.blogger.com": "fab fa-blogger-b",
     },
 )
 
@@ -110,6 +113,7 @@ ICON_CHOICES = (
     ("fab fa-bandcamp", "fab fa-bandcamp"),  # BandCamp
     ("fab fa-behance", "fab fa-behance"),  # Behance
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
+    ("fab fa-blogger-b", "fab fa-blogger-b"),  # Blogger
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
     ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
@@ -160,6 +164,7 @@ ICON_HUMAN_NAMES = {
     "bandcamp": "BandCamp",
     "behance": "Behance",
     "bitbucket": "Bitbucket",
+    "blogger-b": "Blogger",
     "codepen": "Codepen",
     "deviantart": "Deviantart",
     "diaspora": "Diaspora",

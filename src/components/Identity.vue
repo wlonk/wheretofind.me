@@ -121,6 +121,7 @@
               <option value="fab fa-bandcamp">BandCamp</option>
               <option value="fab fa-behance">Behance</option>
               <option value="fab fa-bitbucket">Bitbucket</option>
+              <option value="fab fa-blogger-b">Blogger</option>
               <option value="fab fa-codepen">Codepen</option>
               <option value="fab fa-deviantart">Deviantart</option>
               <option value="fab fa-diaspora">Diaspora</option>
