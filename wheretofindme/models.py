@@ -113,6 +113,8 @@ ICONS = defaultdict(
         "news.ycombinator.com": "fab fa-hacker-news-square",
         "hackerrank.com": "fab fa-hackerrank",
         "www.hackerrank.com": "fab fa-hackerrank",
+        "jsfiddle.net": "fab fa-jsfiddle",
+        "www.jsfiddle.net": "fab fa-jsfiddle",
     },
 )
 
@@ -144,6 +146,7 @@ ICON_CHOICES = (
     ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
+    ("fab fa-jsfiddle", "fab fa-jsfiddle"),  # JSFiddle
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
@@ -201,6 +204,7 @@ ICON_HUMAN_NAMES = {
     "hacker-news-square": "Hacker News",
     "hackerrank": "HackerRank",
     "instagram": "Instagram",
+    "jsfiddle": "JSFiddle",
     "keybase": "Keybase",
     "kickstarter": "Kickstarter",
     "lastfm": "Last",

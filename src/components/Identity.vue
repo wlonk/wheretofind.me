@@ -141,6 +141,7 @@
               <option value="fab fa-hacker-news-square">HackerNews</option>
               <option value="fab fa-hackerrank">HackerRank</option>
               <option value="fab fa-instagram">Instagram</option>
+              <option value="fab fa-jsfiddle">JSFiddle</option>
               <option value="fab fa-keybase">Keybase</option>
               <option value="fab fa-kickstarter">Kickstarter</option>
               <option value="fab fa-lastfm">Last</option>
