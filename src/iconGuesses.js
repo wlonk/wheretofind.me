@@ -72,6 +72,10 @@ const iconGuesses = [
     val: 'fab fa-lastfm',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('matrix.to'),
+    val: 'fa fa-matrix-org',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('medium.com'),
     val: 'fab fa-medium',
   },

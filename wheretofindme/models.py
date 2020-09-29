@@ -21,7 +21,7 @@ ICONS = defaultdict(
         "www.keybase.io": "fab fa-keybase",
         "mastodon.social": "fab fa-mastodon",
         "pixelfed.social": "fa fa-pixelfed",
-        "element.io": "fa fa-matrix-org",
+        "matrix.to": "fa fa-matrix-org",
         "plus.google.com": "fab fa-google-plus-g",
         "twitch.tv": "fab fa-twitch",
         "www.twitch.tv": "fab fa-twitch",
