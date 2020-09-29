@@ -229,6 +229,10 @@ const iconGuesses = [
     val: 'fab fa-paypal',
   },
   {
+    fn: url => parseUrl(url).hostname.includes('pixelfed'),
+    val: 'fa fa-pixelfed',
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('pora'),
     val: 'fab fa-diaspora',
   },
