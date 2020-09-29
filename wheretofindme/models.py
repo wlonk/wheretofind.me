@@ -108,6 +108,8 @@ ICONS = defaultdict(
         "www.figma.com": "fab fa-figma",
         "flickr.com": "fab fa-flickr",
         "www.flickr.com": "fab fa-flickr",
+        "foursquare.com": "fab fa-foursquare",
+        "www.foursquare.com": "fab fa-foursquare",
     },
 )
 
@@ -131,6 +133,7 @@ ICON_CHOICES = (
     ("fab fa-facebook", "fab fa-facebook"),  # Facebook
     ("fab fa-figma", "fab fa-figma"),  # Figma
     ("fab fa-flickr", "fab fa-flickr"),  # Flickr
+    ("fab fa-foursquare", "fab fa-foursquare"),  # Foursquare
     ("fab fa-github", "fab fa-github"),  # GitHub
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
@@ -185,6 +188,7 @@ ICON_HUMAN_NAMES = {
     "facebook": "Facebook",
     "figma": "Figma",
     "flickr": "Flickr",
+    "foursquare": "Foursquare",
     "github": "GitHub",
     "gitlab": "Gitlab",
     "goodreads": "Goodreads",
