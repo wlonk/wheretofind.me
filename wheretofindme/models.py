@@ -143,6 +143,7 @@ ICONS = defaultdict(
         "www.vk.com": "fab fa-vk",
         "wikipedia.org": "fab fa-wikipedia-w",
         "en.wikipedia.org": "fab fa-wikipedia-w",
+        "wordpress.com": "fab fa-wordpress-simple",
     },
 )
 
@@ -215,6 +216,7 @@ ICON_CHOICES = (
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-vk", "fab fa-vk"),  # VK
     ("fab fa-wikipedia-w", "fab fa-wikipedia-w"),  # Wikipedia
+    ("fab fa-wordpress-simple", "fab fa-wordpress-simple"),  # Wordpress
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
 )
 
@@ -287,6 +289,7 @@ ICON_HUMAN_NAMES = {
     "vimeo": "Vimeo",
     "vk": "VK",
     "wikipedia-w": "Wikipedia",
+    "wordpress-simple": "Wordpress",
     "youtube": "YouTube",
 }
 

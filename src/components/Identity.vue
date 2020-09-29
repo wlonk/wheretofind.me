@@ -182,6 +182,7 @@
               <option value="fab fa-vimeo">Vimeo</option>
               <option value="fab fa-vk">VK</option>
               <option value="fab fa-wikipedia-w">Wikipedia</option>
+              <option value="fab fa-wordpress-simple">Wordpress</option>
               <option value="fab fa-youtube">YouTube</option>
             </select>
           </div>

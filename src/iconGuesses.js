@@ -280,6 +280,10 @@ const iconGuesses = [
     fn: url => parseUrl(url).hostname.includes('telegram'),
     val: 'fab fa-telegram-plane',
   },
+  {
+    fn: url => parseUrl(url).hostname.includes('wordpress'),
+    val: 'fab fa-wordpress-simple',
+  },
 
   { fn: url => parseUrl(url).protocol === 'mailto:', val: 'fas fa-envelope' },
 ];
