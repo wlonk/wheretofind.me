@@ -115,6 +115,8 @@ ICONS = defaultdict(
         "www.hackerrank.com": "fab fa-hackerrank",
         "jsfiddle.net": "fab fa-jsfiddle",
         "www.jsfiddle.net": "fab fa-jsfiddle",
+        "kaggle.com": "fab fa-kaggle",
+        "www.kaggle.com": "fab fa-kaggle",
     },
 )
 
@@ -147,6 +149,7 @@ ICON_CHOICES = (
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
     ("fab fa-jsfiddle", "fab fa-jsfiddle"),  # JSFiddle
+    ("fab fa-kaggle", "fab fa-kaggle"),  # Kaggle
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
@@ -205,6 +208,7 @@ ICON_HUMAN_NAMES = {
     "hackerrank": "HackerRank",
     "instagram": "Instagram",
     "jsfiddle": "JSFiddle",
+    "kaggle": "Kaggle",
     "keybase": "Keybase",
     "kickstarter": "Kickstarter",
     "lastfm": "Last",

@@ -100,6 +100,10 @@ const iconGuesses = [
     val: 'fab fa-jsfiddle',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('kaggle.com'),
+    val: 'fab fa-kaggle',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('keybase.io'),
     val: 'fab fa-keybase',
   },
