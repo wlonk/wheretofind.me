@@ -131,6 +131,8 @@ ICONS = defaultdict(
         "www.slideshare.net": "fab fa-slideshare",
         "spotify.com": "fab fa-spotify",
         "open.spotify.com": "fab fa-spotify",
+        "stackexchange.com": "fab fa-stack-exchange",
+        "www.stackexchange.com": "fab fa-stack-exchange",
     },
 )
 
@@ -188,6 +190,7 @@ ICON_CHOICES = (
     ("fab fa-snapchat-ghost", "fab fa-snapchat-ghost"),  # Snapchat
     ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
     ("fab fa-spotify", "fab fa-spotify"),  # Spotify
+    ("fab fa-stack-exchange", "fab fa-stack-exchange"),  # Stack Exchange
     ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
     ("fab fa-steam", "fab fa-steam"),  # Steam
     ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
@@ -254,6 +257,7 @@ ICON_HUMAN_NAMES = {
     "snapchat-ghost": "Snapchat",
     "soundcloud": "Soundcloud",
     "spotify": "Spotify",
+    "stack-exchange": "Stack Exchange",
     "stack-overflow": "Stack Overflow",
     "steam": "Steam",
     "teamspeak": "Teamspeak",

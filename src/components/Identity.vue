@@ -167,6 +167,7 @@
               <option value="fab fa-snapchat-ghost">Snapchat</option>
               <option value="fab fa-soundcloud">Soundcloud</option>
               <option value="fab fa-spotify">Spotify</option>
+              <option value="fab fa-stack-exchange">Stack Exchange</option>
               <option value="fab fa-stack-overflow">Stack Overflow</option>
               <option value="fab fa-steam">Steam</option>
               <option value="fab fa-teamspeak">Teamspeak</option>
