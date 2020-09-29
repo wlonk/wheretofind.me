@@ -92,6 +92,8 @@ ICONS = defaultdict(
         "t.me": "fab fa-telegram-plane",
         "linkedin.com": "fab fa-linkedin",
         "www.linkedin.com": "fab fa-linkedin",
+        "paypal.me": "fab fa-paypal",
+        "www.paypal.me": "fab fa-paypal",
     },
 )
 

@@ -88,10 +88,6 @@ const iconGuesses = [
     val: 'fab fa-patreon',
   },
   {
-    fn: url => parseUrl(url).hostname.endsWith('paypal.com'),
-    val: 'fab fa-paypal',
-  },
-  {
     fn: url => parseUrl(url).hostname.endsWith('pinterest.com'),
     val: 'fab fa-pinterest',
   },
@@ -164,6 +160,10 @@ const iconGuesses = [
     val: 'fab fa-youtube',
   },
 
+  {
+    fn: url => parseUrl(url).hostname.includes('paypal'),
+    val: 'fab fa-paypal',
+  },
   {
     fn: url => parseUrl(url).hostname.includes('pora'),
     val: 'fab fa-diaspora',
