@@ -148,6 +148,8 @@ ICONS = defaultdict(
         "drive.google.com": "fab fa-google-drive",
         "flipboard.com": "fab fa-flipboard",
         "www.flipboard.com": "fab fa-flipboard",
+        "dailymotion.com": "fab fa-dailymotion",
+        "www.dailymotion.com": "fab fa-dailymotion",
     },
 )
 
@@ -161,6 +163,7 @@ ICON_CHOICES = (
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-blogger-b", "fab fa-blogger-b"),  # Blogger
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
+    ("fab fa-dailymotion", "fab fa-dailymotion"),  # DailyMotion
     ("fab fa-dev", "fab fa-dev"),  # DEV.to
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
     ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
@@ -237,6 +240,7 @@ ICON_HUMAN_NAMES = {
     "bitbucket": "Bitbucket",
     "blogger-b": "Blogger",
     "codepen": "Codepen",
+    "dailymotion": "DailyMotion",
     "dev": "DEV.to",
     "deviantart": "Deviantart",
     "diaspora": "Diaspora",
