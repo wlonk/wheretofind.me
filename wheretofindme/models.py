@@ -123,6 +123,8 @@ ICONS = defaultdict(
         "www.npmjs.com": "fab fa-npm",
         "periscope.tv": "fab fa-periscope",
         "www.periscope.tv": "fab fa-periscope",
+        "producthunt.com": "fab fa-product-hunt",
+        "www.producthunt.com": "fab fa-product-hunt",
     },
 )
 
@@ -170,6 +172,7 @@ ICON_CHOICES = (
     ("fab fa-periscope", "fab fa-periscope"),  # Periscope
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
+    ("fab fa-product-hunt", "fab fa-product-hunt"),  # Product Hunt
     ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
     ("fab fa-reddit", "fab fa-reddit"),  # Reddit
     ("fab fa-skype", "fab fa-skype"),  # Skype
@@ -232,6 +235,7 @@ ICON_HUMAN_NAMES = {
     "periscope": "Periscope",
     "pinterest": "Pinterest",
     "pixelfed": "Pixelfed",
+    "product-hunt": "Product Hunt",
     "ravelry": "Ravelry",
     "reddit": "Reddit",
     "skype": "Skype",

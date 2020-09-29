@@ -157,6 +157,7 @@
               <option value="fab fa-periscope">Periscope</option>
               <option value="fab fa-pinterest">Pinterest</option>
               <option value="fa fa-pixelfed">Pixelfed</option>
+              <option value="fab fa-product-hunt">Product Hunt</option>
               <option value="fab fa-ravelry">Ravelry</option>
               <option value="fab fa-reddit">Reddit</option>
               <option value="fab fa-skype">Skype</option>
