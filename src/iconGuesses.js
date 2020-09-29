@@ -64,6 +64,10 @@ const iconGuesses = [
     val: 'fab fa-facebook',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('figma.com'),
+    val: 'fab fa-figma',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('github.com'),
     val: 'fab fa-github',
   },
