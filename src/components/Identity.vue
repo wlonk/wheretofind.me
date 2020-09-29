@@ -145,6 +145,7 @@
               <option value="fab fa-hacker-news-square">HackerNews</option>
               <option value="fab fa-hackerrank">HackerRank</option>
               <option value="fab fa-instagram">Instagram</option>
+              <option value="fab fa-itch-io">Itch.io</option>
               <option value="fab fa-jsfiddle">JSFiddle</option>
               <option value="fab fa-kaggle">Kaggle</option>
               <option value="fab fa-keybase">Keybase</option>

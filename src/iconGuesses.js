@@ -108,6 +108,10 @@ const iconGuesses = [
     val: 'fab fa-instagram',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('itch.io'),
+    val: 'fab fa-itch-io',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('jsfiddle.net'),
     val: 'fab fa-jsfiddle',
   },

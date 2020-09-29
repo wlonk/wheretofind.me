@@ -150,6 +150,7 @@ ICONS = defaultdict(
         "www.flipboard.com": "fab fa-flipboard",
         "dailymotion.com": "fab fa-dailymotion",
         "www.dailymotion.com": "fab fa-dailymotion",
+        "itch.io": "fab fa-itch-io",
     },
 )
 
@@ -185,6 +186,7 @@ ICON_CHOICES = (
     ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
+    ("fab fa-itch-io", "fab fa-itch-io"),  # itch.io
     ("fab fa-jsfiddle", "fab fa-jsfiddle"),  # JSFiddle
     ("fab fa-kaggle", "fab fa-kaggle"),  # Kaggle
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
@@ -262,6 +264,7 @@ ICON_HUMAN_NAMES = {
     "hacker-news-square": "Hacker News",
     "hackerrank": "HackerRank",
     "instagram": "Instagram",
+    "itch-io": "itch.io",
     "jsfiddle": "JSFiddle",
     "kaggle": "Kaggle",
     "keybase": "Keybase",
