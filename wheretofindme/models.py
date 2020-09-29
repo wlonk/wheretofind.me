@@ -94,12 +94,15 @@ ICONS = defaultdict(
         "www.linkedin.com": "fab fa-linkedin",
         "paypal.me": "fab fa-paypal",
         "www.paypal.me": "fab fa-paypal",
+        "angel.co": "fab fa-angellist",
+        "www.angel.co": "fab fa-angellist",
     },
 )
 
 ICON_CHOICES = (
     ("fas fa-link", "fas fa-link"),  # web
     ("fas fa-envelope", "fas fa-envelope"),  # email
+    ("fab fa-angellist", "fab fa-angellist"),  # AngelList
     ("fab fa-behance", "fab fa-behance"),  # Behance
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
@@ -147,6 +150,7 @@ ICON_CHOICES = (
 ICON_HUMAN_NAMES = {
     "link": "web",
     "envelope": "email",
+    "angellist": "AngelList",
     "behance": "Behance",
     "bitbucket": "Bitbucket",
     "codepen": "Codepen",

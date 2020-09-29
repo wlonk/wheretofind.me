@@ -7,6 +7,10 @@ function parseUrl(url) {
 const iconGuesses = [
   { fn: () => true, val: 'fas fa-link' },
   {
+    fn: url => parseUrl(url).hostname.endsWith('angel.co'),
+    val: 'fab fa-angellist',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('behance.net'),
     val: 'fab fa-behance',
   },

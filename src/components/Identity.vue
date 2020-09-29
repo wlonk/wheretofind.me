@@ -116,6 +116,7 @@
             >
               <option value="fas fa-link">web</option>
               <option value="fas fa-envelope">email</option>
+              <option value="fab fa-angellist">AngelList</option>
               <option value="fab fa-behance">Behance</option>
               <option value="fab fa-bitbucket">Bitbucket</option>
               <option value="fab fa-codepen">Codepen</option>
