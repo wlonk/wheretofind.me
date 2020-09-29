@@ -160,6 +160,10 @@ const iconGuesses = [
     val: 'fab fa-google-plus-g',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('quora.com'),
+    val: 'fab fa-quora',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('ravelry.com'),
     val: 'fab fa-ravelry',
   },

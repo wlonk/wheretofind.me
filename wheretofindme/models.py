@@ -125,6 +125,8 @@ ICONS = defaultdict(
         "www.periscope.tv": "fab fa-periscope",
         "producthunt.com": "fab fa-product-hunt",
         "www.producthunt.com": "fab fa-product-hunt",
+        "quora.com": "fab fa-quora",
+        "www.quora.com": "fab fa-quora",
     },
 )
 
@@ -173,6 +175,7 @@ ICON_CHOICES = (
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
     ("fab fa-product-hunt", "fab fa-product-hunt"),  # Product Hunt
+    ("fab fa-quora", "fab fa-quora"),  # Quora
     ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
     ("fab fa-reddit", "fab fa-reddit"),  # Reddit
     ("fab fa-skype", "fab fa-skype"),  # Skype
@@ -236,6 +239,7 @@ ICON_HUMAN_NAMES = {
     "pinterest": "Pinterest",
     "pixelfed": "Pixelfed",
     "product-hunt": "Product Hunt",
+    "quora": "Quora",
     "ravelry": "Ravelry",
     "reddit": "Reddit",
     "skype": "Skype",
