@@ -156,6 +156,10 @@ const iconGuesses = [
     val: 'fab fa-product-hunt',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('play.google.com'),
+    val: 'fab fa-google-play',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('plus.google.com'),
     val: 'fab fa-google-plus-g',
   },

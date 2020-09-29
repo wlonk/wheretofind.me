@@ -137,6 +137,7 @@
               <option value="fab fa-github">GitHub</option>
               <option value="fab fa-gitlab">Gitlab</option>
               <option value="fab fa-goodreads">Goodreads</option>
+              <option value="fab fa-google-play">Google Play</option>
               <option value="fab fa-google-plus-g">Google Plus</option>
               <option value="fab fa-hacker-news-square">HackerNews</option>
               <option value="fab fa-hackerrank">HackerRank</option>
