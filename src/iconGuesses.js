@@ -224,6 +224,10 @@ const iconGuesses = [
     val: 'fab fa-trello',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('tripadvisor.com'),
+    val: 'fab fa-tripadvisor',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('tumblr.com'),
     val: 'fab fa-tumblr',
   },

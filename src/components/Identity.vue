@@ -174,6 +174,7 @@
               <option value="fab fa-teamspeak">Teamspeak</option>
               <option value="fab fa-telegram-plane">Telegram</option>
               <option value="fab fa-trello">Trello</option>
+              <option value="fab fa-tripadvisor">Tripadvisor</option>
               <option value="fab fa-tumblr">Tumblr</option>
               <option value="fab fa-twitch">Twitch</option>
               <option value="fab fa-twitter">Twitter</option>

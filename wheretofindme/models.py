@@ -137,6 +137,8 @@ ICONS = defaultdict(
         "www.strava.com": "fab fa-strava",
         "trello.com": "fab fa-trello",
         "www.trello.com": "fab fa-trello",
+        "tripadvisor.com": "fab fa-tripadvisor",
+        "www.tripadvisor.com": "fab fa-tripadvisor",
     },
 )
 
@@ -201,6 +203,7 @@ ICON_CHOICES = (
     ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
     ("fab fa-telegram-plane", "fab fa-telegram-plane"),  # Telegram
     ("fab fa-trello", "fab fa-trello"),  # Trello
+    ("fab fa-tripadvisor", "fab fa-tripadvisor"),  # Trip Advisor
     ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
     ("fab fa-twitch", "fab fa-twitch"),  # Twitch
     ("fab fa-twitter", "fab fa-twitter"),  # Twitter
@@ -270,6 +273,7 @@ ICON_HUMAN_NAMES = {
     "teamspeak": "Teamspeak",
     "telegram-plane": "Telegram",
     "trello": "Trello",
+    "tripadvisor": "Trip Advisor",
     "tumblr": "Tumblr",
     "twitch": "Twitch",
     "twitter": "Twitter",
