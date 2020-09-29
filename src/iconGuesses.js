@@ -132,6 +132,10 @@ const iconGuesses = [
     val: 'fab fa-steam',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('t.me'),
+    val: 'fab fa-telegram-plane',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('teamspeak.com'),
     val: 'fab fa-teamspeak',
   },
@@ -167,6 +171,10 @@ const iconGuesses = [
   {
     fn: url => parseUrl(url).hostname.includes('mastodon'),
     val: 'fab fa-mastodon',
+  },
+  {
+    fn: url => parseUrl(url).hostname.includes('telegram'),
+    val: 'fab fa-telegram-plane',
   },
 
   { fn: url => parseUrl(url).protocol === 'mailto:', val: 'fas fa-envelope' },

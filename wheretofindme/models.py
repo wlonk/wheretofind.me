@@ -87,8 +87,9 @@ ICONS = defaultdict(
         "www.ravelry.com": "fab fa-ravelry",
         "last.fm": "fab fa-lastfm",
         "www.last.fm": "fab fa-lastfm",
-        "telegram.org": "fab fa-telegram",
-        "www.telegram.org": "fab fa-telegram",
+        "telegram.dog": "fab fa-telegram-plane",
+        "telegram.me": "fab fa-telegram-plane",
+        "t.me": "fab fa-telegram-plane",
         "linkedin.com": "fab fa-linkedin",
         "www.linkedin.com": "fab fa-linkedin",
     },
@@ -132,13 +133,13 @@ ICON_CHOICES = (
     ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
     ("fab fa-steam", "fab fa-steam"),  # Steam
     ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
+    ("fab fa-telegram-plane", "fab fa-telegram-plane"),  # Telegram
     ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
     ("fab fa-twitch", "fab fa-twitch"),  # Twitch
     ("fab fa-twitter", "fab fa-twitter"),  # Twitter
     ("fab fa-untappd", "fab fa-untappd"),  # Untappd
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
-    ("fab fa-telegram", "fab fa-telegram"),  # Telegram
 )
 
 ICON_HUMAN_NAMES = {
@@ -179,13 +180,13 @@ ICON_HUMAN_NAMES = {
     "stack-overflow": "Stack Overflow",
     "steam": "Steam",
     "teamspeak": "Teamspeak",
+    "telegram-plane": "Telegram",
     "tumblr": "Tumblr",
     "twitch": "Twitch",
     "twitter": "Twitter",
     "untappd": "Untappd",
     "vimeo": "Vimeo",
     "youtube": "YouTube",
-    "telegram": "Telegram",
 }
 
 QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
