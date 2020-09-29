@@ -151,6 +151,8 @@ ICONS = defaultdict(
         "dailymotion.com": "fab fa-dailymotion",
         "www.dailymotion.com": "fab fa-dailymotion",
         "itch.io": "fab fa-itch-io",
+        "unsplash.com": "fab fa-unsplash",
+        "www.unsplash.com": "fab fa-unsplash",
     },
 )
 
@@ -224,6 +226,7 @@ ICON_CHOICES = (
     ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
     ("fab fa-twitch", "fab fa-twitch"),  # Twitch
     ("fab fa-twitter", "fab fa-twitter"),  # Twitter
+    ("fab fa-unsplash", "fab fa-unsplash"),  # Unsplash
     ("fab fa-untappd", "fab fa-untappd"),  # Untappd
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-vk", "fab fa-vk"),  # VK
@@ -302,6 +305,7 @@ ICON_HUMAN_NAMES = {
     "tumblr": "Tumblr",
     "twitch": "Twitch",
     "twitter": "Twitter",
+    "unsplash": "Unsplash",
     "untappd": "Untappd",
     "vimeo": "Vimeo",
     "vk": "VK",

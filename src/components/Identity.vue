@@ -183,6 +183,7 @@
               <option value="fab fa-tumblr">Tumblr</option>
               <option value="fab fa-twitch">Twitch</option>
               <option value="fab fa-twitter">Twitter</option>
+              <option value="fab fa-unsplash">Unsplash</option>
               <option value="fab fa-untappd">Untappd</option>
               <option value="fab fa-vimeo">Vimeo</option>
               <option value="fab fa-vk">VK</option>

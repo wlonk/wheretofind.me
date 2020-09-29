@@ -260,6 +260,10 @@ const iconGuesses = [
     val: 'fab fa-twitter',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('unsplash.com'),
+    val: 'fab fa-unsplash',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('untappd.com'),
     val: 'fab fa-untappd',
   },
