@@ -127,6 +127,8 @@ ICONS = defaultdict(
         "www.producthunt.com": "fab fa-product-hunt",
         "quora.com": "fab fa-quora",
         "www.quora.com": "fab fa-quora",
+        "slideshare.net": "fab fa-slideshare",
+        "www.slideshare.net": "fab fa-slideshare",
     },
 )
 
@@ -180,6 +182,7 @@ ICON_CHOICES = (
     ("fab fa-reddit", "fab fa-reddit"),  # Reddit
     ("fab fa-skype", "fab fa-skype"),  # Skype
     ("fab fa-slack", "fab fa-slack"),  # Slack
+    ("fab fa-slideshare", "fab fa-slideshare"),  # SlideShare
     ("fab fa-snapchat", "fab fa-snapchat"),  # Snapchat
     ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
     ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
@@ -244,6 +247,7 @@ ICON_HUMAN_NAMES = {
     "reddit": "Reddit",
     "skype": "Skype",
     "slack": "Slack",
+    "slideshare": "SlideShare",
     "snapchat": "Snapchat",
     "soundcloud": "Soundcloud",
     "stack-overflow": "Stack Overflow",

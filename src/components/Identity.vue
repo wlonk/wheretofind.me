@@ -163,6 +163,7 @@
               <option value="fab fa-reddit">Reddit</option>
               <option value="fab fa-skype">Skype</option>
               <option value="fab fa-slack">Slack</option>
+              <option value="fab fa-slideshare">SlideShare</option>
               <option value="fab fa-snapchat">Snapchat</option>
               <option value="fab fa-soundcloud">Soundcloud</option>
               <option value="fab fa-stack-overflow">Stack Overflow</option>

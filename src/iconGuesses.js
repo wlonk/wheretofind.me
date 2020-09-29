@@ -180,6 +180,10 @@ const iconGuesses = [
     val: 'fab fa-slack',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('slideshare.net'),
+    val: 'fab fa-slideshare',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('snapchat.com'),
     val: 'fab fa-snapchat',
   },
