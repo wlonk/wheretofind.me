@@ -146,6 +146,8 @@ ICONS = defaultdict(
         "wordpress.com": "fab fa-wordpress-simple",
         "play.google.com": "fab fa-google-play",
         "drive.google.com": "fab fa-google-drive",
+        "flipboard.com": "fab fa-flipboard",
+        "www.flipboard.com": "fab fa-flipboard",
     },
 )
 
@@ -169,6 +171,7 @@ ICON_CHOICES = (
     ("fab fa-facebook", "fab fa-facebook"),  # Facebook
     ("fab fa-figma", "fab fa-figma"),  # Figma
     ("fab fa-flickr", "fab fa-flickr"),  # Flickr
+    ("fab fa-flipboard", "fab fa-flipboard"),  # Flipboard
     ("fab fa-foursquare", "fab fa-foursquare"),  # Foursquare
     ("fab fa-github", "fab fa-github"),  # GitHub
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
@@ -244,6 +247,7 @@ ICON_HUMAN_NAMES = {
     "facebook": "Facebook",
     "figma": "Figma",
     "flickr": "Flickr",
+    "flipboard": "Flipboard",
     "foursquare": "Foursquare",
     "github": "GitHub",
     "gitlab": "Gitlab",
