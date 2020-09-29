@@ -144,6 +144,10 @@ const iconGuesses = [
     val: 'fab fa-patreon',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('periscope.tv'),
+    val: 'fab fa-periscope',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('pinterest.com'),
     val: 'fab fa-pinterest',
   },

@@ -121,6 +121,8 @@ ICONS = defaultdict(
         "www.leanpub.com": "fab fa-leanpub",
         "npmjs.com": "fab fa-npm",
         "www.npmjs.com": "fab fa-npm",
+        "periscope.tv": "fab fa-periscope",
+        "www.periscope.tv": "fab fa-periscope",
     },
 )
 
@@ -165,6 +167,7 @@ ICON_CHOICES = (
     ("fab fa-npm", "fab fa-npm"),  # NPM
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
+    ("fab fa-periscope", "fab fa-periscope"),  # Periscope
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
     ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
@@ -226,6 +229,7 @@ ICON_HUMAN_NAMES = {
     "npm": "NPM",
     "patreon": "Patreon",
     "paypal": "Paypal",
+    "periscope": "Periscope",
     "pinterest": "Pinterest",
     "pixelfed": "Pixelfed",
     "ravelry": "Ravelry",
