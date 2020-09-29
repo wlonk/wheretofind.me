@@ -118,6 +118,7 @@
               <option value="fas fa-envelope">email</option>
               <option value="fab fa-500px">500px</option>
               <option value="fab fa-angellist">AngelList</option>
+              <option value="fab fa-bandcamp">BandCamp</option>
               <option value="fab fa-behance">Behance</option>
               <option value="fab fa-bitbucket">Bitbucket</option>
               <option value="fab fa-codepen">Codepen</option>

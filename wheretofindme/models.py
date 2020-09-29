@@ -98,6 +98,7 @@ ICONS = defaultdict(
         "www.angel.co": "fab fa-angellist",
         "500px.com": "fab fa-500px",
         "www.500px.com": "fab fa-500px",
+        "bandcamp.com": "fab fa-bandcamp",
     },
 )
 
@@ -106,6 +107,7 @@ ICON_CHOICES = (
     ("fas fa-envelope", "fas fa-envelope"),  # email
     ("fab fa-500px", "fab fa-500px"),  # 500px
     ("fab fa-angellist", "fab fa-angellist"),  # AngelList
+    ("fab fa-bandcamp", "fab fa-bandcamp"),  # BandCamp
     ("fab fa-behance", "fab fa-behance"),  # Behance
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
@@ -155,6 +157,7 @@ ICON_HUMAN_NAMES = {
     "envelope": "email",
     "500px": "500px",
     "angellist": "AngelList",
+    "bandcamp": "BandCamp",
     "behance": "Behance",
     "bitbucket": "Bitbucket",
     "codepen": "Codepen",

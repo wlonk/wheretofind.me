@@ -15,6 +15,10 @@ const iconGuesses = [
     val: 'fab fa-angellist',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('bandcamp.com'),
+    val: 'fab fa-bandcamp',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('behance.net'),
     val: 'fab fa-behance',
   },
