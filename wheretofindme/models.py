@@ -139,6 +139,8 @@ ICONS = defaultdict(
         "www.trello.com": "fab fa-trello",
         "tripadvisor.com": "fab fa-tripadvisor",
         "www.tripadvisor.com": "fab fa-tripadvisor",
+        "vk.com": "fab fa-vk",
+        "www.vk.com": "fab fa-vk",
     },
 )
 
@@ -209,6 +211,7 @@ ICON_CHOICES = (
     ("fab fa-twitter", "fab fa-twitter"),  # Twitter
     ("fab fa-untappd", "fab fa-untappd"),  # Untappd
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
+    ("fab fa-vk", "fab fa-vk"),  # VK
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
 )
 
@@ -279,6 +282,7 @@ ICON_HUMAN_NAMES = {
     "twitter": "Twitter",
     "untappd": "Untappd",
     "vimeo": "Vimeo",
+    "vk": "VK",
     "youtube": "YouTube",
 }
 

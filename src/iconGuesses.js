@@ -248,6 +248,10 @@ const iconGuesses = [
     val: 'fab fa-vimeo',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('vk.com'),
+    val: 'fab fa-vk',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('youtube.com'),
     val: 'fab fa-youtube',
   },

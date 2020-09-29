@@ -180,6 +180,7 @@
               <option value="fab fa-twitter">Twitter</option>
               <option value="fab fa-untappd">Untappd</option>
               <option value="fab fa-vimeo">Vimeo</option>
+              <option value="fab fa-vk">VK</option>
               <option value="fab fa-youtube">YouTube</option>
             </select>
           </div>
