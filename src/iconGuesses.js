@@ -220,6 +220,10 @@ const iconGuesses = [
     val: 'fab fa-teamspeak',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('trello.com'),
+    val: 'fab fa-trello',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('tumblr.com'),
     val: 'fab fa-tumblr',
   },
