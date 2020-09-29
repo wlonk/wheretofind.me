@@ -145,6 +145,7 @@ ICONS = defaultdict(
         "en.wikipedia.org": "fab fa-wikipedia-w",
         "wordpress.com": "fab fa-wordpress-simple",
         "play.google.com": "fab fa-google-play",
+        "drive.google.com": "fab fa-google-drive",
     },
 )
 
@@ -172,6 +173,7 @@ ICON_CHOICES = (
     ("fab fa-github", "fab fa-github"),  # GitHub
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
+    ("fab fa-google-drive", "fab fa-google-drive"),  # Google Drive
     ("fab fa-google-play", "fab fa-google-play"),  # Google Play
     ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
     ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
@@ -246,6 +248,7 @@ ICON_HUMAN_NAMES = {
     "github": "GitHub",
     "gitlab": "Gitlab",
     "goodreads": "Goodreads",
+    "google-drive": "Google Drive",
     "google-play": "Google Play",
     "google-plus-g": "Google Plus",
     "hacker-news-square": "Hacker News",

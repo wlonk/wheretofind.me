@@ -54,6 +54,10 @@ const iconGuesses = [
     fn: url => parseUrl(url).hostname.endsWith('dribbble.com'),
     val: 'fab fa-dribbble',
   },
+  {
+    fn: url => parseUrl(url).hostname.endsWith('drive.google.com'),
+    val: 'fab fa-google-drive',
+  },
   { fn: url => parseUrl(url).hostname.endsWith('ello.co'), val: 'fab fa-ello' },
   {
     fn: url => parseUrl(url).hostname.endsWith('etsy.com'),
