@@ -134,6 +134,7 @@
               <option value="fab fa-keybase">Keybase</option>
               <option value="fab fa-kickstarter">Kickstarter</option>
               <option value="fab fa-lastfm">Last</option>
+              <option value="fab fa-linkedin">LinkedIn</option>
               <option value="fab fa-mastodon">Mastodon</option>
               <option value="fa fa-matrix-org">Matrix</option>
               <option value="fab fa-medium">Medium</option>

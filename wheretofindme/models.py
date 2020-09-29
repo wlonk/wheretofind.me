@@ -115,6 +115,7 @@ ICON_CHOICES = (
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
+    ("fab fa-linkedin", "fab fa-linkedin"),  # LinkedIn
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
@@ -138,7 +139,6 @@ ICON_CHOICES = (
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
     ("fab fa-telegram", "fab fa-telegram"),  # Telegram
-    ("fab fa-linkedin", "fab fa-linkedin"),  # LinkedIn
 )
 
 ICON_HUMAN_NAMES = {
@@ -162,6 +162,7 @@ ICON_HUMAN_NAMES = {
     "keybase": "Keybase",
     "kickstarter": "Kickstarter",
     "lastfm": "Last",
+    "linkedin": "LinkedIn",
     "mastodon": "Mastodon",
     "matrix-org": "Matrix",
     "medium": "Medium",
@@ -185,7 +186,6 @@ ICON_HUMAN_NAMES = {
     "vimeo": "Vimeo",
     "youtube": "YouTube",
     "telegram": "Telegram",
-    "linkedin": "LinkedIn",
 }
 
 QUALITY_CHOICES = ((0, "low"), (1, "mid"), (2, "high"))
