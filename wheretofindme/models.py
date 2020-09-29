@@ -55,8 +55,8 @@ ICONS = defaultdict(
         "www.teamspeak.com": "fab fa-teamspeak",
         "steamcommunity.com": "fab fa-steam",
         "www.steamcommunity.com": "fab fa-steam",
-        "stackoverflow.com": "fab fa-stackoverflow",
-        "www.stackoverflow.com": "fab fa-stackoverflow",
+        "stackoverflow.com": "fab fa-stack-overflow",
+        "www.stackoverflow.com": "fab fa-stack-overflow",
         "soundcloud.com": "fab fa-soundcloud",
         "www.soundcloud.com": "fab fa-soundcloud",
         "snapchat.com": "fab fa-snapchat",
@@ -128,7 +128,7 @@ ICON_CHOICES = (
     ("fab fa-slack", "fab fa-slack"),  # Slack
     ("fab fa-snapchat", "fab fa-snapchat"),  # Snapchat
     ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
-    ("fab fa-stackoverflow", "fab fa-stackoverflow"),  # Stackoverflow
+    ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
     ("fab fa-steam", "fab fa-steam"),  # Steam
     ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
     ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
@@ -175,7 +175,7 @@ ICON_HUMAN_NAMES = {
     "slack": "Slack",
     "snapchat": "Snapchat",
     "soundcloud": "Soundcloud",
-    "stackoverflow": "Stackoverflow",
+    "stack-overflow": "Stack Overflow",
     "steam": "Steam",
     "teamspeak": "Teamspeak",
     "tumblr": "Tumblr",

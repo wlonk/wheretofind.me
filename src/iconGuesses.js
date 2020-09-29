@@ -121,7 +121,7 @@ const iconGuesses = [
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('stackoverflow.com'),
-    val: 'fab fa-stackoverflow',
+    val: 'fab fa-stack-overflow',
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('steamcommunity.com'),

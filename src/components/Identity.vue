@@ -147,7 +147,7 @@
               <option value="fab fa-slack">Slack</option>
               <option value="fab fa-snapchat">Snapchat</option>
               <option value="fab fa-soundcloud">Soundcloud</option>
-              <option value="fab fa-stackoverflow">Stackoverflow</option>
+              <option value="fab fa-stack-overflow">Stack Overflow</option>
               <option value="fab fa-steam">Steam</option>
               <option value="fab fa-teamspeak">Teamspeak</option>
               <option value="fab fa-tumblr">Tumblr</option>
