@@ -208,6 +208,10 @@ const iconGuesses = [
     val: 'fab fa-steam',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('strava.com'),
+    val: 'fab fa-strava',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('t.me'),
     val: 'fab fa-telegram-plane',
   },

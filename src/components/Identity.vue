@@ -170,6 +170,7 @@
               <option value="fab fa-stack-exchange">Stack Exchange</option>
               <option value="fab fa-stack-overflow">Stack Overflow</option>
               <option value="fab fa-steam">Steam</option>
+              <option value="fab fa-strava">Strava</option>
               <option value="fab fa-teamspeak">Teamspeak</option>
               <option value="fab fa-telegram-plane">Telegram</option>
               <option value="fab fa-tumblr">Tumblr</option>
