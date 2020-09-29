@@ -192,6 +192,10 @@ const iconGuesses = [
     val: 'fab fa-soundcloud',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('spotify.com'),
+    val: 'fab fa-spotify',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('stackoverflow.com'),
     val: 'fab fa-stack-overflow',
   },
