@@ -155,6 +155,8 @@ ICONS = defaultdict(
         "www.unsplash.com": "fab fa-unsplash",
         "tiktok.com": "fab fa-tiktok",
         "www.tiktok.com": "fab fa-tiktok",
+        "speakerdeck.com": "fab fa-speakerdeck",
+        "www.speakerdeck.com": "fab fa-speakerdeck",
     },
 )
 
@@ -217,6 +219,7 @@ ICON_CHOICES = (
     ("fab fa-snapchat-ghost", "fab fa-snapchat-ghost"),  # Snapchat
     ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
     ("fab fa-spotify", "fab fa-spotify"),  # Spotify
+    ("fab fa-speakerdeck", "fab fa-speakerdeck"),  # Speaker Deck
     ("fab fa-stack-exchange", "fab fa-stack-exchange"),  # Stack Exchange
     ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
     ("fab fa-steam", "fab fa-steam"),  # Steam
@@ -297,6 +300,7 @@ ICON_HUMAN_NAMES = {
     "snapchat-ghost": "Snapchat",
     "soundcloud": "Soundcloud",
     "spotify": "Spotify",
+    "speakerdeck": "Speaker Deck",
     "stack-exchange": "Stack Exchange",
     "stack-overflow": "Stack Overflow",
     "steam": "Steam",
