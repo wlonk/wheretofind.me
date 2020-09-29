@@ -119,6 +119,8 @@ ICONS = defaultdict(
         "www.kaggle.com": "fab fa-kaggle",
         "leanpub.com": "fab fa-leanpub",
         "www.leanpub.com": "fab fa-leanpub",
+        "npmjs.com": "fab fa-npm",
+        "www.npmjs.com": "fab fa-npm",
     },
 )
 
@@ -160,6 +162,7 @@ ICON_CHOICES = (
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
+    ("fab fa-npm", "fab fa-npm"),  # NPM
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
@@ -220,6 +223,7 @@ ICON_HUMAN_NAMES = {
     "mastodon": "Mastodon",
     "matrix-org": "Matrix",
     "medium": "Medium",
+    "npm": "NPM",
     "patreon": "Patreon",
     "paypal": "Paypal",
     "pinterest": "Pinterest",

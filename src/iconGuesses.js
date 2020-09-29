@@ -136,6 +136,10 @@ const iconGuesses = [
     val: 'fab fa-hacker-news-square',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('npmjs.com'),
+    val: 'fab fa-npm',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('patreon.com'),
     val: 'fab fa-patreon',
   },
