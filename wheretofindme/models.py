@@ -110,6 +110,7 @@ ICONS = defaultdict(
         "www.flickr.com": "fab fa-flickr",
         "foursquare.com": "fab fa-foursquare",
         "www.foursquare.com": "fab fa-foursquare",
+        "news.ycombinator.com": "fab fa-hacker-news-square",
         "hackerrank.com": "fab fa-hackerrank",
         "www.hackerrank.com": "fab fa-hackerrank",
     },
@@ -140,6 +141,7 @@ ICON_CHOICES = (
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
     ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
+    ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
@@ -196,6 +198,7 @@ ICON_HUMAN_NAMES = {
     "gitlab": "Gitlab",
     "goodreads": "Goodreads",
     "google-plus-g": "Google Plus",
+    "hacker-news-square": "Hacker News",
     "hackerrank": "HackerRank",
     "instagram": "Instagram",
     "keybase": "Keybase",
