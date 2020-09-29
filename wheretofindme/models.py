@@ -59,8 +59,8 @@ ICONS = defaultdict(
         "www.stackoverflow.com": "fab fa-stack-overflow",
         "soundcloud.com": "fab fa-soundcloud",
         "www.soundcloud.com": "fab fa-soundcloud",
-        "snapchat.com": "fab fa-snapchat",
-        "www.snapchat.com": "fab fa-snapchat",
+        "snapchat.com": "fab fa-snapchat-ghost",
+        "www.snapchat.com": "fab fa-snapchat-ghost",
         "slack.com": "fab fa-slack",
         "www.slack.com": "fab fa-slack",
         "skype.com": "fab fa-skype",
@@ -183,7 +183,7 @@ ICON_CHOICES = (
     ("fab fa-skype", "fab fa-skype"),  # Skype
     ("fab fa-slack", "fab fa-slack"),  # Slack
     ("fab fa-slideshare", "fab fa-slideshare"),  # SlideShare
-    ("fab fa-snapchat", "fab fa-snapchat"),  # Snapchat
+    ("fab fa-snapchat-ghost", "fab fa-snapchat-ghost"),  # Snapchat
     ("fab fa-soundcloud", "fab fa-soundcloud"),  # Soundcloud
     ("fab fa-stack-overflow", "fab fa-stack-overflow"),  # Stackoverflow
     ("fab fa-steam", "fab fa-steam"),  # Steam
@@ -248,7 +248,7 @@ ICON_HUMAN_NAMES = {
     "skype": "Skype",
     "slack": "Slack",
     "slideshare": "SlideShare",
-    "snapchat": "Snapchat",
+    "snapchat-ghost": "Snapchat",
     "soundcloud": "Soundcloud",
     "stack-overflow": "Stack Overflow",
     "steam": "Steam",

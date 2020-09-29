@@ -185,7 +185,7 @@ const iconGuesses = [
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('snapchat.com'),
-    val: 'fab fa-snapchat',
+    val: 'fab fa-snapchat-ghost',
   },
   {
     fn: url => parseUrl(url).hostname.endsWith('soundcloud.com'),
