@@ -132,6 +132,7 @@
               <option value="fab fa-etsy">Etsy</option>
               <option value="fab fa-facebook">Facebook</option>
               <option value="fab fa-figma">Figma</option>
+              <option value="fab fa-flickr">Flickr</option>
               <option value="fab fa-github">GitHub</option>
               <option value="fab fa-gitlab">Gitlab</option>
               <option value="fab fa-goodreads">Goodreads</option>

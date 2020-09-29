@@ -106,6 +106,8 @@ ICONS = defaultdict(
         "www.dev.to": "fab fa-dev",
         "figma.com": "fab fa-figma",
         "www.figma.com": "fab fa-figma",
+        "flickr.com": "fab fa-flickr",
+        "www.flickr.com": "fab fa-flickr",
     },
 )
 
@@ -128,6 +130,7 @@ ICON_CHOICES = (
     ("fab fa-etsy", "fab fa-etsy"),  # Etsy
     ("fab fa-facebook", "fab fa-facebook"),  # Facebook
     ("fab fa-figma", "fab fa-figma"),  # Figma
+    ("fab fa-flickr", "fab fa-flickr"),  # Flickr
     ("fab fa-github", "fab fa-github"),  # GitHub
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
@@ -181,6 +184,7 @@ ICON_HUMAN_NAMES = {
     "etsy": "Etsy",
     "facebook": "Facebook",
     "figma": "Figma",
+    "flickr": "Flickr",
     "github": "GitHub",
     "gitlab": "Gitlab",
     "goodreads": "Goodreads",
