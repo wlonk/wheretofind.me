@@ -141,6 +141,8 @@ ICONS = defaultdict(
         "www.tripadvisor.com": "fab fa-tripadvisor",
         "vk.com": "fab fa-vk",
         "www.vk.com": "fab fa-vk",
+        "wikipedia.org": "fab fa-wikipedia-w",
+        "en.wikipedia.org": "fab fa-wikipedia-w",
     },
 )
 
@@ -212,6 +214,7 @@ ICON_CHOICES = (
     ("fab fa-untappd", "fab fa-untappd"),  # Untappd
     ("fab fa-vimeo", "fab fa-vimeo"),  # Vimeo
     ("fab fa-vk", "fab fa-vk"),  # VK
+    ("fab fa-wikipedia-w", "fab fa-wikipedia-w"),  # Wikipedia
     ("fab fa-youtube", "fab fa-youtube"),  # YouTube
 )
 
@@ -283,6 +286,7 @@ ICON_HUMAN_NAMES = {
     "untappd": "Untappd",
     "vimeo": "Vimeo",
     "vk": "VK",
+    "wikipedia-w": "Wikipedia",
     "youtube": "YouTube",
 }
 

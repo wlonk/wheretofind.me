@@ -252,6 +252,10 @@ const iconGuesses = [
     val: 'fab fa-vk',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('wikipedia.org'),
+    val: 'fab fa-wikipedia-w',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('youtube.com'),
     val: 'fab fa-youtube',
   },
