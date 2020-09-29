@@ -117,6 +117,8 @@ ICONS = defaultdict(
         "www.jsfiddle.net": "fab fa-jsfiddle",
         "kaggle.com": "fab fa-kaggle",
         "www.kaggle.com": "fab fa-kaggle",
+        "leanpub.com": "fab fa-leanpub",
+        "www.leanpub.com": "fab fa-leanpub",
     },
 )
 
@@ -153,6 +155,7 @@ ICON_CHOICES = (
     ("fab fa-keybase", "fab fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
+    ("fab fa-leanpub", "fab fa-leanpub"),  # Leanpub
     ("fab fa-linkedin", "fab fa-linkedin"),  # LinkedIn
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
@@ -212,6 +215,7 @@ ICON_HUMAN_NAMES = {
     "keybase": "Keybase",
     "kickstarter": "Kickstarter",
     "lastfm": "Last",
+    "leanpub": "Leanpub",
     "linkedin": "LinkedIn",
     "mastodon": "Mastodon",
     "matrix-org": "Matrix",

@@ -116,6 +116,10 @@ const iconGuesses = [
     val: 'fab fa-lastfm',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('leanpub.com'),
+    val: 'fab fa-leanpub',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('linkedin.com'),
     val: 'fa fa-linkedin',
   },
