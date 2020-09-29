@@ -153,6 +153,8 @@ ICONS = defaultdict(
         "itch.io": "fab fa-itch-io",
         "unsplash.com": "fab fa-unsplash",
         "www.unsplash.com": "fab fa-unsplash",
+        "tiktok.com": "fab fa-tiktok",
+        "www.tiktok.com": "fab fa-tiktok",
     },
 )
 
@@ -221,6 +223,7 @@ ICON_CHOICES = (
     ("fab fa-strava", "fab fa-strava"),  # Strava
     ("fab fa-teamspeak", "fab fa-teamspeak"),  # Teamspeak
     ("fab fa-telegram-plane", "fab fa-telegram-plane"),  # Telegram
+    ("fab fa-tiktok", "fab fa-tiktok"),  # Tiktok
     ("fab fa-trello", "fab fa-trello"),  # Trello
     ("fab fa-tripadvisor", "fab fa-tripadvisor"),  # Trip Advisor
     ("fab fa-tumblr", "fab fa-tumblr"),  # Tumblr
@@ -300,6 +303,7 @@ ICON_HUMAN_NAMES = {
     "strava": "Strava",
     "teamspeak": "Teamspeak",
     "telegram-plane": "Telegram",
+    "tiktok": "Tiktok",
     "trello": "Trello",
     "tripadvisor": "Trip Advisor",
     "tumblr": "Tumblr",
