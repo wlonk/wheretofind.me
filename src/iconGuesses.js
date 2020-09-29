@@ -39,6 +39,10 @@ const iconGuesses = [
     val: 'fab fa-codepen',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('dev.to'),
+    val: 'fab fa-dev',
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('deviantart.com'),
     val: 'fab fa-deviantart',
   },

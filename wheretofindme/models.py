@@ -102,6 +102,8 @@ ICONS = defaultdict(
         "blogspot.com": "fab fa-blogger-b",
         "blogger.com": "fab fa-blogger-b",
         "www.blogger.com": "fab fa-blogger-b",
+        "dev.to": "fab fa-dev",
+        "www.dev.to": "fab fa-dev",
     },
 )
 
@@ -115,6 +117,7 @@ ICON_CHOICES = (
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-blogger-b", "fab fa-blogger-b"),  # Blogger
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
+    ("fab fa-dev", "fab fa-dev"),  # DEV.to
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
     ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
     ("fab fa-discord", "fab fa-discord"),  # Discord
@@ -166,6 +169,7 @@ ICON_HUMAN_NAMES = {
     "bitbucket": "Bitbucket",
     "blogger-b": "Blogger",
     "codepen": "Codepen",
+    "dev": "DEV.to",
     "deviantart": "Deviantart",
     "diaspora": "Diaspora",
     "discord": "Discord",
