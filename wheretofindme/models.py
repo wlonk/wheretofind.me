@@ -178,6 +178,8 @@ ICONS = defaultdict(
         "www.liberapay.com": "fa fa-liberapay",
         "mixcloud.com": "fa fa-mixcloud",
         "www.mixcloud.com": "fa fa-mixcloud",
+        "nextcloud.com": "fa fa-nextcloud",
+        "www.nextcloud.com": "fa fa-nextcloud",
     },
 )
 
@@ -232,6 +234,7 @@ ICON_CHOICES = (
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
     ("fa fa-mixcloud", "fa fa-mixcloud"),  # Mixcloud
+    ("fa fa-nextcloud", "fa fa-nextcloud"),  # Nextcloud
     ("fab fa-npm", "fab fa-npm"),  # NPM
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
@@ -326,6 +329,7 @@ ICON_HUMAN_NAMES = {
     "matrix-org": "Matrix",
     "medium": "Medium",
     "mixcloud": "Mixcloud",
+    "nextcloud": "nextcloud",
     "npm": "NPM",
     "patreon": "Patreon",
     "paypal": "Paypal",

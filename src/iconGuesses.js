@@ -329,6 +329,10 @@ const iconGuesses = [
     val: "fa fa-hashnode",
   },
   {
+    fn: url => parseUrl(url).hostname.includes('nextcloud'),
+    val: "fa fa-nextcloud",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('paypal'),
     val: 'fab fa-paypal',
   },

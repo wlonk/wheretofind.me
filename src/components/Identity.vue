@@ -164,6 +164,7 @@
               <option value="fa fa-matrix-org">Matrix</option>
               <option value="fab fa-medium">Medium</option>
               <option value="fa fa-mixcloud">Mixcloud</option>
+              <option value="fa fa-nextcloud">Nextcloud</option>
               <option value="fab fa-npm">NPM</option>
               <option value="fab fa-patreon">Patreon</option>
               <option value="fab fa-paypal">Paypal</option>
