@@ -161,6 +161,8 @@ ICONS = defaultdict(
         "www.fdroid.org": "fa fa-f-droid",
         "f-droid.org": "fa fa-f-droid",
         "www.f-droid.org": "fa fa-f-droid",
+        "gitea.com": "fa fa-gitea",
+        "www.gitea.com": "fa fa-gitea",
     },
 )
 
@@ -188,6 +190,7 @@ ICON_CHOICES = (
     ("fab fa-flickr", "fab fa-flickr"),  # Flickr
     ("fab fa-flipboard", "fab fa-flipboard"),  # Flipboard
     ("fab fa-foursquare", "fab fa-foursquare"),  # Foursquare
+    ("fa fa-gitea", "fa fa-gitea"),  # Gitea
     ("fab fa-github", "fab fa-github"),  # GitHub
     ("fab fa-gitlab", "fab fa-gitlab"),  # Gitlab
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
@@ -270,6 +273,7 @@ ICON_HUMAN_NAMES = {
     "flickr": "Flickr",
     "flipboard": "Flipboard",
     "foursquare": "Foursquare",
+    "gitea": "Gitea",
     "github": "GitHub",
     "gitlab": "Gitlab",
     "goodreads": "Goodreads",

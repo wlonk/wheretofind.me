@@ -301,6 +301,10 @@ const iconGuesses = [
   },
 
   {
+    fn: url => parseUrl(url).hostname.includes('gitea'),
+    val: "fa fa-gitea",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('paypal'),
     val: 'fab fa-paypal',
   },

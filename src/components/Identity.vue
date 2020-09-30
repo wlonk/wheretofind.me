@@ -137,6 +137,7 @@
               <option value="fab fa-flickr">Flickr</option>
               <option value="fab fa-flipboard">Flipboard</option>
               <option value="fab fa-foursquare">Foursquare</option>
+              <option value="fa fa-gitea">Gitea</option>
               <option value="fab fa-github">GitHub</option>
               <option value="fab fa-gitlab">Gitlab</option>
               <option value="fab fa-goodreads">Goodreads</option>
