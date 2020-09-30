@@ -145,6 +145,7 @@
               <option value="fab fa-google-drive">Google Drive</option>
               <option value="fab fa-google-play">Google Play</option>
               <option value="fab fa-google-plus-g">Google Plus</option>
+              <option value="fa fa-hackaday">Hackaday</option>
               <option value="fab fa-hacker-news-square">HackerNews</option>
               <option value="fab fa-hackerrank">HackerRank</option>
               <option value="fab fa-instagram">Instagram</option>

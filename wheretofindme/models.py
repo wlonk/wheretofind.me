@@ -165,6 +165,10 @@ ICONS = defaultdict(
         "www.gitea.com": "fa fa-gitea",
         "codiepie.com": "fa fa-codiepie",
         "www.codiepie.com": "fa fa-codiepie",
+        "hackaday.io": "fa fa-hackaday",
+        "www.hackaday.io": "fa fa-hackaday",
+        "hackaday.com": "fa fa-hackaday",
+        "www.hackaday.com": "fa fa-hackaday",
     },
 )
 
@@ -200,6 +204,7 @@ ICON_CHOICES = (
     ("fab fa-google-drive", "fab fa-google-drive"),  # Google Drive
     ("fab fa-google-play", "fab fa-google-play"),  # Google Play
     ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
+    ("fa fa-hackaday", "fa fa-hackaday"),  # Hackaday
     ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
@@ -283,8 +288,14 @@ ICON_HUMAN_NAMES = {
     "goodreads": "Goodreads",
     "google-drive": "Google Drive",
     "google-play": "Google Play",
+<<<<<<< HEAD
     "google-plus-g": "Google Plus",
     "hacker-news-square": "Hacker News",
+=======
+    "google-plus": "Google Plus",
+    "hackaday": "Hackaday",
+    "hacker-news": "Hacker News",
+>>>>>>> 98b2862... add icon parse support for hackaday links
     "hackerrank": "HackerRank",
     "instagram": "Instagram",
     "itch-io": "itch.io",

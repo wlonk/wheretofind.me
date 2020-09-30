@@ -309,6 +309,10 @@ const iconGuesses = [
     val: "fa fa-gitea",
   },
   {
+    fn: url => parseUrl(url).hostname.includes('hackaday'),
+    val: "fa fa-hackaday",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('paypal'),
     val: 'fab fa-paypal',
   },
