@@ -176,6 +176,8 @@ ICONS = defaultdict(
         "www.hashnode.com": "fa fa-hashnode",
         "liberapay.com": "fa fa-liberapay",
         "www.liberapay.com": "fa fa-liberapay",
+        "mixcloud.com": "fa fa-mixcloud",
+        "www.mixcloud.com": "fa fa-mixcloud",
     },
 )
 
@@ -229,6 +231,7 @@ ICON_CHOICES = (
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
+    ("fa fa-mixcloud", "fa fa-mixcloud"),  # Mixcloud
     ("fab fa-npm", "fab fa-npm"),  # NPM
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
@@ -322,6 +325,7 @@ ICON_HUMAN_NAMES = {
     "mastodon": "Mastodon",
     "matrix-org": "Matrix",
     "medium": "Medium",
+    "mixcloud": "Mixcloud",
     "npm": "NPM",
     "patreon": "Patreon",
     "paypal": "Paypal",

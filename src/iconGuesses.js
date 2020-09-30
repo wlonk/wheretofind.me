@@ -168,6 +168,10 @@ const iconGuesses = [
     val: 'fab fa-medium',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('mixcloud.com'),
+    val: "fa fa-mixcloud",
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('news.ycombinator.com'),
     val: 'fab fa-hacker-news-square',
   },
