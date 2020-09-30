@@ -152,6 +152,10 @@ const iconGuesses = [
     val: 'fab fa-leanpub',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('liberapay.com'),
+    val: "fa fa-liberapay",
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('linkedin.com'),
     val: 'fa fa-linkedin',
   },
