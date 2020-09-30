@@ -68,6 +68,14 @@ const iconGuesses = [
     val: 'fab fa-etsy',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('fdroid.org'),
+    val: "fa fa-f-droid",
+  },
+  {
+    fn: url => parseUrl(url).hostname.endsWith('f-droid.org'),
+    val: "fa fa-f-droid",
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('facebook.com'),
     val: 'fab fa-facebook',
   },

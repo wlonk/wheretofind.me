@@ -157,6 +157,10 @@ ICONS = defaultdict(
         "www.tiktok.com": "fab fa-tiktok",
         "speakerdeck.com": "fab fa-speakerdeck",
         "www.speakerdeck.com": "fab fa-speakerdeck",
+        "fdroid.org": "fa fa-f-droid",
+        "www.fdroid.org": "fa fa-f-droid",
+        "f-droid.org": "fa fa-f-droid",
+        "www.f-droid.org": "fa fa-f-droid",
     },
 )
 
@@ -178,6 +182,7 @@ ICON_CHOICES = (
     ("fab fa-dribbble", "fab fa-dribbble"),  # Dribbble
     ("fab fa-ello", "fab fa-ello"),  # Ello
     ("fab fa-etsy", "fab fa-etsy"),  # Etsy
+    ("fa fa-f-droid", "fa fa-f-droid"),  # F-droid
     ("fab fa-facebook", "fab fa-facebook"),  # Facebook
     ("fab fa-figma", "fab fa-figma"),  # Figma
     ("fab fa-flickr", "fab fa-flickr"),  # Flickr
@@ -259,6 +264,7 @@ ICON_HUMAN_NAMES = {
     "dribbble": "Dribbble",
     "ello": "Ello",
     "etsy": "Etsy",
+    "f-droid": "F-droid",
     "facebook": "Facebook",
     "figma": "Figma",
     "flickr": "Flickr",

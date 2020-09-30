@@ -131,6 +131,7 @@
               <option value="fab fa-dribbble">Dribbble</option>
               <option value="fab fa-ello">Ello</option>
               <option value="fab fa-etsy">Etsy</option>
+              <option value="fa fa-f-droid">F-droid</option>
               <option value="fab fa-facebook">Facebook</option>
               <option value="fab fa-figma">Figma</option>
               <option value="fab fa-flickr">Flickr</option>
