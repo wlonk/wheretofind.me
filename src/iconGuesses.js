@@ -337,6 +337,10 @@ const iconGuesses = [
     val: 'fab fa-paypal',
   },
   {
+    fn: url => parseUrl(url).hostname.includes('peertube'),
+    val: "fa fa-peertube",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('pixelfed'),
     val: 'fa fa-pixelfed',
   },

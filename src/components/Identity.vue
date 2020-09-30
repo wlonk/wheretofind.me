@@ -168,6 +168,7 @@
               <option value="fab fa-npm">NPM</option>
               <option value="fab fa-patreon">Patreon</option>
               <option value="fab fa-paypal">Paypal</option>
+              <option value="fa fa-peertube">PeerTube</option>
               <option value="fab fa-periscope">Periscope</option>
               <option value="fab fa-pinterest">Pinterest</option>
               <option value="fa fa-pixelfed">Pixelfed</option>

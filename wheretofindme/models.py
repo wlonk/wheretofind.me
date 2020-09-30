@@ -180,6 +180,7 @@ ICONS = defaultdict(
         "www.mixcloud.com": "fa fa-mixcloud",
         "nextcloud.com": "fa fa-nextcloud",
         "www.nextcloud.com": "fa fa-nextcloud",
+        "peer.tube": "fa fa-peertube",
     },
 )
 
@@ -238,6 +239,7 @@ ICON_CHOICES = (
     ("fab fa-npm", "fab fa-npm"),  # NPM
     ("fab fa-patreon", "fab fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
+    ("fa fa-peertube", "fa fa-peertube"),  # PeerTube
     ("fab fa-periscope", "fab fa-periscope"),  # Periscope
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
@@ -333,6 +335,7 @@ ICON_HUMAN_NAMES = {
     "npm": "NPM",
     "patreon": "Patreon",
     "paypal": "Paypal",
+    "peertube": "PeerTube",
     "periscope": "Periscope",
     "pinterest": "Pinterest",
     "pixelfed": "Pixelfed",
