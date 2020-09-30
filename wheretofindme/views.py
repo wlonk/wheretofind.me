@@ -106,7 +106,7 @@ class FriendsByService(LoginRequiredMixin, ListView):
         search = self.request.GET.get("q", "")
         if search:
             service_name = ICON_HUMAN_NAMES.get(search, search)
-            is_a_fediverse = search in ("mastodon", "diaspora", "pixelfed", "peertube")
+            is_a_fediverse = search in ("mastodon", "diaspora", "pixelfed", "peertube", "pleroma")
         else:
             service_name = "the null service"
             is_a_fediverse = False

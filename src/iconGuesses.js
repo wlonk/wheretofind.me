@@ -345,6 +345,10 @@ const iconGuesses = [
     val: 'fa fa-pixelfed',
   },
   {
+    fn: url => parseUrl(url).hostname.includes('pleroma'),
+    val: "fa fa-pleroma",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('pora'),
     val: 'fab fa-diaspora',
   },

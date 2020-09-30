@@ -181,6 +181,7 @@ ICONS = defaultdict(
         "nextcloud.com": "fa fa-nextcloud",
         "www.nextcloud.com": "fa fa-nextcloud",
         "peer.tube": "fa fa-peertube",
+        "pleroma.com": "fa fa-pleroma",
     },
 )
 
@@ -243,6 +244,7 @@ ICON_CHOICES = (
     ("fab fa-periscope", "fab fa-periscope"),  # Periscope
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
+    ("fa fa-pleroma", "fa fa-pleroma"),  # Pleroma
     ("fab fa-product-hunt", "fab fa-product-hunt"),  # Product Hunt
     ("fab fa-quora", "fab fa-quora"),  # Quora
     ("fab fa-ravelry", "fab fa-ravelry"),  # Ravelry
@@ -339,6 +341,7 @@ ICON_HUMAN_NAMES = {
     "periscope": "Periscope",
     "pinterest": "Pinterest",
     "pixelfed": "Pixelfed",
+    "pleroma": "Pleroma",
     "product-hunt": "Product Hunt",
     "quora": "Quora",
     "ravelry": "Ravelry",
