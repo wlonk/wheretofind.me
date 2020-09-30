@@ -169,6 +169,8 @@ ICONS = defaultdict(
         "www.hackaday.io": "fa fa-hackaday",
         "hackaday.com": "fa fa-hackaday",
         "www.hackaday.com": "fa fa-hackaday",
+        "hackster.io": "fa fa-hackster",
+        "www.hackster.io": "fa fa-hackster",
     },
 )
 
@@ -207,6 +209,7 @@ ICON_CHOICES = (
     ("fa fa-hackaday", "fa fa-hackaday"),  # Hackaday
     ("fab fa-hacker-news-square", "fab fa-hacker-news-square"),  # HackerNews
     ("fab fa-hackerrank", "fab fa-hackerrank"),  # HackerRank
+    ("fa fa-hackster", "fa fa-hackster"),  # Hackster
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
     ("fab fa-itch-io", "fab fa-itch-io"),  # itch.io
     ("fab fa-jsfiddle", "fab fa-jsfiddle"),  # JSFiddle
@@ -297,6 +300,7 @@ ICON_HUMAN_NAMES = {
     "hacker-news": "Hacker News",
 >>>>>>> 98b2862... add icon parse support for hackaday links
     "hackerrank": "HackerRank",
+    "hackster": "Hackster",
     "instagram": "Instagram",
     "itch-io": "itch.io",
     "jsfiddle": "JSFiddle",

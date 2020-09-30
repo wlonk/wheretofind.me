@@ -116,6 +116,10 @@ const iconGuesses = [
     val: 'fab fa-hackerrank',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('hackster.io'),
+    val: "fa fa-hackster",
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('instagram.com'),
     val: 'fab fa-instagram',
   },
