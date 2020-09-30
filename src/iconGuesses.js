@@ -317,6 +317,10 @@ const iconGuesses = [
     val: "fa fa-hackaday",
   },
   {
+    fn: url => parseUrl(url).hostname.includes('hashnode'),
+    val: "fa fa-hashnode",
+  },
+  {
     fn: url => parseUrl(url).hostname.includes('paypal'),
     val: 'fab fa-paypal',
   },
