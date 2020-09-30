@@ -39,6 +39,10 @@ const iconGuesses = [
     val: 'fab fa-codepen',
   },
   {
+    fn: url => parseUrl(url).hostname.endsWith('codiepie.com'),
+    val: "fa fa-codiepie",
+  },
+  {
     fn: url => parseUrl(url).hostname.endsWith('dailymotion.com'),
     val: 'fab fa-dailymotion',
   },

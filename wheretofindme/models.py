@@ -163,6 +163,8 @@ ICONS = defaultdict(
         "www.f-droid.org": "fa fa-f-droid",
         "gitea.com": "fa fa-gitea",
         "www.gitea.com": "fa fa-gitea",
+        "codiepie.com": "fa fa-codiepie",
+        "www.codiepie.com": "fa fa-codiepie",
     },
 )
 
@@ -176,6 +178,7 @@ ICON_CHOICES = (
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-blogger-b", "fab fa-blogger-b"),  # Blogger
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
+    ("fa fa-codiepie", "fa fa-codiepie"),  # Codiepie
     ("fab fa-dailymotion", "fab fa-dailymotion"),  # DailyMotion
     ("fab fa-dev", "fab fa-dev"),  # DEV.to
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
@@ -259,6 +262,7 @@ ICON_HUMAN_NAMES = {
     "bitbucket": "Bitbucket",
     "blogger-b": "Blogger",
     "codepen": "Codepen",
+    "codiepie": "Codiepie",
     "dailymotion": "DailyMotion",
     "dev": "DEV.to",
     "deviantart": "Deviantart",
