@@ -1,7 +1,7 @@
 <span class="badge badge badge-light">
   {% include "wheretofindme/_identity_icon.html" %}
   {% if identity.looks_like_link %}
-    <a rel="nofollow" href="{{ identity.url }}">
+    <a rel="nofollow noreferrer noopener" href="{{ identity.url }}">
       {{ identity.name }}
     </a>
   {% else %}
