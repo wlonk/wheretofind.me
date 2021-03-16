@@ -134,6 +134,7 @@
               <option value="fab fa-keybase">Keybase</option>
               <option value="fab fa-kickstarter">Kickstarter</option>
               <option value="fab fa-lastfm">Last</option>
+              <option value="fab fa-linkedin">LinkedIn</option>
               <option value="fab fa-mastodon">Mastodon</option>
               <option value="fa fa-matrix-org">Matrix</option>
               <option value="fab fa-medium">Medium</option>
@@ -150,6 +151,7 @@
               <option value="fab fa-stackoverflow">Stackoverflow</option>
               <option value="fab fa-steam">Steam</option>
               <option value="fab fa-teamspeak">Teamspeak</option>
+              <option value="fab fa-telegram">Telegram</option>
               <option value="fab fa-tumblr">Tumblr</option>
               <option value="fab fa-twitch">Twitch</option>
               <option value="fab fa-twitter">Twitter</option>
