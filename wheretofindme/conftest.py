@@ -11,7 +11,11 @@ class UserFactory(factory.django.DjangoModelFactory):
 
     email = factory.Sequence("user_{}@example.com".format)
     username = factory.Sequence("user_{}".format)
-    password = factory.PostGenerationMethodCall("set_password", "foobar")
+
+    @factory.post_generation
+    def password(obj, create, extracted, **kwargs):
+        obj.set_password("foobar")
+        obj.save()
 
 
 @register

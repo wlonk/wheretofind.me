@@ -1,8 +1,8 @@
 dj-database-url~=0.5
-gunicorn~=19.9
+gunicorn~=20.1
 psycopg2-binary~=2.8
-pytz==2020.1
-whitenoise~=4.1
+pytz==2021.1
+whitenoise~=5.2
 django-crispy-forms~=1.8
 Django~=3.0
 django-registration~=3.0
