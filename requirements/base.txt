@@ -18,7 +18,7 @@ django-registration==3.1.2
     # via -r base.in
 django-sendgrid-v5==0.9.1
     # via -r base.in
-django==3.2.1
+django==3.2.4
     # via
     #   -r base.in
     #   django-js-reverse
