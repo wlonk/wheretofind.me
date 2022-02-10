@@ -29,9 +29,6 @@ jobs:
       - run:
           name: Install Python dependencies
           command: |
-            sudo pip install virtualenv
-            virtualenv .venv
-            source .venv/bin/activate
             pip install -U pip
             pip install pip-tools==6.4.0
             pip-sync requirements/dev.txt requirements/base.txt
@@ -43,7 +40,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ".venv"
+            - "/home/circlci/.local"
           key: v4-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
@@ -79,7 +76,6 @@ jobs:
       - run:
           name: run python tests
           command: |
-            source .venv/bin/activate
             pytest
 
   test-client:
