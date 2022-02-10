@@ -75,7 +75,6 @@ export default {
       },
       set(newItemList) {
         this.$emit('reordered', newItemList);
-        console.log('emitted reordered event');
       },
     },
   },

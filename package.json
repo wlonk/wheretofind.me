@@ -21,7 +21,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-sass": "^3.4.0",
     "jquery": "^3.5.0",
-    "node-sass": "^4.11.0",
+    "sass": "^1.49.7",
     "popper.js": "^1.14.6",
     "sass-loader": "^8.0.0",
     "vue": "^2.6.11",
