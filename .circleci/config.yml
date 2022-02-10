@@ -18,13 +18,13 @@ jobs:
 
       - restore_cache:
           keys:
-          - v5-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v5-dependencies-py-
+          - v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v6-dependencies-py-
 
       - restore_cache:
           keys:
-          - v5-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v5-dependencies-js-
+          - v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v6-dependencies-js-
 
       - run:
           name: Install Python dependencies
@@ -41,13 +41,13 @@ jobs:
       - save_cache:
           paths:
             - "/home/circleci/.local"
-          key: v5-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          key: v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v5-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
@@ -70,8 +70,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v5-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v5-dependencies-py-
+          - v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v6-dependencies-py-
 
       - run:
           name: run python tests
@@ -89,8 +89,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v5-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v5-dependencies-js-
+          - v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v6-dependencies-js-
 
       - run:
           name: run javascript tests
