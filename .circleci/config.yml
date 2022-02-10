@@ -30,7 +30,8 @@ jobs:
           name: Install Python dependencies
           command: |
             pip install -U pip
-            pip install -r requirements/dev.txt requirements/base.txt
+            pip install -r requirements/base.txt
+            pip install -r requirements/dev.txt
 
       - run:
           name: Install Javascript dependencies
