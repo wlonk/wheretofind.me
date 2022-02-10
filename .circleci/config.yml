@@ -40,7 +40,7 @@ jobs:
 
       - save_cache:
           paths:
-            - "/home/circlci/.local"
+            - "/home/circleci/.local"
           key: v5-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
