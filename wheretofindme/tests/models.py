@@ -48,13 +48,13 @@ class TestUser:
 class TestInternetIdentity:
     def test_str(self, user_factory, internet_identity_factory):
         user = user_factory(username="merciful")
-        identity = internet_identity_factory(
-            user=user, name="quaint", url="https://example.com/notebook"
-        )
-        assert str(identity) == "merciful's quaint at https://example.com/notebook"
+        identity = internet_identity_factory(user=user, name="quaint", url="gnorp")
+        assert str(identity) == "merciful's quaint at gnorp"
 
-    def test_looks_like_link_valid(self, internet_identity_factory):
-        identity = internet_identity_factory(url="https://example.com/")
+    def test_looks_like_link_valid(self, requests_mock, internet_identity_factory):
+        url = "https://example.com/"
+        requests_mock.get(url, text="<html></html>")
+        identity = internet_identity_factory(url=url)
         assert identity.looks_like_link()
 
     def test_looks_like_link_invalid(self, internet_identity_factory):
@@ -81,6 +81,22 @@ class TestInternetIdentity:
             internet_identity_factory(icon="fab fa-mastodon").icon_to_search()
             == "mastodon"
         )
+
+    def test_should_validate(
+        self, user_factory, internet_identity_factory, requests_mock
+    ):
+        user = user_factory()
+        text = f"""
+        <html>
+        <body>
+        <a href="https://wheretofind.me/@{user.username}" rel="me">me</a>
+        </body>
+        </html>
+        """
+        url = "http://example.com/id"
+        requests_mock.get(url, text=text)
+        identity = internet_identity_factory(url=url, user=user)
+        assert identity.verified_at is not None
 
 
 @pytest.mark.django_db

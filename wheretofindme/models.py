@@ -1,12 +1,14 @@
 from collections import defaultdict
 
+import mf2py
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.utils import timezone
 
 ICONS = defaultdict(
     lambda: "fas fa-link",
@@ -17,8 +19,8 @@ ICONS = defaultdict(
         "www.github.com": "fab fa-github",
         "instagram.com": "fab fa-instagram",
         "www.instagram.com": "fab fa-instagram",
-        "keybase.io": "fab fa-keybase",
-        "www.keybase.io": "fab fa-keybase",
+        "keybase.io": "fa fa-keybase",
+        "www.keybase.io": "fa fa-keybase",
         "mastodon.social": "fab fa-mastodon",
         "pixelfed.social": "fa fa-pixelfed",
         "element.io": "fa fa-matrix-org",
@@ -35,16 +37,16 @@ ICONS = defaultdict(
         "www.bitbucket.org": "fab fa-bitbucket",
         "deviantart.com": "fab fa-deviantart",
         "www.deviantart.com": "fab fa-deviantart",
-        "pluspora.com": "fab fa-diaspora",
-        "www.pluspora.com": "fab fa-diaspora",
+        "pluspora.com": "fa fa-diaspora",
+        "www.pluspora.com": "fa fa-diaspora",
         "dribbble.com": "fab fa-dribbble",
         "www.dribbble.com": "fab fa-dribbble",
         "ello.co": "fab fa-ello",
         "www.ello.co": "fab fa-ello",
         "codepen.io": "fab fa-codepen",
         "www.codepen.io": "fab fa-codepen",
-        "discordapp.com": "fab fa-discord",
-        "www.discordapp.com": "fab fa-discord",
+        "discordapp.com": "fa fa-discord",
+        "www.discordapp.com": "fa fa-discord",
         "vimeo.com": "fab fa-vimeo",
         "www.vimeo.com": "fab fa-vimeo",
         "untappd.com": "fab fa-untappd",
@@ -69,8 +71,8 @@ ICONS = defaultdict(
         "www.reddit.com": "fab fa-reddit",
         "pinterest.com": "fab fa-pinterest",
         "www.pinterest.com": "fab fa-pinterest",
-        "patreon.com": "fab fa-patreon",
-        "www.patreon.com": "fab fa-patreon",
+        "patreon.com": "fa fa-patreon",
+        "www.patreon.com": "fa fa-patreon",
         "paypal.com": "fab fa-paypal",
         "www.paypal.com": "fab fa-paypal",
         "medium.com": "fab fa-medium",
@@ -101,8 +103,8 @@ ICON_CHOICES = (
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
-    ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
-    ("fab fa-discord", "fab fa-discord"),  # Discord
+    ("fa fa-diaspora", "fa fa-diaspora"),  # Diaspora
+    ("fa fa-discord", "fa fa-discord"),  # Discord
     ("fab fa-dribbble", "fab fa-dribbble"),  # Dribbble
     ("fab fa-ello", "fab fa-ello"),  # Ello
     ("fab fa-etsy", "fab fa-etsy"),  # Etsy
@@ -112,13 +114,13 @@ ICON_CHOICES = (
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
     ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
-    ("fab fa-keybase", "fab fa-keybase"),  # Keybase
+    ("fa fa-keybase", "fa fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
-    ("fab fa-patreon", "fab fa-patreon"),  # Patreon
+    ("fa fa-patreon", "fa fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
@@ -239,6 +241,7 @@ class InternetIdentity(models.Model):
     quality = models.PositiveSmallIntegerField(choices=QUALITY_CHOICES, default=2)
     tag = models.CharField(max_length=50, blank=True)
     seq = models.IntegerField(null=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s {self.name} at {self.url}"
@@ -264,6 +267,20 @@ class InternetIdentity(models.Model):
             _, search = self.icon.split("-", 1)
             return search
         return ""
+
+    def verify(self):
+        """
+        NB: does not save! That's for you to do.
+        """
+        if not self.looks_like_link():
+            return
+        # Caution: network IO here:
+        mf_result = mf2py.parse(url=self.url)
+        expected = f"https://wheretofind.me/@{self.user.username}"
+        if expected in mf_result.get("rels", {}).get("me", []):
+            self.verified_at = timezone.now()
+        else:
+            self.verified_at = None
 
 
 class Follow(models.Model):
@@ -295,3 +312,8 @@ class Alias(models.Model):
 def ensure_alias(sender, instance, created, **kwargs):
     if not instance.alias_set.exists():
         instance.alias_set.create(name=instance.username, seq=0)
+
+
+@receiver(pre_save, sender=InternetIdentity)
+def verify(sender, instance, **kwargs):
+    instance.verify()
