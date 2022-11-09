@@ -11,7 +11,7 @@ Server development
 
 You will need:
 
-* Python 3.8 or later (``brew install python@3.8``)
+* Python 3.9 or later (``brew install python@3.9``)
 * PostgreSQL (``brew install postgres`` or Postgres.app_)
 * yarn (``brew install yarn``)
 * virtualenv
@@ -32,7 +32,7 @@ root::
 Set up your virtualenv with your preferred method. For me, using
 ``virtualenvwrapper`` and ``pyenv``, this looks like::
 
-   $ mkvirtualenv wheretofindme --python=$(pyenv which python3.8)
+   $ mkvirtualenv wheretofindme --python=$(pyenv which python3.9)
    $ setvirtualenvproject
    $ pip install pip-tools
    $ pip-sync requirements/dev.txt requirements/base.txt
