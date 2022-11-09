@@ -18,13 +18,13 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v8-dependencies-py-
+          - v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v9-dependencies-py-
 
       - restore_cache:
           keys:
-          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v8-dependencies-js-
+          - v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v9-dependencies-js-
 
       - run:
           name: Install Python dependencies
@@ -44,13 +44,13 @@ jobs:
           paths:
             - "/home/circleci/.local"
             - "~/repo/.venv"
-          key: v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          key: v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
@@ -73,8 +73,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v8-dependencies-py-
+          - v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v9-dependencies-py-
 
       - run:
           name: run python tests
@@ -93,8 +93,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v8-dependencies-js-
+          - v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v9-dependencies-js-
 
       - run:
           name: run javascript tests
