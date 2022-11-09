@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/python:3.8.15-node
+      - image: cimg/python:3.9.15-node
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -18,18 +18,18 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v8-dependencies-py-
+          - v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v9-dependencies-py-
 
       - restore_cache:
           keys:
-          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v8-dependencies-js-
+          - v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v9-dependencies-js-
 
       - run:
           name: Install Python dependencies
           command: |
-            python3 -m venv .venv
+            python -m venv .venv
             . .venv/bin/activate
             pip install -U pip
             pip install -r requirements/base.txt
@@ -44,17 +44,17 @@ jobs:
           paths:
             - "/home/circleci/.local"
             - "~/repo/.venv"
-          key: v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          key: v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
-      - image: cimg/python:3.8.15
+      - image: cimg/python:3.9.15
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -73,8 +73,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v8-dependencies-py-
+          - v9-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v9-dependencies-py-
 
       - run:
           name: run python tests
@@ -84,7 +84,7 @@ jobs:
 
   test-client:
     docker:
-      - image: cimg/python:3.8.15-node
+      - image: cimg/python:3.9.15-node
 
     working_directory: ~/repo
 
@@ -93,8 +93,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v8-dependencies-js-
+          - v9-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v9-dependencies-js-
 
       - run:
           name: run javascript tests
