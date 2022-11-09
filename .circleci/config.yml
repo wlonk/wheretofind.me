@@ -2,11 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.8.2-node
+      - image: cimg/python:3.8.15-node
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
-      - image: circleci/postgres:11.1
+      - image: cimg/postgres:14.5
         environment:
           POSTGRES_USER: wheretofindme
           POSTGRES_DB: wheretofindme
@@ -18,17 +18,19 @@ jobs:
 
       - restore_cache:
           keys:
-          - v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v6-dependencies-py-
+          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v8-dependencies-py-
 
       - restore_cache:
           keys:
-          - v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v6-dependencies-js-
+          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v8-dependencies-js-
 
       - run:
           name: Install Python dependencies
           command: |
+            python3 -m venv .venv
+            . .venv/bin/activate
             pip install -U pip
             pip install -r requirements/base.txt
             pip install -r requirements/dev.txt
@@ -41,24 +43,25 @@ jobs:
       - save_cache:
           paths:
             - "/home/circleci/.local"
-          key: v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+            - "~/repo/.venv"
+          key: v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
         
       - save_cache:
           paths:
             - "~/.cache/yarn"
             - "./node_modules/"
-          key: v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
         
   test-server:
     docker:
-      - image: circleci/python:3.8.2
+      - image: cimg/python:3.8.15
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
           DJANGO_SECRET_KEY: "some secret this is"
           DJANGO_DEBUG: True
           SECURE_SSL_REDIRECT: false
-      - image: circleci/postgres:11.1
+      - image: cimg/postgres:14.5
         environment:
           POSTGRES_USER: wheretofindme
           POSTGRES_DB: wheretofindme
@@ -70,17 +73,18 @@ jobs:
 
       - restore_cache:
           keys:
-          - v6-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
-          - v6-dependencies-py-
+          - v8-dependencies-py-{{ .Branch }}-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/dev.txt" }}
+          - v8-dependencies-py-
 
       - run:
           name: run python tests
           command: |
+            . .venv/bin/activate
             pytest
 
   test-client:
     docker:
-      - image: circleci/python:3.8.2-node
+      - image: cimg/python:3.8.15-node
 
     working_directory: ~/repo
 
@@ -89,8 +93,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v6-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v6-dependencies-js-
+          - v8-dependencies-js-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v8-dependencies-js-
 
       - run:
           name: run javascript tests
