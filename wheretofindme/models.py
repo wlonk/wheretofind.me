@@ -17,8 +17,8 @@ ICONS = defaultdict(
         "www.github.com": "fab fa-github",
         "instagram.com": "fab fa-instagram",
         "www.instagram.com": "fab fa-instagram",
-        "keybase.io": "fab fa-keybase",
-        "www.keybase.io": "fab fa-keybase",
+        "keybase.io": "fa fa-keybase",
+        "www.keybase.io": "fa fa-keybase",
         "mastodon.social": "fab fa-mastodon",
         "pixelfed.social": "fa fa-pixelfed",
         "element.io": "fa fa-matrix-org",
@@ -35,16 +35,16 @@ ICONS = defaultdict(
         "www.bitbucket.org": "fab fa-bitbucket",
         "deviantart.com": "fab fa-deviantart",
         "www.deviantart.com": "fab fa-deviantart",
-        "pluspora.com": "fab fa-diaspora",
-        "www.pluspora.com": "fab fa-diaspora",
+        "pluspora.com": "fa fa-diaspora",
+        "www.pluspora.com": "fa fa-diaspora",
         "dribbble.com": "fab fa-dribbble",
         "www.dribbble.com": "fab fa-dribbble",
         "ello.co": "fab fa-ello",
         "www.ello.co": "fab fa-ello",
         "codepen.io": "fab fa-codepen",
         "www.codepen.io": "fab fa-codepen",
-        "discordapp.com": "fab fa-discord",
-        "www.discordapp.com": "fab fa-discord",
+        "discordapp.com": "fa fa-discord",
+        "www.discordapp.com": "fa fa-discord",
         "vimeo.com": "fab fa-vimeo",
         "www.vimeo.com": "fab fa-vimeo",
         "untappd.com": "fab fa-untappd",
@@ -69,8 +69,8 @@ ICONS = defaultdict(
         "www.reddit.com": "fab fa-reddit",
         "pinterest.com": "fab fa-pinterest",
         "www.pinterest.com": "fab fa-pinterest",
-        "patreon.com": "fab fa-patreon",
-        "www.patreon.com": "fab fa-patreon",
+        "patreon.com": "fa fa-patreon",
+        "www.patreon.com": "fa fa-patreon",
         "paypal.com": "fab fa-paypal",
         "www.paypal.com": "fab fa-paypal",
         "medium.com": "fab fa-medium",
@@ -101,8 +101,8 @@ ICON_CHOICES = (
     ("fab fa-bitbucket", "fab fa-bitbucket"),  # Bitbucket
     ("fab fa-codepen", "fab fa-codepen"),  # Codepen
     ("fab fa-deviantart", "fab fa-deviantart"),  # Deviantart
-    ("fab fa-diaspora", "fab fa-diaspora"),  # Diaspora
-    ("fab fa-discord", "fab fa-discord"),  # Discord
+    ("fa fa-diaspora", "fa fa-diaspora"),  # Diaspora
+    ("fa fa-discord", "fa fa-discord"),  # Discord
     ("fab fa-dribbble", "fab fa-dribbble"),  # Dribbble
     ("fab fa-ello", "fab fa-ello"),  # Ello
     ("fab fa-etsy", "fab fa-etsy"),  # Etsy
@@ -112,13 +112,13 @@ ICON_CHOICES = (
     ("fab fa-goodreads", "fab fa-goodreads"),  # Goodreads
     ("fab fa-google-plus-g", "fab fa-google-plus-g"),  # Google Plus
     ("fab fa-instagram", "fab fa-instagram"),  # Instagram
-    ("fab fa-keybase", "fab fa-keybase"),  # Keybase
+    ("fa fa-keybase", "fa fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
     ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
-    ("fab fa-patreon", "fab fa-patreon"),  # Patreon
+    ("fa fa-patreon", "fa fa-patreon"),  # Patreon
     ("fab fa-paypal", "fab fa-paypal"),  # Paypal
     ("fab fa-pinterest", "fab fa-pinterest"),  # Pinterest
     ("fa fa-pixelfed", "fa fa-pixelfed"),  # Pixelfed
