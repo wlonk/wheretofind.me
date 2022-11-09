@@ -133,7 +133,7 @@ class TestIdentityViewset:
             {
                 "id": id1.id,
                 "name": "Test",
-                "url": "https://example.com/",
+                "url": "non URL value",
                 "tag": "",
                 "quality": 2,
                 "icon": "fas fa-link",

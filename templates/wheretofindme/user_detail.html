@@ -43,13 +43,18 @@
   {% for identity in identities %}
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="detail-card card bg-light shadow-sm mb-3">
+      <div class="detail-card card bg-light shadow-sm mb-3{% if identity.verified_at %} verified{% endif %}">
         {% if identity.looks_like_link %}
         <div class="card-body">
           {% include "wheretofindme/_identity_icon.html" %}
           <a rel="me nofollow noreferrer noopener" href="{{ identity.url }}" aria-label="{{ identity.name }}">
             {{ identity.name }}
           </a>
+          {% if identity.verified_at %}
+          <div class="verified-mark">
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </div>
+          {% endif %}
           {% if object.should_show_quality %}
           <div class="quality-indicator">
             <img class="quality-{{ identity.quality }}" src="{% static identity.quality_img %}" alt="Signal {{ identity.quality }}">

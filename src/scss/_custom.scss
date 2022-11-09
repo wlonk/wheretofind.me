@@ -46,6 +46,19 @@ code {
   right: 0.5rem;;
 }
 
+.verified {
+  border-color: #1e7e34 !important;
+  background-color: #207e5f5c !important;
+}
+
+.verified-mark {
+  position: absolute;
+  top: -0.75rem;
+  left: -0.25rem;
+  font-size: 1.5rem;
+  color: #1e7e34;
+}
+
 .quality-indicator {
   position: absolute;
   top: 0.25rem;

@@ -25,7 +25,9 @@ class InternetIdentityFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserFactory)
     name = "Test"
-    url = "https://example.com/"
+    # If this is a URL, that triggers validation, which we only wanna do under
+    # controlled circumstances.
+    url = "non URL value"
 
 
 @register

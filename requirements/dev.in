@@ -1,10 +1,11 @@
 isort
-black==20.8b1
+black
 flake8
 ipython
 pytest
 pytest-django
 pytest-factoryboy
 pytest-cov
+requests-mock
 sphinx
 beautifulsoup4

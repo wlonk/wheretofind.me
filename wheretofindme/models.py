@@ -1,12 +1,14 @@
 from collections import defaultdict
 
+import mf2py
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.urls import reverse
+from django.utils import timezone
 
 ICONS = defaultdict(
     lambda: "fas fa-link",
@@ -239,6 +241,7 @@ class InternetIdentity(models.Model):
     quality = models.PositiveSmallIntegerField(choices=QUALITY_CHOICES, default=2)
     tag = models.CharField(max_length=50, blank=True)
     seq = models.IntegerField(null=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s {self.name} at {self.url}"
@@ -264,6 +267,20 @@ class InternetIdentity(models.Model):
             _, search = self.icon.split("-", 1)
             return search
         return ""
+
+    def verify(self):
+        """
+        NB: does not save! That's for you to do.
+        """
+        if not self.looks_like_link():
+            return
+        # Caution: network IO here:
+        mf_result = mf2py.parse(url=self.url)
+        expected = f"https://wheretofind.me/@{self.user.username}"
+        if expected in mf_result.get("rels", {}).get("me", []):
+            self.verified_at = timezone.now()
+        else:
+            self.verified_at = None
 
 
 class Follow(models.Model):
@@ -295,3 +312,8 @@ class Alias(models.Model):
 def ensure_alias(sender, instance, created, **kwargs):
     if not instance.alias_set.exists():
         instance.alias_set.create(name=instance.username, seq=0)
+
+
+@receiver(pre_save, sender=InternetIdentity)
+def verify(sender, instance, **kwargs):
+    instance.verify()
