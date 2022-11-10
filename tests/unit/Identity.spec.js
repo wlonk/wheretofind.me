@@ -6,7 +6,7 @@ window.Urls = MockUrls;
 
 describe('Identity.vue', () => {
   const putRequestPromise = Promise.resolve('put request result');
-  const setup = options => {
+  const setup = (options) => {
     const $emit = jest.fn();
     const $http = {
       put: jest.fn().mockReturnValue(putRequestPromise),
@@ -80,7 +80,7 @@ describe('Identity.vue', () => {
     });
     wrapper.vm.guessIcon();
 
-    expect(wrapper.vm.identity.icon).toEqual('fab fa-mastodon');
+    expect(wrapper.vm.identity.icon).toEqual('fa fa-mastodon');
   });
 
   test('updateUrl', () => {

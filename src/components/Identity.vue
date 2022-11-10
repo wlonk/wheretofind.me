@@ -120,8 +120,8 @@
               <option value="fab fa-bitbucket">Bitbucket</option>
               <option value="fab fa-codepen">Codepen</option>
               <option value="fab fa-deviantart">Deviantart</option>
-              <option value="fab fa-diaspora">Diaspora</option>
-              <option value="fab fa-discord">Discord</option>
+              <option value="fa fa-diaspora">Diaspora</option>
+              <option value="fa fa-discord">Discord</option>
               <option value="fab fa-dribbble">Dribbble</option>
               <option value="fab fa-ello">Ello</option>
               <option value="fab fa-etsy">Etsy</option>
@@ -131,14 +131,14 @@
               <option value="fab fa-goodreads">Goodreads</option>
               <option value="fab fa-google-plus-g">Google Plus</option>
               <option value="fab fa-instagram">Instagram</option>
-              <option value="fab fa-keybase">Keybase</option>
+              <option value="fa fa-keybase">Keybase</option>
               <option value="fab fa-kickstarter">Kickstarter</option>
               <option value="fab fa-lastfm">Last</option>
               <option value="fab fa-linkedin">LinkedIn</option>
-              <option value="fab fa-mastodon">Mastodon</option>
+              <option value="fa fa-mastodon">Mastodon</option>
               <option value="fa fa-matrix-org">Matrix</option>
               <option value="fab fa-medium">Medium</option>
-              <option value="fab fa-patreon">Patreon</option>
+              <option value="fa fa-patreon">Patreon</option>
               <option value="fab fa-paypal">Paypal</option>
               <option value="fab fa-pinterest">Pinterest</option>
               <option value="fa fa-pixelfed">Pixelfed</option>
@@ -252,7 +252,7 @@ export default {
     },
     guessIcon() {
       let icon;
-      iconGuesses.forEach(el => {
+      iconGuesses.forEach((el) => {
         const { fn, val } = el;
         if (fn(this.identity.url)) {
           icon = val;

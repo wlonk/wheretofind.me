@@ -21,7 +21,7 @@ ICONS = defaultdict(
         "www.instagram.com": "fab fa-instagram",
         "keybase.io": "fa fa-keybase",
         "www.keybase.io": "fa fa-keybase",
-        "mastodon.social": "fab fa-mastodon",
+        "mastodon.social": "fa fa-mastodon",
         "pixelfed.social": "fa fa-pixelfed",
         "element.io": "fa fa-matrix-org",
         "plus.google.com": "fab fa-google-plus-g",
@@ -117,7 +117,7 @@ ICON_CHOICES = (
     ("fa fa-keybase", "fa fa-keybase"),  # Keybase
     ("fab fa-kickstarter", "fab fa-kickstarter"),  # Kickstarter
     ("fab fa-lastfm", "fab fa-lastfm"),  # Last
-    ("fab fa-mastodon", "fab fa-mastodon"),  # Mastodon
+    ("fa fa-mastodon", "fa fa-mastodon"),  # Mastodon
     ("fa fa-matrix-org", "fa fa-matrix-org"),  # Matrix
     ("fab fa-medium", "fab fa-medium"),  # Medium
     ("fa fa-patreon", "fa fa-patreon"),  # Patreon
