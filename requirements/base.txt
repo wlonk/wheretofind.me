@@ -62,7 +62,7 @@ six==1.16.0
     # via html5lib
 soupsieve==2.3.2.post1
     # via beautifulsoup4
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via django
 starkbank-ecdsa==2.2.0
     # via sendgrid
