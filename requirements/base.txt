@@ -54,7 +54,7 @@ pytz==2022.6
     #   -r base.in
     #   django
     #   djangorestframework
-requests==2.28.1
+requests==2.31.0
     # via mf2py
 sendgrid==6.9.7
     # via django-sendgrid-v5
