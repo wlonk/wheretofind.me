@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static gravatar %}
 
 {% block "title" %}{{ object.primary_alias }} | {% endblock "title" %}
 
@@ -11,7 +11,7 @@
 <meta property="og:title" content="Where to find {{ object.primary_alias }}" />
 <meta property="og:type" content="profile" />
 <meta property="og:url" content="{{request.build_absolute_uri}}" />
-<meta property="og:image" content="{% static 'images/logo-with-bg.png' %}" />
+<meta property="og:image" content="{% gravatar object %}" />
 <meta property="og:image:alt" content="Where to Find Me logo" />
 <meta property="og:description" content="A calling card for the internet." />
 {% endblock "opengraph" %}
