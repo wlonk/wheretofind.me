@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/python:3.9.15-node
+      - image: cimg/python:3.9.18-node
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -54,7 +54,7 @@ jobs:
         
   test-server:
     docker:
-      - image: cimg/python:3.9.15
+      - image: cimg/python:3.9.18
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
@@ -84,7 +84,7 @@ jobs:
 
   test-client:
     docker:
-      - image: cimg/python:3.9.15-node
+      - image: cimg/python:3.9.18-node
 
     working_directory: ~/repo
 

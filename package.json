@@ -71,7 +71,8 @@
     "not ie <= 8"
   ],
   "engines": {
-    "yarn": "1.x"
+    "yarn": "1.x",
+    "node": "^18.17"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
