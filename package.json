@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "build": "vue-cli-service build",
     "inspect": "vue-cli-service inspect",
     "js:lint": "vue-cli-service lint",
     "js:serve": "vue-cli-service serve",
