@@ -16,6 +16,8 @@ charset-normalizer==3.5.2
     # via requests
 confusable-homoglyphs==3.3.1
     # via django-registration
+crispy-bootstrap4==2026.2
+    # via -r requirements/base.in
 cryptography==50.0.2
     # via sendgrid
 dj-database-url==3.1.2
@@ -23,6 +25,7 @@ dj-database-url==3.1.2
 django==6.0.9
     # via
     #   -r requirements/base.in
+    #   crispy-bootstrap4
     #   dj-database-url
     #   django-crispy-forms
     #   django-js-reverse
@@ -30,7 +33,9 @@ django==6.0.9
     #   django-sendgrid-v5
     #   djangorestframework
 django-crispy-forms==2.7
-    # via -r requirements/base.in
+    # via
+    #   -r requirements/base.in
+    #   crispy-bootstrap4
 django-js-reverse==1.0.0
     # via -r requirements/base.in
 django-registration==5.2.1

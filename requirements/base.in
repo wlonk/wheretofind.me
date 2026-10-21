@@ -1,3 +1,4 @@
+crispy-bootstrap4~=2026.2
 dj-database-url~=3.1
 django-crispy-forms~=2.7
 django-js-reverse~=1.0
