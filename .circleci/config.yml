@@ -97,6 +97,12 @@ jobs:
           - v9-dependencies-js-
 
       - run:
+          name: downgrade node
+          comamnd: |
+            npm install -g n
+            n 18
+
+      - run:
           name: run javascript tests
           command: |
             yarn js:test:unit
