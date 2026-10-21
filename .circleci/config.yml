@@ -6,7 +6,7 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://wheretofindme@localhost/wheretofindme
-      - image: cimg/postgres:14.5
+      - image: cimg/postgres:17
         environment:
           POSTGRES_USER: wheretofindme
           POSTGRES_DB: wheretofindme
@@ -61,7 +61,7 @@ jobs:
           DJANGO_SECRET_KEY: "some secret this is"
           DJANGO_DEBUG: True
           SECURE_SSL_REDIRECT: false
-      - image: cimg/postgres:14.5
+      - image: cimg/postgres:17
         environment:
           POSTGRES_USER: wheretofindme
           POSTGRES_DB: wheretofindme
