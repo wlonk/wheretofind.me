@@ -9,3 +9,4 @@ pytest-cov
 requests-mock
 sphinx
 beautifulsoup4
+pip-tools

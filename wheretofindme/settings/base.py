@@ -107,6 +107,7 @@ INSTALLED_APPS = [
     "django_js_reverse",
     "rest_framework",
     "crispy_forms",
+    "crispy_bootstrap4",
     "wheretofindme",
 ]
 
@@ -203,6 +204,7 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 # Email
 DEFAULT_FROM_EMAIL = "no-reply@wheretofind.me"
