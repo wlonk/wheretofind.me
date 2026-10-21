@@ -101,6 +101,7 @@ jobs:
       - run:
           name: run javascript tests
           command: |
+            sudo npm install -g n
             sudo n 18
             yarn js:test:unit
 
